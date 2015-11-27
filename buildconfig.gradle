@@ -1,0 +1,27 @@
+// model config file ,make app build.gradle clean
+ext {
+    android = [
+    AndroidBuildToolsVersion : "23.0.2",
+    AndridMinSdkVersion : 15,
+    AndroidTargetSdkVersion : 23,
+    AndroidCompileSdkVersion : 23,
+    applicationId : "me.silencedut.nbaplus",
+    versionCode:1,
+    versionName:"0.1"
+    ]
+
+    //LibrariesVersion
+    googlesupportVersion="23.1.0"
+
+    goodleDependencies =[
+            appcompat_v7: "com.android.support:appcompat-v7:${googlesupportVersion}",
+            design : "com.android.support:design:${googlesupportVersion}",
+    ]
+
+    otherDependdencies=[
+
+    ]
+
+
+
+}

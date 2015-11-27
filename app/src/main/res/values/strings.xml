@@ -1,0 +1,48 @@
+<resources>
+    <string name="app_name">NBAPlus</string>
+
+    <string name="firstTab">精选</string>
+    <string name="secondTab">推荐</string>
+    <string name="thirdTab">更多</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="exit_prompt">再按一次退出</string>
+    <string name="load_more">加载更多</string>
+    <string name="load_fail">加载失败，请检查网络后重试</string>
+
+    <!--drawer-->
+    <string name="news">新闻</string>
+    <string name="blog">博客</string>
+    <string name="sort">排名</string>
+    <string name="data">数据统计</string>
+    <string name="likes">收藏</string>
+    <string name="about">关于</string>
+    <string name="gameDate">赛程</string>
+    <string name="advice">反馈</string>
+    <string name="action_settings">设置</string>
+
+    <string name="theme_day">日间模式</string>
+    <string name="theme_night">夜间模式</string>
+    <string name="exit">分享应用</string>
+    <string name="action_share">分享应用</string>
+    <string name="share_text">发现了一款非常美观的App「NBAPlus」，太赞了! 推荐~：http://fir.im/mengmeizhi </string>
+    <string name="about_app_name_with_introduce">NBAPlus - 最专注的NBA信息平台</string>
+    <string name="about_introduce">介绍</string>
+    <string name="introduce">「NBAPlus」是一款专注于NBA新闻和动态的平台！\n\n致力于打造更全面更方便更快捷的NBA资讯获取中心\n\n所有资讯均来自互联网，如有侵权，请告知！</string>
+    <string name="contact_to_me">联系</string>
+    <string name="email">silencedutchman@foxmail.com</string>
+    <string name="notices">开源协议</string>
+    <string name="open_source">开放源代码许可</string>
+
+    <!--preferences key-->
+    <string name="load_big_image">load_big_image</string>
+    <string name="clear_data">clear_data</string>
+    <string name="data_cleared">已清除缓存数据</string>
+    <string name="update">update</string>
+    <string name="font_size">font_size</string>
+    <string name="check_for_update">check_for_update</string>
+    <string name="my_team">我的主队</string>
+
+</resources>
