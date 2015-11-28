@@ -12,18 +12,56 @@ android {
         versionCode globalConfiguration.versionCode
         versionName globalConfiguration.versionName
     }
+
+    lintOptions {
+        disable 'InvalidPackage'
+    }
+    packagingOptions {
+        exclude 'META-INF/services/javax.annotation.processing.Processor'
+    }
     buildTypes {
         release {
+            applicationIdSuffix ".release"
+            minifyEnabled false
+
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+
+        dev{
+            applicationIdSuffix ".dev"
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
         }
     }
 }
 
 dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     def googleDependencies = rootProject.ext.goodleDependencies
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    testCompile 'junit:junit:4.12'
+    def otherDependencies = rootProject.ext.otherDependdencies
+    compile googleDependencies.support_v4
     compile googleDependencies.appcompat_v7
     compile googleDependencies.design
+    compile googleDependencies.recyclerview_v7
+    compile googleDependencies.cardview_v7
+    compile otherDependencies.rippleeffect
+    compile otherDependencies.butterknife
+    compile otherDependencies.volley
+    compile otherDependencies.glide
+    compile otherDependencies.eventbus
+    compile otherDependencies.snappydb
+    compile otherDependencies.kryo
+    compile otherDependencies.materialish_progress
+    compile otherDependencies.circleimageview
+    compile otherDependencies.licensesdialog
+    compile otherDependencies.integration
+    compile otherDependencies.retrofit_2_0
+    compile otherDependencies.retrofit_converter_gson
+    compile otherDependencies.rxandroid
+    compile otherDependencies.rxjava
+    debugCompile otherDependencies.leakcanary_debug
+    releaseCompile otherDependencies.leakcanary_release
+
+
 }

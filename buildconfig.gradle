@@ -1,13 +1,13 @@
 // model config file ,make app build.gradle clean
 ext {
     android = [
-    AndroidBuildToolsVersion : "23.0.2",
-    AndridMinSdkVersion : 15,
-    AndroidTargetSdkVersion : 23,
-    AndroidCompileSdkVersion : 23,
-    applicationId : "me.silencedut.nbaplus",
-    versionCode:1,
-    versionName:"0.1"
+            AndroidBuildToolsVersion : "23.0.2",
+            AndridMinSdkVersion : 15,
+            AndroidTargetSdkVersion : 23,
+            AndroidCompileSdkVersion : 23,
+            applicationId : "me.silencedut.nbaplus",
+            versionCode:1,
+            versionName:"1.0.3"
     ]
 
     //LibrariesVersion
@@ -16,10 +16,29 @@ ext {
     goodleDependencies =[
             appcompat_v7: "com.android.support:appcompat-v7:${googlesupportVersion}",
             design : "com.android.support:design:${googlesupportVersion}",
+            support_v4 :"com.android.support:support-v4:${googlesupportVersion}",
+            recyclerview_v7: "com.android.support:recyclerview-v7:${googlesupportVersion}",
+            cardview_v7 :"com.android.support:cardview-v7:${googlesupportVersion}"
     ]
 
     otherDependdencies=[
-
+            rippleeffect :"com.github.traex.rippleeffect:library:1.3+",
+            butterknife :"com.jakewharton:butterknife:7.0.1+",
+            volley:"com.mcxiaoke.volley:library:1.0.5+",
+            glide :"com.github.bumptech.glide:volley-integration:1.3.1+",
+            eventbus:"de.greenrobot:eventbus:2.4.0+",
+            snappydb:"com.snappydb:snappydb-lib:0.5.2+",
+            kryo:"com.esotericsoftware.kryo:kryo:2.24.0+",
+            materialish_progress:"com.pnikosis:materialish-progress:1.5+",
+            circleimageview :"de.hdodenhof:circleimageview:1.3.0+",
+            licensesdialog :"de.psdev.licensesdialog:licensesdialog:1.8.0+",
+            integration:"im.fir:sdk:latest.integration@aar",
+            retrofit_2_0:"com.squareup.retrofit:retrofit:2.0.0-beta1",
+            retrofit_converter_gson:"com.squareup.retrofit:converter-gson:2.0.0-beta1",
+            leakcanary_debug:"com.squareup.leakcanary:leakcanary-android:1.3.1",
+            leakcanary_release:"com.squareup.leakcanary:leakcanary-android-no-op:1.3.1",
+            rxandroid:"io.reactivex:rxandroid:1.0.1",
+            rxjava:"io.reactivex:rxjava:1.0.16"
     ]
 
 
