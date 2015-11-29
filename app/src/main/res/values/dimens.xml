@@ -6,4 +6,23 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
+
+    <dimen name="default_elevation">4dp</dimen>
+
+    <dimen name="icon_size">24dp</dimen>
+    <dimen name="navigation_drawer_width">240dp</dimen>
+    <dimen name="appbar_layout_height">230dp</dimen>
+    <dimen name="navigation_drawer_item_height">48dp</dimen>
+    <dimen name="navigation_drawer_icon_height">24dp</dimen>
+    <dimen name="shot_card_height">120dp</dimen>
+    <dimen name="view_margingtop">@dimen/margin_8dp</dimen>
+    <dimen name="profile">40dp</dimen>
+    <dimen name="cardview_height">180dp</dimen>
+    <dimen name="margin_12dp">12dp</dimen>
+    <dimen name="margin_10dp">10dp</dimen>
+    <dimen name="margin_5dp">5dp</dimen>
+    <dimen name="margin_8dp">8dp</dimen>
+    <dimen name="margin_2dp">2dp</dimen>
+    <dimen name="margin_0dp">0dp</dimen>
+    <dimen name="item_divider_line">1px</dimen>
 </resources>
