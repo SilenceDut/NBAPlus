@@ -20,7 +20,7 @@
             />
     </android.support.v4.widget.SwipeRefreshLayout>
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/frfresh"
+        android:id="@+id/refresh"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|right"
@@ -33,5 +33,8 @@
         app:layout_anchor="@id/rv_news"
         app:layout_anchorGravity="bottom|right|end"
         app:pressedTranslationZ="12dp"
+
         />
+
 </android.support.design.widget.CoordinatorLayout>
+    <!--https://guides.codepath.com/android/Floating-Action-Buttons-->
