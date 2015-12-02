@@ -7,7 +7,7 @@ import com.me.silencedut.nbaplus.model.News;
  */
 public class NewsEvent extends Event {
     private News mNews;
-    NewsEvent(News news) {
+    public NewsEvent(News news) {
         this.mNews=news;
     }
 

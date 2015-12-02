@@ -35,7 +35,9 @@ public class MainActivity extends BaseActivity {
     }
 
     public void onEventMainThread(Event event) {
-
+//        if(event instanceof NewsEvent) {
+//            Log.d("onEventMainThread",((NewsEvent) event).getNews().getNextId()+"");
+//        }
     }
 
     @Override

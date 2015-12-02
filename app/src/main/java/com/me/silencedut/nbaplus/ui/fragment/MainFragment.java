@@ -2,6 +2,7 @@ package com.me.silencedut.nbaplus.ui.fragment;
 
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -10,7 +11,6 @@ import com.me.silencedut.nbaplus.R;
 import com.me.silencedut.nbaplus.app.NbaplusService;
 import com.me.silencedut.nbaplus.event.Event;
 import com.me.silencedut.nbaplus.event.NewsEvent;
-import com.me.silencedut.nbaplus.utils.ShareUtils;
 
 import butterknife.Bind;
 
@@ -33,6 +33,13 @@ public class MainFragment extends SwipeRefreshBaseFragment{
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mNewsList.getContext());
         mNewsList.setLayoutManager(linearLayoutManager);
         setHasOptionsMenu(true);
+        NbaplusService.getInstance().updateNews();
+    }
+
+    public void onEventMainThread(Event event) {
+        if(event instanceof NewsEvent) {
+            Log.d("onEventMainThread", ((NewsEvent) event).getNews().getNextId() + "");
+        }
     }
 
     @Override

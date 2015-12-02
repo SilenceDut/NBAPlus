@@ -1,8 +1,8 @@
 package com.me.silencedut.nbaplus.app;
 
 
-import com.me.silencedut.nbaplus.RxMethod.RxNews;
 import com.me.silencedut.nbaplus.data.Cache;
+import com.me.silencedut.nbaplus.model.News;
 import com.me.silencedut.nbaplus.model.NewsEntity;
 
 import java.util.ArrayList;
@@ -61,7 +61,9 @@ public class NbaplusService {
     }
 
     public void updateNews() {
-        mCompositeSubscription.add(RxNews.updateNews());
+        News news = mNbaPlus.updateNews();
+//        mNbaPlus.getDGankData(2015,12,01);
+      //  mCompositeSubscription.add(RxNews.updateNews());
     }
 
     private NbaplusService(){}
