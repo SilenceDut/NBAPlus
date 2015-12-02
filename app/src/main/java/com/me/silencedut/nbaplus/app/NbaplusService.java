@@ -1,6 +1,7 @@
 package com.me.silencedut.nbaplus.app;
 
 
+import com.me.silencedut.nbaplus.RxMethod.RxNews;
 import com.me.silencedut.nbaplus.data.Cache;
 import com.me.silencedut.nbaplus.model.NewsEntity;
 
@@ -21,7 +22,6 @@ public class NbaplusService {
     private Map<Integer,CompositeSubscription> mCompositeSubMap;
     private CompositeSubscription mCompositeSubscription ;
     private Cache mCache;
-    private Nbaplus mNbaplus;
     private List<NewsEntity> mNewsList=null;
 
 
@@ -35,7 +35,6 @@ public class NbaplusService {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                mNbaplus=NbaplusFactory.getNbaplus();
                 mCache= Cache.getInstance();
                 mCache.initSnappyDB();
                 mNewsList=(List<NewsEntity>)mCache.get(Cache.CACHEKEY.NEWSFEED.name(),List.class);
@@ -60,8 +59,7 @@ public class NbaplusService {
     }
 
     public void updateNews() {
-//        Subscription subscription = mNbaplus.updateNews()
-//                .subscribe()
+        mCompositeSubscription.add(RxNews.updateNews());
     }
 
     private NbaplusService(){}
