@@ -22,6 +22,7 @@ public class NbaplusService {
     private Map<Integer,CompositeSubscription> mCompositeSubMap;
     private CompositeSubscription mCompositeSubscription ;
     private Cache mCache;
+    private static Nbaplus mNbaPlus;
     private List<NewsEntity> mNewsList=null;
 
 
@@ -35,6 +36,7 @@ public class NbaplusService {
         new Thread(new Runnable() {
             @Override
             public void run() {
+                mNbaPlus=NbaplusFactory.getNbaplus();
                 mCache= Cache.getInstance();
                 mCache.initSnappyDB();
                 mNewsList=(List<NewsEntity>)mCache.get(Cache.CACHEKEY.NEWSFEED.name(),List.class);
@@ -49,7 +51,7 @@ public class NbaplusService {
     public void addCompositeSub(int taskId) {
         mCompositeSubscription= new CompositeSubscription();
 
-        mCompositeSubMap.put(taskId,mCompositeSubscription);
+        mCompositeSubMap.put(taskId, mCompositeSubscription);
     }
 
     public void removeCompositeSub(int taskId) {
@@ -70,6 +72,10 @@ public class NbaplusService {
 
     public static EventBus getBus() {
         return mBus;
+    }
+
+    public static Nbaplus getNbaPlus() {
+        return mNbaPlus;
     }
 
 }

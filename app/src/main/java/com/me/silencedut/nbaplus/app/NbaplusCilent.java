@@ -8,7 +8,7 @@ import retrofit.Retrofit;
  * Created by SilenceDut on 2015/11/28.
  */
 public class NbaplusCilent {
-    final Nbaplus nbaplus ;
+    final  Nbaplus nbaplus ;
     NbaplusCilent() {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("http://nbaplus.sinaapp.com")

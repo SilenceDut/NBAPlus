@@ -2,6 +2,7 @@ package com.me.silencedut.nbaplus.RxMethod;
 
 import com.me.silencedut.nbaplus.app.NbaplusCilent;
 import com.me.silencedut.nbaplus.app.NbaplusService;
+import com.me.silencedut.nbaplus.event.NewsEvent;
 import com.me.silencedut.nbaplus.model.News;
 
 import rx.Subscription;
@@ -13,12 +14,12 @@ import rx.functions.Action1;
  */
 public class RxNews {
     public static Subscription updateNews() {
-        Subscription subscription = NbaplusCilent.getCilent().updateNews()
+        Subscription subscription = NbaplusService.getNbaPlus().updateNews()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Action1<News>() {
                     @Override
                     public void call(News news) {
-                        NbaplusService.getBus().post(News);
+                        NbaplusService.getBus().post(new NewsEvent(news));
                     }
                 });
         return subscription;

@@ -75,7 +75,8 @@ public class MainFragment extends SwipeRefreshBaseFragment{
 //                return true;
 //            }
             case R.id.share :
-                ShareUtils.share(getActivity());
+                //ShareUtils.share(getActivity());
+                NbaplusService.getInstance().updateNews();
                 return true;
 
         }
