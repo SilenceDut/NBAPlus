@@ -28,14 +28,23 @@ public class NbaplusService {
     public void initService() {
         mBus = new EventBus();
         mCompositeSubMap=new HashMap<Integer,CompositeSubscription>();
-        mNbaplus=NbaplusFactory.getNbaplus();
-        mCache= Cache.getInstance();
-        mCache.initSnappyDB();
+        backGroundInit();
+    }
 
-        mNewsList=(List<NewsEntity>)mCache.get(Cache.CACHEKEY.NEWSFEED.name(),List.class);
-        if (mNewsList==null) {
-            mNewsList=new ArrayList<NewsEntity>();
-        }
+    private void backGroundInit() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                mNbaplus=NbaplusFactory.getNbaplus();
+                mCache= Cache.getInstance();
+                mCache.initSnappyDB();
+                mNewsList=(List<NewsEntity>)mCache.get(Cache.CACHEKEY.NEWSFEED.name(),List.class);
+                if (mNewsList==null) {
+                    mNewsList=new ArrayList<NewsEntity>();
+                }
+            }
+        }).start();
+
     }
 
     public void addCompositeSub(int taskId) {

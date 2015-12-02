@@ -12,7 +12,7 @@ public class NbaplusFactory {
     public static Nbaplus getNbaplus() {
         synchronized (WATCH_DOG) {
             if(sInstance==null){
-                sInstance=new NbaplusRetrofit().getService();
+                sInstance=new NbaplusCilent().getService();
             }
             return sInstance;
         }
