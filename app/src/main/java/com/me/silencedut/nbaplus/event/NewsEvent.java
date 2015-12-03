@@ -1,6 +1,6 @@
 package com.me.silencedut.nbaplus.event;
 
-import com.me.silencedut.nbaplus.data.News;
+import com.me.silencedut.nbaplus.model.News;
 
 /**
  * Created by Silencedut on 2015/11/28.

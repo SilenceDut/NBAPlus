@@ -2,6 +2,9 @@ package com.me.silencedut.greendao;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Config;
+
+import de.greenrobot.dao.query.QueryBuilder;
 
 /**
  * Created by SilenceDut on 2015/12/3.
@@ -28,6 +31,10 @@ public class DBHelper {
         // 注意：该数据库连接属于 DaoMaster，所以多个 Session 指的是相同的数据库连接。
         DaoMaster daoMaster = new DaoMaster(db);
         daoSession = daoMaster.newSession();
+        if(Config.DEBUG) {
+            QueryBuilder.LOG_SQL = true;
+            QueryBuilder.LOG_VALUES = true;
+        }
     }
     public DaoSession getDaoSession() {
         return daoSession;
