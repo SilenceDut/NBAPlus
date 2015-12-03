@@ -39,7 +39,8 @@ ext {
             leakcanary_release:"com.squareup.leakcanary:leakcanary-android-no-op:1.3.1",
             adapter_rxjava:"com.squareup.retrofit:adapter-rxjava:2.0.0-beta2",
             rxandroid:"io.reactivex:rxandroid:1.0.1",
-            rxjava:"io.reactivex:rxjava:1.0.16"
+            rxjava:"io.reactivex:rxjava:1.0.16",
+            greendao:"de.greenrobot:greendao:2.0.0"
     ]
 
 

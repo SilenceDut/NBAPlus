@@ -6,20 +6,14 @@ import java.util.List;
  * Created by SilenceDut on 2015/11/28.
  */
 public class NewsEntity {
-    private String contentType;
     private String description;
     private String title;
     private String putdate;
     private int articleId;
     private String contentSourceName;
     private String articleUrl;
-    private String type;
-    private String sourceType;
     private List<String> imgUrlList;
 
-    public void setContentType(String contentType) {
-        this.contentType = contentType;
-    }
 
     public void setDescription(String description) {
         this.description = description;
@@ -45,21 +39,12 @@ public class NewsEntity {
         this.articleUrl = articleUrl;
     }
 
-    public void setType(String type) {
-        this.type = type;
-    }
 
-    public void setSourceType(String sourceType) {
-        this.sourceType = sourceType;
-    }
 
     public void setImgUrlList(List<String> imgUrlList) {
         this.imgUrlList = imgUrlList;
     }
 
-    public String getContentType() {
-        return contentType;
-    }
 
     public String getDescription() {
         return description;
@@ -83,14 +68,6 @@ public class NewsEntity {
 
     public String getArticleUrl() {
         return articleUrl;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public String getSourceType() {
-        return sourceType;
     }
 
     public List<String> getImgUrlList() {

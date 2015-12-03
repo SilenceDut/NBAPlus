@@ -1,9 +1,9 @@
 package com.me.silencedut.nbaplus.app;
 
 
+import com.me.silencedut.greendao.DBHelper;
 import com.me.silencedut.nbaplus.RxMethod.RxNews;
 import com.me.silencedut.nbaplus.data.Cache;
-import com.me.silencedut.nbaplus.model.News;
 import com.me.silencedut.nbaplus.model.NewsEntity;
 
 import java.util.ArrayList;
@@ -19,16 +19,18 @@ import rx.subscriptions.CompositeSubscription;
  */
 public class NbaplusService {
     private static final NbaplusService NBAPLUS_SERVICE=new NbaplusService();
-    public  static EventBus mBus ;
+    private static EventBus sBus ;
+    private static DBHelper sDBHelper;
+    private static NbaplusAPI sNbaplus;
     private Map<Integer,CompositeSubscription> mCompositeSubMap;
     private CompositeSubscription mCompositeSubscription ;
     private Cache mCache;
-    private static NbaplusAPI mNbaPlus;
+
     private List<NewsEntity> mNewsList=null;
 
 
     public void initService() {
-        mBus = new EventBus();
+        sBus = new EventBus();
         mCompositeSubMap=new HashMap<Integer,CompositeSubscription>();
         backGroundInit();
     }
@@ -37,7 +39,8 @@ public class NbaplusService {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                mNbaPlus=NbaplusFactory.getNbaplus();
+                sNbaplus=NbaplusFactory.getNbaplus();
+                sDBHelper=DBHelper.getInstance(App.getContext());
                 mCache= Cache.getInstance();
                 mCache.initSnappyDB();
                 mNewsList=(List<NewsEntity>)mCache.get(Cache.CACHEKEY.NEWSFEED.name(),List.class);
@@ -73,11 +76,15 @@ public class NbaplusService {
     }
 
     public static EventBus getBus() {
-        return mBus;
+        return sBus;
     }
 
     public static NbaplusAPI getNbaPlus() {
-        return mNbaPlus;
+        return sNbaplus;
+    }
+
+    public static DBHelper getDBHelper() {
+        return sDBHelper;
     }
 
 }

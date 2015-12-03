@@ -34,6 +34,11 @@ android {
 
         }
     }
+    sourceSets {
+        main {
+            java.srcDirs = ['src/main/java', 'src/main/java-gen']
+        }
+    }
 }
 
 dependencies {
@@ -61,7 +66,10 @@ dependencies {
     compile otherDependencies.rxandroid
     compile otherDependencies.rxjava
     compile otherDependencies.adapter_rxjava
+    compile otherDependencies.greendao
     debugCompile otherDependencies.leakcanary_debug
     releaseCompile otherDependencies.leakcanary_release
+
     compile files('libs/joda-time-2.8.2.jar')
+    compile files('libs/gson-2.5.jar')
 }
