@@ -60,6 +60,7 @@ dependencies {
     compile otherDependencies.retrofit_converter_gson
     compile otherDependencies.rxandroid
     compile otherDependencies.rxjava
+    compile otherDependencies.adapter_rxjava
     debugCompile otherDependencies.leakcanary_debug
     releaseCompile otherDependencies.leakcanary_release
     compile files('libs/joda-time-2.8.2.jar')

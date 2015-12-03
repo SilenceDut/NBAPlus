@@ -1,6 +1,7 @@
 package com.me.silencedut.nbaplus.app;
 
 
+import com.me.silencedut.nbaplus.RxMethod.RxNews;
 import com.me.silencedut.nbaplus.data.Cache;
 import com.me.silencedut.nbaplus.model.News;
 import com.me.silencedut.nbaplus.model.NewsEntity;
@@ -22,7 +23,7 @@ public class NbaplusService {
     private Map<Integer,CompositeSubscription> mCompositeSubMap;
     private CompositeSubscription mCompositeSubscription ;
     private Cache mCache;
-    private static Nbaplus mNbaPlus;
+    private static NbaplusAPI mNbaPlus;
     private List<NewsEntity> mNewsList=null;
 
 
@@ -61,9 +62,8 @@ public class NbaplusService {
     }
 
     public void updateNews() {
-        News news = mNbaPlus.updateNews();
-//        mNbaPlus.getDGankData(2015,12,01);
-      //  mCompositeSubscription.add(RxNews.updateNews());
+
+        mCompositeSubscription.add(RxNews.updateNews());
     }
 
     private NbaplusService(){}
@@ -76,7 +76,7 @@ public class NbaplusService {
         return mBus;
     }
 
-    public static Nbaplus getNbaPlus() {
+    public static NbaplusAPI getNbaPlus() {
         return mNbaPlus;
     }
 
