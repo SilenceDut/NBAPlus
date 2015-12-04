@@ -8,7 +8,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import com.me.silencedut.nbaplus.R;
-import com.me.silencedut.nbaplus.app.NbaplusService;
+import com.me.silencedut.nbaplus.app.AppService;
 import com.me.silencedut.nbaplus.event.Event;
 import com.me.silencedut.nbaplus.event.NewsEvent;
 
@@ -17,10 +17,7 @@ import butterknife.Bind;
 /**
  * Created by SilenceDut on 2015/11/28.
  */
-public class MainFragment extends SwipeRefreshBaseFragment{
-
-    @Bind(R.id.rv_news)
-    RecyclerView mNewsList;
+public class MainFragment extends NewsFragment{
 
     public static MainFragment newInstance() {
         MainFragment mainFragment = new MainFragment();
@@ -28,47 +25,14 @@ public class MainFragment extends SwipeRefreshBaseFragment{
     }
 
     @Override
-    protected void initViews() {
-        super.initViews();
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mNewsList.getContext());
-        mNewsList.setLayoutManager(linearLayoutManager);
-        setHasOptionsMenu(true);
-        NbaplusService.getInstance().updateNews();
-    }
+    void setAdapter() {
 
-    public void onEventMainThread(Event event) {
-        if(event instanceof NewsEvent) {
-            Log.d("onEventMainThread", ((NewsEvent) event).getNews().getNextId() + "");
-        }
-    }
-
-    @Override
-    protected void upDateView(Event event) {
-        if(event!=null&&event instanceof NewsEvent) {
-
-        }
-    }
-
-    @Override
-    protected int getContentViewId() {
-        return R.layout.fragment_main;
-    }
-
-    @Override
-    public void onRefresh() {
-        NbaplusService.getInstance().updateNews();
-    }
-
-    @Override
-    protected String getToolBarTitle() {
-        return "";
     }
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.menu_main, menu);
-
     }
 
     @Override
@@ -83,12 +47,11 @@ public class MainFragment extends SwipeRefreshBaseFragment{
 //            }
             case R.id.share :
                 //ShareUtils.share(getActivity());
-                NbaplusService.getInstance().updateNews();
+                AppService.getInstance().updateNews();
                 return true;
-
         }
-
         return super.onOptionsItemSelected(item);
     }
+
 
 }

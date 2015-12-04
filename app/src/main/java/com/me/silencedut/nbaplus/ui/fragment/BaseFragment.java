@@ -7,7 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.me.silencedut.nbaplus.app.NbaplusService;
+import com.me.silencedut.nbaplus.app.AppService;
 import com.me.silencedut.nbaplus.event.Event;
 
 import butterknife.ButterKnife;
@@ -23,7 +23,7 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        NbaplusService.getInstance().getBus().register(this);
+        AppService.getInstance().getBus().register(this);
     }
 
     @Nullable
@@ -38,6 +38,6 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        NbaplusService.getInstance().getBus().unregister(this);
+        AppService.getInstance().getBus().unregister(this);
     }
 }

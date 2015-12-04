@@ -7,5 +7,9 @@ public class Constant {
 
 
     public static final String CSS_STYLE ="<style>* {font-size:%spx;line-height:28px;}p {color:%s;}</style>";
+    public enum NEWSTYPE {
+        NEWS,BLOG;
+
+    }
 
 }

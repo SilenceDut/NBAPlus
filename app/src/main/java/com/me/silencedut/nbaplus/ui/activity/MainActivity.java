@@ -2,6 +2,8 @@ package com.me.silencedut.nbaplus.ui.activity;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
+import android.text.format.DateFormat;
+import android.util.Log;
 import android.widget.FrameLayout;
 
 import com.me.silencedut.nbaplus.R;
@@ -9,6 +11,8 @@ import com.me.silencedut.nbaplus.event.Event;
 import com.me.silencedut.nbaplus.ui.fragment.DrawerFragment;
 import com.me.silencedut.nbaplus.ui.fragment.MainFragment;
 import com.me.silencedut.nbaplus.utils.AppUtils;
+
+import java.util.Date;
 
 public class MainActivity extends BaseActivity {
     private DrawerFragment mNavigationFragment;
@@ -23,6 +27,7 @@ public class MainActivity extends BaseActivity {
                 (DrawerLayout) findViewById(R.id.main_drawer));
         mCurrentFragment= MainFragment.newInstance();
         transactionFragment(mCurrentFragment);
+
     }
 
     private void transactionFragment(Fragment fragment) {
