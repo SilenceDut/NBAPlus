@@ -51,7 +51,7 @@ public class RxNews {
             public void call(Subscriber<? super News> subscriber) {
                 GreenNewsDao greenNewsDao = AppService.getDBHelper().getDaoSession().getGreenNewsDao();
                 Query query = greenNewsDao.queryBuilder()
-                        .where(GreenNewsDao.Properties.Type.eq(Constant.NEWSTYPE.NEWS.toString()))
+                        .where(GreenNewsDao.Properties.Type.eq(Constant.NEWSTYPE.NEWS.name()))
                         .build();
                 // 查询结果以 List 返回
                 List<GreenNews> greenNewses = query.list();
