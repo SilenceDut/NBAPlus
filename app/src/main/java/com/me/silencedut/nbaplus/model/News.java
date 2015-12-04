@@ -3,27 +3,27 @@ package com.me.silencedut.nbaplus.model;
 import java.util.List;
 
 /**
- * Created by SilenceDut on 2015/12/3.
+ * Created by Administrator on 2015/12/4.
  */
 public class News {
     /**
-     * nextId : 116406468
-     * newslist : [{"contentType":"ARTICLE","description":"北京时间12月3日，天津媒体爆料称，天津男篮俱乐部宣布，天津男篮教练纳什由于身体状况不佳，主帅位置由","title":"曝天津主帅纳什因健康退居2线","putdate":"20151203","topicVoteJson":null,"randomNum":1449143673231,"articleId":116407325,"contentSourceName":"3G门户.体育","articleUrl":"http://reader.res.meizu.com/reader/articlecontent/20151203/116407325.json","type":"IMAGETEXT","imgUrlList":["http://img.res.meizu.com/img/download/reader/2015/1203/114/277b949e/87c94c34/868e1767/acfcb30d/original"],"sourceType":"ZAKER"},{"contentType":"ARTICLE","description":"昨晚，浙江广厦坐镇主场迎战三外援的四川队，第三节结束时曾一度落后19分，但凭借末节的疯狂反扑，以10","title":"李春江点名1人表现越来越好了","putdate":"20151203","topicVoteJson":null,"randomNum":1449143555785,"articleId":116407326,"contentSourceName":"3G门户.体育","articleUrl":"http://reader.res.meizu.com/reader/articlecontent/20151203/116407326.json","type":"IMAGETEXT","imgUrlList":["http://img.res.meizu.com/img/download/reader/2015/1203/10/0476c4e4/a75340c4/bcc336b4/c7a5c5c5/original"],"sourceType":"ZAKER"}]
+     * nextId : 116409785
+     * newslist : [{"contentType":"ARTICLE","description":"央视体育频道女主播\u201c乌贼刘\u201d刘语熙在社交网络发文\u201c人生若只如初见，再见最前线！\u201d，以此正式宣布离开《","title":"告别NBA！最美女主播宣布退出","putdate":"20151204","imgUrlList":["http://img.res.meizu.com/img/download/reader/2015/1204/8/92edcd73/452f4cc1/81686264/66092ed4/original"],"randomNum":1449186657638,"articleId":116409942,"contentSourceName":"NBA","articleUrl":"http://reader.res.meizu.com/reader/articlecontent/20151204/116409942.json","type":"IMAGETEXT","topicVoteJson":null,"sourceType":"ZAKER"}]
      */
 
     private String nextId;
     /**
      * contentType : ARTICLE
-     * description : 北京时间12月3日，天津媒体爆料称，天津男篮俱乐部宣布，天津男篮教练纳什由于身体状况不佳，主帅位置由
-     * title : 曝天津主帅纳什因健康退居2线
-     * putdate : 20151203
-     * topicVoteJson : null
-     * randomNum : 1449143673231
-     * articleId : 116407325
-     * contentSourceName : 3G门户.体育
-     * articleUrl : http://reader.res.meizu.com/reader/articlecontent/20151203/116407325.json
+     * description : 央视体育频道女主播“乌贼刘”刘语熙在社交网络发文“人生若只如初见，再见最前线！”，以此正式宣布离开《
+     * title : 告别NBA！最美女主播宣布退出
+     * putdate : 20151204
+     * imgUrlList : ["http://img.res.meizu.com/img/download/reader/2015/1204/8/92edcd73/452f4cc1/81686264/66092ed4/original"]
+     * randomNum : 1449186657638
+     * articleId : 116409942
+     * contentSourceName : NBA
+     * articleUrl : http://reader.res.meizu.com/reader/articlecontent/20151204/116409942.json
      * type : IMAGETEXT
-     * imgUrlList : ["http://img.res.meizu.com/img/download/reader/2015/1203/114/277b949e/87c94c34/868e1767/acfcb30d/original"]
+     * topicVoteJson : null
      * sourceType : ZAKER
      */
 
@@ -52,6 +52,7 @@ public class News {
         private int articleId;
         private String contentSourceName;
         private String articleUrl;
+        private Object topicVoteJson;
         private List<String> imgUrlList;
 
         public void setDescription(String description) {
@@ -76,6 +77,10 @@ public class News {
 
         public void setArticleUrl(String articleUrl) {
             this.articleUrl = articleUrl;
+        }
+
+        public void setTopicVoteJson(Object topicVoteJson) {
+            this.topicVoteJson = topicVoteJson;
         }
 
         public void setImgUrlList(List<String> imgUrlList) {
@@ -106,8 +111,13 @@ public class News {
             return articleUrl;
         }
 
+        public Object getTopicVoteJson() {
+            return topicVoteJson;
+        }
+
         public List<String> getImgUrlList() {
             return imgUrlList;
         }
     }
 }
+

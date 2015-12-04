@@ -3,7 +3,7 @@ package com.me.silencedut.nbaplus.ui.activity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-import com.me.silencedut.nbaplus.app.NbaplusService;
+import com.me.silencedut.nbaplus.app.AppService;
 
 import butterknife.ButterKnife;
 
@@ -19,8 +19,8 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getContentViewId());
-        NbaplusService.getInstance().addCompositeSub(getTaskId());
-        NbaplusService.getInstance().getBus().register(this);
+        AppService.getInstance().addCompositeSub(getTaskId());
+        AppService.getInstance().getBus().register(this);
         ButterKnife.bind(this);
         initViews();
     }
@@ -28,7 +28,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        NbaplusService.getInstance().removeCompositeSub(getTaskId());
-        NbaplusService.getInstance().getBus().unregister(this);
+        AppService.getInstance().removeCompositeSub(getTaskId());
+        AppService.getInstance().getBus().unregister(this);
     }
 }

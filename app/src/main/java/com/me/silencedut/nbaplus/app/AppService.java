@@ -15,12 +15,12 @@ import rx.subscriptions.CompositeSubscription;
 /**
  * Created by SilenceDut on 2015/11/28.
  */
-public class NbaplusService {
-    private static final NbaplusService NBAPLUS_SERVICE=new NbaplusService();
+public class AppService {
+    private static final AppService NBAPLUS_SERVICE=new AppService();
+    private static Gson sGson;
     private static EventBus sBus ;
     private static DBHelper sDBHelper;
     private static NbaplusAPI sNbaplus;
-    private static final Gson gson = new Gson();
     private Map<Integer,CompositeSubscription> mCompositeSubMap;
     private CompositeSubscription mCompositeSubscription ;
     private Cache mCache;
@@ -29,6 +29,7 @@ public class NbaplusService {
 
     public void initService() {
         sBus = new EventBus();
+        sGson=new Gson();
         mCompositeSubMap=new HashMap<Integer,CompositeSubscription>();
         backGroundInit();
     }
@@ -41,10 +42,7 @@ public class NbaplusService {
                 sDBHelper=DBHelper.getInstance(App.getContext());
                 mCache= Cache.getInstance();
                 mCache.initSnappyDB();
-//                mNewsList=(List<NewsEntity>)mCache.get(Cache.CACHEKEY.NEWSFEED.name(),List.class);
-//                if (mNewsList==null) {
-//                    mNewsList=new ArrayList<NewsEntity>();
-//                }
+
             }
         }).start();
 
@@ -62,14 +60,14 @@ public class NbaplusService {
         mCompositeSubMap.remove(taskId);
     }
 
-    public void updateNews() {
+    public void updateNews(String type) {
 
-        mCompositeSubscription.add(RxNews.updateNews());
+        mCompositeSubscription.add(RxNews.updateNews(type));
     }
 
-    private NbaplusService(){}
+    private AppService(){}
 
-    public static NbaplusService getInstance() {
+    public static AppService getInstance() {
         return NBAPLUS_SERVICE;
     }
 
@@ -86,7 +84,7 @@ public class NbaplusService {
     }
 
     public static Gson getGson() {
-        return gson;
+        return sGson;
     }
 
 }

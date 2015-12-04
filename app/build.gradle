@@ -11,6 +11,7 @@ android {
         targetSdkVersion globalConfiguration.AndroidTargetSdkVersion
         versionCode globalConfiguration.versionCode
         versionName globalConfiguration.versionName
+
     }
 
     lintOptions {
@@ -30,6 +31,7 @@ android {
         dev{
             applicationIdSuffix ".dev"
             minifyEnabled false
+
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
 
         }

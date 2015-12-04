@@ -16,7 +16,7 @@ public class App extends Application {
         FIR.init(this);
         super.onCreate();
         sContext = getApplicationContext();
-        NbaplusService.getInstance().initService();
+        AppService.getInstance().initService();
 
     }
     public static Context getContext() {
