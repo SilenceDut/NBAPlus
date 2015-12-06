@@ -6,12 +6,25 @@ import com.me.silencedut.nbaplus.model.News;
  * Created by Silencedut on 2015/11/28.
  */
 public class NewsEvent extends Event {
-    private News mNews;
-    public NewsEvent(News news) {
-        this.mNews=news;
+
+    public enum GETNEWSWAY {
+        INIT,UPDATE,LOADMORE;
+    }
+    private News news;
+    private GETNEWSWAY getNewsWay;
+
+
+    public NewsEvent(News news,GETNEWSWAY getNewsWay) {
+        this.news=news;
+        this.getNewsWay=getNewsWay;
+
     }
 
     public News getNews() {
-        return mNews;
+        return news;
+    }
+
+    public GETNEWSWAY getNewsWay() {
+        return getNewsWay;
     }
 }

@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.me.silencedut.nbaplus.app.AppService;
-import com.me.silencedut.nbaplus.event.Event;
 
 import butterknife.ButterKnife;
 
@@ -17,7 +16,7 @@ import butterknife.ButterKnife;
  */
 public abstract class BaseFragment extends Fragment {
     protected abstract void initViews();
-    protected abstract void upDateView(Event event);
+
     protected abstract int getContentViewId();
 
     @Override

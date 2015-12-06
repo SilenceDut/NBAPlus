@@ -36,20 +36,12 @@ public class DateFormatter {
         long diff = new Date().getTime() - date.getMillis();
         long r = 0;
         if (diff > year) {
-            r = (diff / year);
-            return r + "年前";
-        }
-        if (diff > month) {
-            r = (diff / month);
-            return r + "个月前";
-        }
-        if (diff > week) {
-            r = (diff / week);
-            return r + "周前";
+
+            return date.toString("yyyy年MM月dd日");
         }
         if (diff > day) {
-            r = (diff / day);
-            return r + "天前";
+
+            return date.toString("MM月dd日");
         }
         if (diff > hour) {
             r = (diff / hour);

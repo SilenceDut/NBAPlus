@@ -1,18 +1,13 @@
 package com.me.silencedut.nbaplus.ui.fragment;
 
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import com.me.silencedut.nbaplus.R;
 import com.me.silencedut.nbaplus.app.AppService;
-import com.me.silencedut.nbaplus.event.Event;
-import com.me.silencedut.nbaplus.event.NewsEvent;
-
-import butterknife.Bind;
+import com.me.silencedut.nbaplus.data.Constant;
+import com.me.silencedut.nbaplus.ui.adapter.NewsAdapter;
 
 /**
  * Created by SilenceDut on 2015/11/28.
@@ -24,9 +19,17 @@ public class MainFragment extends NewsFragment{
         return mainFragment;
     }
 
+
     @Override
     void setAdapter() {
+        mNewsAdapter=new NewsAdapter(getActivity(),mNewsListEntity);
+        mNewsListView.setAdapter(mNewsAdapter);
+    }
 
+    @Override
+    public void onRefresh() {
+        AppService.getInstance().updateNews(Constant.NEWSTYPE.NEWS.getNewsType());
+        //AppService.getInstance().updateNews();
     }
 
     @Override
@@ -47,7 +50,7 @@ public class MainFragment extends NewsFragment{
 //            }
             case R.id.share :
                 //ShareUtils.share(getActivity());
-                AppService.getInstance().updateNews();
+                AppService.getInstance().updateNews(Constant.NEWSTYPE.NEWS.getNewsType());
                 return true;
         }
         return super.onOptionsItemSelected(item);

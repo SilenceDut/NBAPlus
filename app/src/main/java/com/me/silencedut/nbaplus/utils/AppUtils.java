@@ -9,7 +9,7 @@ import com.me.silencedut.nbaplus.app.App;
 
 
 /**
- * Created by Administrator on 2015/9/21.
+ * Created by SilenceDut on 2015/12/11.
  */
 public class AppUtils {
     public static boolean isDay() {

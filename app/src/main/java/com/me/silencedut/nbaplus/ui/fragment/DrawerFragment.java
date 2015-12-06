@@ -155,13 +155,6 @@ public class DrawerFragment extends BaseFragment implements View.OnClickListener
     }
 
     @Override
-    protected void upDateView(Event event) {
-        if(event!=null) {
-
-        }
-    }
-
-    @Override
     protected int getContentViewId() {
         return R.layout.fragment_drawer;
     }

@@ -2,17 +2,18 @@
 <android.support.design.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/newsContainer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
     <include layout="@layout/toolbar"/>
     <android.support.v4.widget.SwipeRefreshLayout
+        android:layout_marginTop="?attr/actionBarSize"
         android:id="@+id/swipeRefreshLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <android.support.v7.widget.RecyclerView
-
             android:id="@+id/rv_news"
             android:scrollbars="vertical"
             android:layout_width="match_parent"
@@ -26,7 +27,7 @@
         android:layout_gravity="bottom|right"
         android:layout_marginBottom="@dimen/fab_margin"
         android:layout_marginRight="@dimen/fab_margin"
-        android:src="@mipmap/ic_menu_white"
+        android:src="@mipmap/ic_refresh_white"
         android:clickable="true"
         app:borderWidth="0dp"
         app:elevation="6dp"

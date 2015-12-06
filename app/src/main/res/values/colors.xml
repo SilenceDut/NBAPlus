@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <color name="colorPrimary">@color/red700</color>
-    <color name="colorPrimaryDark">@color/red900</color>
+    <color name="colorPrimary">@color/red600</color>
+    <color name="colorPrimaryDark">@color/red700</color>
     <color name="red_primary_light">#CCFFCDD2</color>
     <color name="colorAccent">#448AFF</color>
 
     <color name="primary_text">#212121</color>
     <color name="secondary_text">#727272</color>
     <color name="icons">#FFFFFF</color>
-    <color name="divider">#B6B6B6</color>
+    <color name="divider">#4fB6B6B6</color>
 
     <color name="red900">#b71c1c</color>
     <color name="red800">#c62828</color>

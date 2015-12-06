@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
 import com.me.silencedut.nbaplus.R;
+import com.me.silencedut.nbaplus.event.Event;
 
 import butterknife.Bind;
 
@@ -15,6 +16,7 @@ public abstract class SwipeRefreshBaseFragment extends BaseFragment implements S
     @Bind(R.id.swipeRefreshLayout) SwipeRefreshLayout mSwipeRefreshLayout;
     @Bind(R.id.toolbar)
     Toolbar mToolBar;
+    protected abstract void onEventMainThread(Event event);
     public void setRefreshing() {
         mSwipeRefreshLayout.post(new Runnable() {
             @Override

@@ -14,4 +14,9 @@ public class BlogFragment extends NewsFragment {
     void setAdapter() {
 
     }
+
+    @Override
+    public void onRefresh() {
+
+    }
 }

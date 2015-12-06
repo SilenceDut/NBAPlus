@@ -3,7 +3,7 @@ package com.me.silencedut.nbaplus.model;
 import java.util.List;
 
 /**
- * Created by Administrator on 2015/12/4.
+ * Created by SilenceDut on 2015/12/4.
  */
 public class News {
     /**
