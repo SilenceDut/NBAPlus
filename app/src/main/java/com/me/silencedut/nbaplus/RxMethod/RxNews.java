@@ -9,7 +9,6 @@ import com.me.silencedut.nbaplus.data.Constant;
 import com.me.silencedut.nbaplus.event.NewsEvent;
 import com.me.silencedut.nbaplus.model.News;
 
-import java.util.Iterator;
 import java.util.List;
 
 import de.greenrobot.dao.query.DeleteQuery;
@@ -40,7 +39,6 @@ public class RxNews {
                     public void onCompleted() {
 
                     }
-
                     @Override
                     public void onError(Throwable e) {
                         Log.d("subscriptiononError", "onError" + e.toString());
@@ -78,22 +76,6 @@ public class RxNews {
 
         return subscription;
     }
-
-    private static News filterHasImageNews(News news) {
-
-        Iterator<News.NewslistEntity> iterator = news.getNewslist().iterator();
-        News.NewslistEntity newslistEntity;
-        while (iterator.hasNext()) {
-            newslistEntity = iterator.next();
-            if (newslistEntity != null) {
-                if(newslistEntity.getImgUrlList()==null||newslistEntity.getImgUrlList().size()<1){
-                    iterator.remove();
-                }
-            }
-        }
-        return news;
-    }
-
     private static void cacheNews(News news, String newsType) {
         GreenNewsDao greenNewsDao = AppService.getDBHelper().getDaoSession().getGreenNewsDao();
         DeleteQuery deleteQuery = greenNewsDao.queryBuilder()
