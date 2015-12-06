@@ -22,9 +22,9 @@ import java.util.List;
 import butterknife.Bind;
 
 /**
- * Created by asan on 2015/12/4.
+ * Created by SilenceDut on 2015/12/4.
  */
-public class NewsAdapter extends LoadMoreAdapter {
+public class NewsAdapter extends LoadAdapter {
 
     public static final int TYPE_NORMAL = 0;
     public static final int TYPE_MOME_PIC=1;
@@ -53,7 +53,7 @@ public class NewsAdapter extends LoadMoreAdapter {
 
     @Override
     public BaseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        LoadMoreAdapter.BaseViewHolder viewHolder=null;
+        LoadAdapter.BaseViewHolder viewHolder=null;
         switch (viewType) {
             case TYPE_LOAD_MORE:
                 viewHolder= new LoadMoreViewHolder(mInflater.inflate(R.layout.fragment_news_item_load_more, parent,false));break;
