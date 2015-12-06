@@ -1,11 +1,8 @@
 package com.me.silencedut.nbaplus.ui.adapter;
 
 import android.content.Context;
-import android.support.v7.widget.CardView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -24,14 +21,21 @@ import butterknife.Bind;
 /**
  * Created by SilenceDut on 2015/12/4.
  */
-public class NewsAdapter extends LoadAdapter {
+public class MainAdapter extends LoadAdapter {
 
-    public static final int TYPE_NORMAL = 0;
-    public static final int TYPE_MOME_PIC=1;
-    public static final int TYPE_LOAD_MORE = 2;
-    public static final int TYPE_ERROR=4;
+    enum VIEWTYPE{
+        NORMAL(0),NOPIC(1),MOREPIC(2),LOADMORE(3),ERROR(4);
+        private int viewType;
+        VIEWTYPE(int viewType) {
+            this.viewType=viewType;
+        }
 
-    public NewsAdapter(Context context,List<News.NewslistEntity> newsList) {
+        public int getViewType() {
+            return viewType;
+        }
+    }
+
+    public MainAdapter(Context context,List<News.NewslistEntity> newsList) {
         this.mContext = context;
         this.mNewsList=newsList;
         mInflater = LayoutInflater.from(context);
@@ -40,36 +44,38 @@ public class NewsAdapter extends LoadAdapter {
     @Override
     public int getItemViewType(int position) {
         if(mNewsList==null||mNewsList.get(position)==null) {
-            return TYPE_ERROR;
+            return VIEWTYPE.ERROR.getViewType();
         }
         if ( position == getItemCount() - 1) {
-            return TYPE_LOAD_MORE;
-        } else if(mNewsList.get(position).getImgUrlList().size()<3){
-            return TYPE_NORMAL;
+            return VIEWTYPE.LOADMORE.getViewType();
+        } else if(mNewsList.get(position).getImgUrlList().size()==0){
+            return VIEWTYPE.NOPIC.getViewType();
+        }else if(mNewsList.get(position).getImgUrlList().size()>=3){
+            return VIEWTYPE.MOREPIC.getViewType();
         }else {
-            return TYPE_MOME_PIC;
+            return VIEWTYPE.NORMAL.getViewType();
         }
     }
 
     @Override
     public BaseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LoadAdapter.BaseViewHolder viewHolder=null;
-        switch (viewType) {
-            case TYPE_LOAD_MORE:
+        switch (VIEWTYPE.values()[viewType]) {
+            case LOADMORE:
                 viewHolder= new LoadMoreViewHolder(mInflater.inflate(R.layout.fragment_news_item_load_more, parent,false));break;
-            case TYPE_NORMAL: // TYPE_NORMAL
-                viewHolder= new NomalNewsViewHolder(mInflater.inflate(R.layout.fragment_news_list_item, parent, false));break;
-            case TYPE_MOME_PIC: // TYPE_NORMAL
-                viewHolder= new NomalNewsViewHolder(mInflater.inflate(R.layout.fragment_news_list_item, parent, false));break;
+            case NOPIC: // TYPE_NORMAL
+                viewHolder= new NoPicNewsViewHolder(mInflater.inflate(R.layout.fragment_news_item_nopic, parent, false));break;
+            case MOREPIC: // TYPE_NORMAL
+                viewHolder= new NomalNewsViewHolder(mInflater.inflate(R.layout.fragment_news_item_normal, parent, false));break;
+            case NORMAL: // TYPE_NORMAL
+                viewHolder= new NomalNewsViewHolder(mInflater.inflate(R.layout.fragment_news_item_normal, parent, false));break;
             default:
                 break;
         }
         return viewHolder;
     }
 
-     class NomalNewsViewHolder extends BaseViewHolder  {
-        @Bind(R.id.cardItem)
-        CardView cardView;
+    class NomalNewsViewHolder extends BaseViewHolder  {
         @Bind(R.id.newsImage)
         ImageView newsImage;
         @Bind(R.id.newsTitle)
@@ -96,16 +102,35 @@ public class NewsAdapter extends LoadAdapter {
                 showTime = DateFormatter.getRecentlyTimeFormatText(new DateTime(Long.parseLong(newEntity.getPutdate())));
             }
             newsTimeTV.setText(showTime);
-            cardView.setOnClickListener(new OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Log.d("NomalNewsViewHolder", "NomalNewsViewHolder");
-                }
-            });
-
         }
 
-     }
+    }
+
+     class NoPicNewsViewHolder extends BaseViewHolder {
+        @Bind(R.id.newsTitle)
+        TextView newsTitleTV;
+        @Bind(R.id.newsTime)
+        TextView newsTimeTV;
+        @Bind(R.id.newsDescription)
+        TextView newsDescriptionTV;
+         String showTime;
+        public NoPicNewsViewHolder(View itemView) {
+            super(itemView);
+        }
+        @Override
+        protected void update(int position) {
+            News.NewslistEntity newEntity= mNewsList.get(position);
+            newsTitleTV.setText(newEntity.getTitle());
+            newsDescriptionTV.setText(newEntity.getDescription());
+            if((Long.parseLong(newEntity.getPutdate()))<20151207){
+                showTime=newEntity.getPutdate().substring(4,6)+"月"+newEntity.getPutdate().substring(6,8)+"日";
+            }else{
+                showTime = DateFormatter.getRecentlyTimeFormatText(new DateTime(Long.parseLong(newEntity.getPutdate())));
+            }
+            newsTimeTV.setText(showTime);
+        }
+
+    }
 
     static class MorePicNewsViewHolder extends BaseViewHolder {
 

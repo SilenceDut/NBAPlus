@@ -13,7 +13,7 @@ import com.me.silencedut.nbaplus.event.Event;
 import com.me.silencedut.nbaplus.event.NewsEvent;
 import com.me.silencedut.nbaplus.model.News;
 import com.me.silencedut.nbaplus.model.News.NewslistEntity;
-import com.me.silencedut.nbaplus.ui.adapter.NewsAdapter;
+import com.me.silencedut.nbaplus.ui.adapter.MainAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +30,7 @@ public abstract class NewsFragment extends SwipeRefreshBaseFragment {
     CoordinatorLayout newsContainer;
 
     protected List<NewslistEntity> mNewsListEntity = new ArrayList<NewslistEntity>();
-    protected NewsAdapter mNewsAdapter;
+    protected MainAdapter mMainAdapter;
     protected String mNextnewsId;
 
     abstract void setAdapter();
@@ -68,7 +68,7 @@ public abstract class NewsFragment extends SwipeRefreshBaseFragment {
                 default:
                     break;
             }
-            mNewsAdapter.notifyDataSetChanged();
+            mMainAdapter.notifyDataSetChanged();
         }
     }
 
@@ -87,8 +87,8 @@ public abstract class NewsFragment extends SwipeRefreshBaseFragment {
     }
 
     protected void stopLoading() {
-        mNewsAdapter.setLoading(false);
-        mNewsAdapter.notifyItemChanged(mNewsAdapter.getItemCount() - 1);
+        mMainAdapter.setLoading(false);
+        mMainAdapter.notifyItemChanged(mMainAdapter.getItemCount() - 1);
     }
 
 

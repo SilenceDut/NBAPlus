@@ -19,7 +19,6 @@ import rx.Subscriber;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
-import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 
 /**
@@ -29,15 +28,6 @@ public class RxNews {
     public static Subscription updateNews(final String newsType) {
         Subscription subscription = AppService.getNbaPlus().updateNews(newsType)
                 .subscribeOn(Schedulers.io())
-                .map(new Func1<News, News>() {
-                    @Override
-                    public News call(News news) {
-                        for(News.NewslistEntity newsList:news.getNewslist()) {
-                            Log.d("RxNewsFunc1",newsList.getTitle());
-                        }
-                        return filterHasImageNews(news);
-                    }
-                })
                 .doOnNext(new Action1<News>() {
                     @Override
                     public void call(News news) {

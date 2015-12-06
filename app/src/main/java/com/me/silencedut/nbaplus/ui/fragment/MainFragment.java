@@ -7,7 +7,7 @@ import android.view.MenuItem;
 import com.me.silencedut.nbaplus.R;
 import com.me.silencedut.nbaplus.app.AppService;
 import com.me.silencedut.nbaplus.data.Constant;
-import com.me.silencedut.nbaplus.ui.adapter.NewsAdapter;
+import com.me.silencedut.nbaplus.ui.adapter.MainAdapter;
 
 /**
  * Created by SilenceDut on 2015/11/28.
@@ -22,8 +22,8 @@ public class MainFragment extends NewsFragment{
 
     @Override
     void setAdapter() {
-        mNewsAdapter=new NewsAdapter(getActivity(),mNewsListEntity);
-        mNewsListView.setAdapter(mNewsAdapter);
+        mMainAdapter=new MainAdapter(getActivity(),mNewsListEntity);
+        mNewsListView.setAdapter(mMainAdapter);
     }
 
     @Override
