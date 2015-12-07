@@ -13,6 +13,6 @@ import rx.Observable;
 public interface NbaplusAPI {
     @GET("api/v1.0/update/{type}")
     Observable<News> updateNews(@Path("type") String type);
-    @GET("api/v1.0/{type}/{newsId}")
+    @GET("api/v1.0/loadmore/{type}/{newsId}")
     Observable<News> loadmore(@Path("type") String type,@Path("newsId") String newsId );
 }
