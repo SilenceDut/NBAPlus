@@ -40,7 +40,7 @@ public abstract class SwipeRefreshBaseFragment extends BaseFragment implements S
        // ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         mToolBar.setNavigationIcon(R.mipmap.ic_menu_white);
         mSwipeRefreshLayout.setOnRefreshListener(this);
-        mSwipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary, R.color.colorPrimaryDark);
+        mSwipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary, R.color.red_primary_light);
     }
 
     protected abstract String getToolBarTitle();

@@ -66,7 +66,7 @@ public class MainAdapter extends LoadAdapter {
             case NOPIC: // TYPE_NORMAL
                 viewHolder= new NoPicNewsViewHolder(mInflater.inflate(R.layout.fragment_news_item_nopic, parent, false));break;
             case MOREPIC: // TYPE_NORMAL
-                viewHolder= new NomalNewsViewHolder(mInflater.inflate(R.layout.fragment_news_item_normal, parent, false));break;
+                viewHolder= new MorePicNewsViewHolder(mInflater.inflate(R.layout.fragment_news_item_morepic, parent, false));break;
             case NORMAL: // TYPE_NORMAL
                 viewHolder= new NomalNewsViewHolder(mInflater.inflate(R.layout.fragment_news_item_normal, parent, false));break;
             default:
@@ -75,18 +75,16 @@ public class MainAdapter extends LoadAdapter {
         return viewHolder;
     }
 
-    class NomalNewsViewHolder extends BaseViewHolder  {
+    class NomalNewsViewHolder extends EntityHolder  {
         @Bind(R.id.newsImage)
         ImageView newsImage;
         @Bind(R.id.newsTitle)
         TextView newsTitleTV;
         @Bind(R.id.newsTime)
         TextView newsTimeTV;
-        View itemView;
         String showTime;
         public NomalNewsViewHolder(View itemView) {
             super(itemView);
-            this.itemView=itemView;
         }
         @Override
         protected void update(int position) {
@@ -106,7 +104,7 @@ public class MainAdapter extends LoadAdapter {
 
     }
 
-     class NoPicNewsViewHolder extends BaseViewHolder {
+     class NoPicNewsViewHolder extends EntityHolder {
         @Bind(R.id.newsTitle)
         TextView newsTitleTV;
         @Bind(R.id.newsTime)
@@ -132,7 +130,19 @@ public class MainAdapter extends LoadAdapter {
 
     }
 
-    static class MorePicNewsViewHolder extends BaseViewHolder {
+     class MorePicNewsViewHolder extends EntityHolder {
+
+        @Bind(R.id.newsImage1)
+        ImageView newsImage1;
+        @Bind(R.id.newsImage2)
+        ImageView newsImage2;
+        @Bind(R.id.newsImage3)
+        ImageView newsImage3;
+        @Bind(R.id.newsTitle)
+        TextView newsTitleTV;
+        @Bind(R.id.newsTime)
+        TextView newsTimeTV;
+        String showTime;
 
         public MorePicNewsViewHolder(View itemView) {
             super(itemView);
@@ -140,7 +150,24 @@ public class MainAdapter extends LoadAdapter {
 
         @Override
         protected void update(int position) {
+            News.NewslistEntity newEntity = mNewsList.get(position);
 
+            Glide.with(mContext).load(newEntity.getImgUrlList().get(0))
+                    .placeholder(R.mipmap.placeholder_small)
+                    .into(newsImage1);
+            Glide.with(mContext).load(newEntity.getImgUrlList().get(0))
+                    .placeholder(R.mipmap.placeholder_small)
+                    .into(newsImage2);
+            Glide.with(mContext).load(newEntity.getImgUrlList().get(0))
+                    .placeholder(R.mipmap.placeholder_small)
+                    .into(newsImage3);
+            newsTitleTV.setText(newEntity.getTitle());
+            if ((Long.parseLong(newEntity.getPutdate())) < 20151207) {
+                showTime = newEntity.getPutdate().substring(4, 6) + "月" + newEntity.getPutdate().substring(6, 8) + "日";
+            } else {
+                showTime = DateFormatter.getRecentlyTimeFormatText(new DateTime(Long.parseLong(newEntity.getPutdate())));
+            }
+            newsTimeTV.setText(showTime);
         }
     }
 

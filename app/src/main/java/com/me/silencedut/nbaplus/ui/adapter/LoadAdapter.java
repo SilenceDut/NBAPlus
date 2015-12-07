@@ -2,6 +2,7 @@ package com.me.silencedut.nbaplus.ui.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 
@@ -53,6 +54,18 @@ public abstract class LoadAdapter extends RecyclerView.Adapter<LoadAdapter.BaseV
 
     public boolean canLoadMore() {
         return !mLoading;
+    }
+
+    protected  abstract class EntityHolder extends BaseViewHolder implements View.OnClickListener {
+        public EntityHolder(View itemVuiew) {
+            super(itemVuiew);
+            itemVuiew.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+
+        }
     }
 
     protected class LoadMoreViewHolder extends BaseViewHolder {

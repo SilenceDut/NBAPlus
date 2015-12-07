@@ -20,8 +20,9 @@
     <dimen name="cardview_height">180dp</dimen>
     <dimen name="margin_12dp">12dp</dimen>
     <dimen name="margin_10dp">10dp</dimen>
-    <dimen name="margin_5dp">5dp</dimen>
     <dimen name="margin_8dp">8dp</dimen>
+    <dimen name="margin_6dp">6dp</dimen>
+    <dimen name="margin_4dp">4dp</dimen>
     <dimen name="margin_2dp">2dp</dimen>
     <dimen name="margin_0dp">0dp</dimen>
     <dimen name="item_divider_line">1px</dimen>
