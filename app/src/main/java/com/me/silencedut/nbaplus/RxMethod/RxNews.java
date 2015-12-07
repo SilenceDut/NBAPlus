@@ -46,9 +46,6 @@ public class RxNews {
 
                     @Override
                     public void onNext(News news) {
-                        for(News.NewslistEntity newsList:news.getNewslist()) {
-                            Log.d("RxNewsOnnext",newsList.getTitle());
-                        }
                         AppService.getBus().post(new NewsEvent(news, NewsEvent.GETNEWSWAY.UPDATE));
                     }
                 });
