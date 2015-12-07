@@ -10,19 +10,20 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+
         android:orientation="vertical">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_alignBottom="@+id/main_left_layout_info"
-            android:src="@mipmap/main_left_header_bg"
-            android:scaleType="centerCrop"
-            android:adjustViewBounds="true" />
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignBottom="@+id/main_left_layout_info"
+                android:src="@mipmap/main_left_header_bg"
+                android:scaleType="centerCrop"
+                android:adjustViewBounds="true" />
             <LinearLayout
                 android:id="@+id/main_left_layout_info"
                 android:layout_width="wrap_content"

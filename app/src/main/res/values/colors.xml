@@ -3,7 +3,7 @@
 
     <color name="colorPrimary">@color/red600</color>
     <color name="colorPrimaryDark">@color/red700</color>
-    <color name="red_primary_light">#CCFFCDD2</color>
+    <color name="colorPrimaryLight">#CCFFCDD2</color>
     <color name="colorAccent">#448AFF</color>
 
     <color name="primary_text">#212121</color>
