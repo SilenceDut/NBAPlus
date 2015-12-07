@@ -155,10 +155,10 @@ public class MainAdapter extends LoadAdapter {
             Glide.with(mContext).load(newEntity.getImgUrlList().get(0))
                     .placeholder(R.mipmap.placeholder_small)
                     .into(newsImage1);
-            Glide.with(mContext).load(newEntity.getImgUrlList().get(0))
+            Glide.with(mContext).load(newEntity.getImgUrlList().get(1))
                     .placeholder(R.mipmap.placeholder_small)
                     .into(newsImage2);
-            Glide.with(mContext).load(newEntity.getImgUrlList().get(0))
+            Glide.with(mContext).load(newEntity.getImgUrlList().get(2))
                     .placeholder(R.mipmap.placeholder_small)
                     .into(newsImage3);
             newsTitleTV.setText(newEntity.getTitle());
