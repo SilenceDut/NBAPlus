@@ -1,7 +1,5 @@
 package com.me.silencedut.nbaplus.RxMethod;
 
-import android.util.Log;
-
 import com.me.silencedut.greendao.GreenNews;
 import com.me.silencedut.greendao.GreenNewsDao;
 import com.me.silencedut.nbaplus.app.AppService;
@@ -34,29 +32,53 @@ public class RxNews {
                     }
                 })
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<News>() {
+                .subscribe(new Action1<News>() {
                     @Override
-                    public void onCompleted() {
-
+                    public void call(News news) {
+                        AppService.getBus().post(new NewsEvent(news, Constant.GETNEWSWAY.UPDATE));
                     }
+                }, new Action1<Throwable>() {
                     @Override
-                    public void onError(Throwable e) {
-                        Log.d("subscriptiononError", "onError" + e.toString());
-                    }
-
-                    @Override
-                    public void onNext(News news) {
-                        AppService.getBus().post(new NewsEvent(news, NewsEvent.GETNEWSWAY.UPDATE));
+                    public void call(Throwable throwable) {
+                        NewsEvent newsEvent= new NewsEvent(null,null);
+                        newsEvent.setEventResult(Constant.Result.FAIL);
+                        AppService.getBus().post(newsEvent);
                     }
                 });
         return subscription;
     }
 
-    public static Subscription initNews(String type) {
+    public static Subscription loadMoreNews(final String newsType,final String newsId) {
+        Subscription subscription = AppService.getNbaPlus().loadMoreNews(newsType,newsId)
+                .subscribeOn(Schedulers.io())
+                .doOnNext(new Action1<News>() {
+                    @Override
+                    public void call(News news) {
+                        cacheNews(news,newsType);
+                    }
+                })
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Action1<News>() {
+                    @Override
+                    public void call(News news) {
+                        AppService.getBus().post(new NewsEvent(news, Constant.GETNEWSWAY.LOADMORE));
+                    }
+                }, new Action1<Throwable>() {
+                    @Override
+                    public void call(Throwable throwable) {
+                        NewsEvent newsEvent= new NewsEvent(null,null);
+                        newsEvent.setEventResult(Constant.Result.FAIL);
+                        AppService.getBus().post(newsEvent);
+                    }
+                });
+        return subscription;
+    }
+
+    public static Subscription initNews(final String newsType) {
         Subscription subscription = Observable.create(new Observable.OnSubscribe<News>() {
             @Override
             public void call(Subscriber<? super News> subscriber) {
-                List<GreenNews> greenNewses = getCacheNews();
+                List<GreenNews> greenNewses = getCacheNews(newsType);
                 if (greenNewses != null && greenNewses.size() > 0) {
                     News news = AppService.getGson().fromJson(greenNewses.get(0).getNewslist(), News.class);
                     subscriber.onNext(news);
@@ -67,7 +89,7 @@ public class RxNews {
                 .subscribe(new Action1<News>() {
                     @Override
                     public void call(News news) {
-                        AppService.getBus().post(new NewsEvent(news, NewsEvent.GETNEWSWAY.INIT));
+                        AppService.getBus().post(new NewsEvent(news, Constant.GETNEWSWAY.INIT));
                     }
                 });
 
@@ -84,10 +106,10 @@ public class RxNews {
         greenNewsDao.insert(greenNews);
     }
 
-    private static List<GreenNews> getCacheNews() {
+    private static List<GreenNews> getCacheNews(String newsType) {
         GreenNewsDao greenNewsDao = AppService.getDBHelper().getDaoSession().getGreenNewsDao();
         Query query = greenNewsDao.queryBuilder()
-                .where(GreenNewsDao.Properties.Type.eq(Constant.NEWSTYPE.NEWS.getNewsType()))
+                .where(GreenNewsDao.Properties.Type.eq(newsType))
                 .build();
         // 查询结果以 List 返回
         List<GreenNews> greenNewses = query.list();

@@ -54,36 +54,45 @@
             </LinearLayout>
 
         </RelativeLayout>
-
-        <RelativeLayout
-
-            style="@style/RippleTextView"
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/view_margingtop"
-            android:id="@+id/first"
-            >
-            <ImageView
-                style="@style/DrawerIcon"
-                android:src="@drawable/drawer_icon_news" />
-            <TextView
-                style="@style/DrawerTextView"
-                android:text="@string/news" />
-        </RelativeLayout>
+            android:foreground="?attr/selectableItemBackground"
+            android:clickable="true">
+            <RelativeLayout
+                style="@style/DrawerView"
+                android:id="@+id/first"
+                >
+                <ImageView
+                    style="@style/DrawerIcon"
+                    android:src="@drawable/drawer_icon_news" />
+                <TextView
+                    style="@style/DrawerTextView"
+                    android:text="@string/news" />
+            </RelativeLayout>
+        </FrameLayout>
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:foreground="?attr/selectableItemBackground"
+            android:clickable="true">
+            <RelativeLayout
+
+                style="@style/DrawerView"
+                android:id="@+id/second"
+                >
+                <ImageView
+                    style="@style/DrawerIcon"
+                    android:src="@drawable/drawer_icon_blog" />
+                <TextView
+                    style="@style/DrawerTextView"
+                    android:text="@string/blog" />
+            </RelativeLayout>
+        </FrameLayout>
         <RelativeLayout
 
-            style="@style/RippleTextView"
-            android:id="@+id/second"
-            >
-            <ImageView
-                style="@style/DrawerIcon"
-                android:src="@drawable/drawer_icon_blog" />
-            <TextView
-                style="@style/DrawerTextView"
-                android:text="@string/blog" />
-        </RelativeLayout>
-
-        <RelativeLayout
-
-            style="@style/RippleTextView"
+            style="@style/DrawerView"
             android:id="@+id/third"
             android:visibility="gone"
             >
@@ -96,7 +105,7 @@
         </RelativeLayout>
         <RelativeLayout
 
-            style="@style/RippleTextView"
+            style="@style/DrawerView"
             android:id="@+id/fourth"
             android:visibility="gone"
             >
@@ -108,7 +117,7 @@
                 android:text="@string/sort" />
         </RelativeLayout>
         <RelativeLayout
-            style="@style/RippleTextView"
+            style="@style/DrawerView"
             android:id="@+id/fivth"
             android:visibility="gone"
             >
@@ -130,7 +139,7 @@
             android:background="@color/grey300"/>
         <RelativeLayout
 
-            style="@style/RippleTextView"
+            style="@style/DrawerView"
             android:id="@+id/sixth"
             >
             <ImageView
@@ -141,7 +150,7 @@
                 android:text="@string/about" />
         </RelativeLayout>
         <RelativeLayout
-            style="@style/RippleTextView"
+            style="@style/DrawerView"
             android:id="@+id/seventh"
            >
            <ImageView

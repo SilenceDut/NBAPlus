@@ -9,7 +9,7 @@
     android:layout_marginLeft="@dimen/margin_0dp"
     android:layout_marginRight="@dimen/margin_0dp"
     android:layout_marginTop="@dimen/margin_0dp"
-    android:foreground="?android:attr/selectableItemBackground"
+    android:foreground="?attr/selectableItemBackground"
     app:cardCornerRadius="@dimen/margin_0dp"
     app:cardElevation="0dp">
     <RelativeLayout
@@ -36,7 +36,7 @@
             android:paddingRight="@dimen/margin_12dp"
             android:paddingTop="@dimen/margin_8dp"
             android:textColor="@color/secondary_text"
-            android:maxLines="2"
+            android:maxLines="1"
             android:ellipsize="end"
             android:textSize="14sp"
             />

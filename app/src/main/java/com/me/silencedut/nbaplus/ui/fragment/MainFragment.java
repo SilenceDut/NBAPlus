@@ -1,5 +1,6 @@
 package com.me.silencedut.nbaplus.ui.fragment;
 
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -7,6 +8,8 @@ import android.view.MenuItem;
 import com.me.silencedut.nbaplus.R;
 import com.me.silencedut.nbaplus.app.AppService;
 import com.me.silencedut.nbaplus.data.Constant;
+import com.me.silencedut.nbaplus.event.Event;
+import com.me.silencedut.nbaplus.event.NewsEvent;
 import com.me.silencedut.nbaplus.ui.adapter.MainAdapter;
 
 /**
@@ -22,14 +25,37 @@ public class MainFragment extends NewsFragment{
 
     @Override
     void setAdapter() {
-        mMainAdapter=new MainAdapter(getActivity(),mNewsListEntity);
-        mNewsListView.setAdapter(mMainAdapter);
+        mLoadAdapter=new MainAdapter(getActivity(),mNewsListEntity);
+        mNewsListView.setAdapter(mLoadAdapter);
+        initCaChe();
+
+    }
+
+    private void initCaChe() {
+        AppService.getInstance().initNews(Constant.NEWSTYPE.NEWS.getNewsType());
     }
 
     @Override
     public void onRefresh() {
         AppService.getInstance().updateNews(Constant.NEWSTYPE.NEWS.getNewsType());
-        //AppService.getInstance().updateNews();
+    }
+
+
+    @Override
+    public void onLoadMore() {
+        if (mLoadAdapter.canLoadMore()) {
+            mLoadAdapter.setLoading(true);
+            mLoadAdapter.notifyItemChanged(mLoadAdapter.getItemCount() - 1);
+            AppService.getInstance().loadMoreNews(Constant.NEWSTYPE.NEWS.getNewsType(), mNewsId);
+        }
+
+    }
+
+    @Override
+    public void onEventMainThread(Event newsEvent) {
+        if(newsEvent!=null&&newsEvent instanceof NewsEvent) {
+            updateViews((NewsEvent) newsEvent);
+        }
     }
 
     @Override
@@ -55,6 +81,5 @@ public class MainFragment extends NewsFragment{
         }
         return super.onOptionsItemSelected(item);
     }
-
 
 }

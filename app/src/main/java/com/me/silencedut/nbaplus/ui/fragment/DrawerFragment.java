@@ -63,6 +63,11 @@ public class DrawerFragment extends BaseFragment implements View.OnClickListener
     }
 
     @Override
+    protected int getContentViewId() {
+        return R.layout.fragment_drawer;
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         rootView = super.onCreateView(inflater,container,savedInstanceState);
@@ -152,11 +157,6 @@ public class DrawerFragment extends BaseFragment implements View.OnClickListener
     @Override
     protected void initViews() {
 
-    }
-
-    @Override
-    protected int getContentViewId() {
-        return R.layout.fragment_drawer;
     }
 
 

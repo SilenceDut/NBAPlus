@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="48dp"
     android:gravity="center"
+    android:background="@color/grey100"
     android:orientation="vertical"
     >
 
@@ -18,10 +19,10 @@
         app:matProg_barWidth="3dp" />
 
     <TextView
-        android:id="@+id/item_load_more_icon_finish"
+        android:id="@+id/item_load_more_icon_fail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/load_more"
+        android:text="@string/load_fail"
         android:textColor="@color/secondary_text"
         android:textSize="16sp" />
 

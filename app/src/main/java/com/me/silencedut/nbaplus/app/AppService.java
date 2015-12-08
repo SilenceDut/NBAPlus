@@ -60,10 +60,20 @@ public class AppService {
         mCompositeSubMap.remove(taskId);
     }
 
+    public void initNews(String type) {
+        mCompositeSubscription.add(RxNews.initNews(type));
+    }
+
     public void updateNews(String type) {
 
         mCompositeSubscription.add(RxNews.updateNews(type));
     }
+
+    public void loadMoreNews(String type,String newsId) {
+
+        mCompositeSubscription.add(RxNews.loadMoreNews(type,newsId));
+    }
+
 
     private AppService(){}
 

@@ -19,7 +19,7 @@ import butterknife.ButterKnife;
  */
 public abstract class LoadAdapter extends RecyclerView.Adapter<LoadAdapter.BaseViewHolder>{
 
-    private Boolean mLoading=false;
+    protected Boolean mLoading=false;
     protected Context mContext;
     protected LayoutInflater mInflater;
     protected List<News.NewslistEntity> mNewsList;
@@ -73,8 +73,8 @@ public abstract class LoadAdapter extends RecyclerView.Adapter<LoadAdapter.BaseV
         @Bind(R.id.item_load_more_icon_loading)
         protected View iconLoading;
 
-        @Bind(R.id.item_load_more_icon_finish)
-        protected View iconFinish;
+        @Bind(R.id.item_load_more_icon_fail)
+        protected View iconFail;
 
         protected LoadMoreViewHolder(View itemView) {
             super(itemView);
@@ -83,7 +83,7 @@ public abstract class LoadAdapter extends RecyclerView.Adapter<LoadAdapter.BaseV
         @Override
         protected void update(int position) {
             iconLoading.setVisibility(mLoading ? View.VISIBLE : View.GONE);
-            iconFinish.setVisibility(mLoading ? View.GONE : View.VISIBLE);
+            //iconFail.setVisibility(mLoading ? View.GONE : View.VISIBLE);
         }
 
     }

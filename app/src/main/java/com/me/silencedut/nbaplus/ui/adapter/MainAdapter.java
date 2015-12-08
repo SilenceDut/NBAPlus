@@ -46,11 +46,11 @@ public class MainAdapter extends LoadAdapter {
         if(mNewsList==null||mNewsList.get(position)==null) {
             return VIEWTYPE.ERROR.getViewType();
         }
-        if ( position == getItemCount() - 1) {
+        if ( position == getItemCount() - 1&&mLoading) {
             return VIEWTYPE.LOADMORE.getViewType();
         } else if(mNewsList.get(position).getImgUrlList().size()==0){
             return VIEWTYPE.NOPIC.getViewType();
-        }else if(mNewsList.get(position).getImgUrlList().size()>=3){
+        }else if(mNewsList.get(position).getImgUrlList().size()>=4){
             return VIEWTYPE.MOREPIC.getViewType();
         }else {
             return VIEWTYPE.NORMAL.getViewType();
@@ -152,13 +152,13 @@ public class MainAdapter extends LoadAdapter {
         protected void update(int position) {
             News.NewslistEntity newEntity = mNewsList.get(position);
 
-            Glide.with(mContext).load(newEntity.getImgUrlList().get(0))
-                    .placeholder(R.mipmap.placeholder_small)
-                    .into(newsImage1);
             Glide.with(mContext).load(newEntity.getImgUrlList().get(1))
                     .placeholder(R.mipmap.placeholder_small)
-                    .into(newsImage2);
+                    .into(newsImage1);
             Glide.with(mContext).load(newEntity.getImgUrlList().get(2))
+                    .placeholder(R.mipmap.placeholder_small)
+                    .into(newsImage2);
+            Glide.with(mContext).load(newEntity.getImgUrlList().get(3))
                     .placeholder(R.mipmap.placeholder_small)
                     .into(newsImage3);
             newsTitleTV.setText(newEntity.getTitle());

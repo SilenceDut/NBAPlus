@@ -9,7 +9,7 @@
     android:layout_marginLeft="@dimen/margin_0dp"
     android:layout_marginRight="@dimen/margin_0dp"
     android:layout_marginTop="@dimen/margin_0dp"
-    android:foreground="?android:attr/selectableItemBackground"
+    android:foreground="?attr/selectableItemBackground"
     app:cardCornerRadius="@dimen/margin_0dp"
     app:cardElevation="0dp">
     <RelativeLayout
