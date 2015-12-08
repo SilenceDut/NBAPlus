@@ -2,9 +2,9 @@
 
     <!-- Base application theme. -->
 
-    <style name="AppTheme.Base" parent="Theme.AppCompat.Light.DarkActionBar"/>
+    <style name="AppTheme.Base" parent="Theme.AppCompat.Light.NoActionBar"/>
 
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="AppTheme" parent="AppTheme.Base">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimary</item>
@@ -40,7 +40,16 @@
         <item name="android:layout_marginLeft">72dp</item>
         <item name="android:textColor">@drawable/drawer_text_color</item>
         <item name="android:textSize">16sp</item>
-    </style>>
+    </style>
+
+    <style name="MyToolbarTextStyle" parent="@android:style/TextAppearance.DeviceDefault">
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="AppTheme.TransparentActivity" parent="AppTheme.NoActionBar">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsTranslucent">true</item>
+    </style>
 
 
 </resources>

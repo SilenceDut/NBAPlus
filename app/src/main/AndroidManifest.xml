@@ -28,6 +28,14 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".ui.activity.NewsDetileActivity"
+            android:screenOrientation="portrait"
+            android:launchMode="singleTask"
+            android:theme="@style/AppTheme.TransparentActivity"
+            >
+        </activity>
+
     </application>
 
 </manifest>

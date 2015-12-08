@@ -16,6 +16,7 @@ public class NbaplusCilent {
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
+
         nbaplus=retrofit.create(NbaplusAPI.class);
 
     }

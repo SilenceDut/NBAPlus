@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.me.silencedut.nbaplus.R;
 import com.me.silencedut.nbaplus.model.News;
+import com.me.silencedut.nbaplus.model.News.NewslistEntity;
 import com.me.silencedut.nbaplus.utils.DateFormatter;
 
 import org.joda.time.DateTime;
@@ -35,7 +36,7 @@ public class MainAdapter extends LoadAdapter {
         }
     }
 
-    public MainAdapter(Context context,List<News.NewslistEntity> newsList) {
+    public MainAdapter(Context context,List<NewslistEntity> newsList) {
         this.mContext = context;
         this.mNewsList=newsList;
         mInflater = LayoutInflater.from(context);
@@ -66,7 +67,7 @@ public class MainAdapter extends LoadAdapter {
             case NOPIC: // TYPE_NORMAL
                 viewHolder= new NoPicNewsViewHolder(mInflater.inflate(R.layout.fragment_news_item_nopic, parent, false));break;
             case MOREPIC: // TYPE_NORMAL
-                viewHolder= new MorePicNewsViewHolder(mInflater.inflate(R.layout.fragment_news_item_morepic, parent, false));break;
+                viewHolder=new MorePicNewsViewHolder(mInflater.inflate(R.layout.fragment_news_item_morepic, parent, false));break;
             case NORMAL: // TYPE_NORMAL
                 viewHolder= new NomalNewsViewHolder(mInflater.inflate(R.layout.fragment_news_item_normal, parent, false));break;
             default:
@@ -83,13 +84,13 @@ public class MainAdapter extends LoadAdapter {
         @Bind(R.id.newsTime)
         TextView newsTimeTV;
         String showTime;
+
         public NomalNewsViewHolder(View itemView) {
             super(itemView);
         }
         @Override
         protected void update(int position) {
-            News.NewslistEntity newEntity= mNewsList.get(position);
-
+            super.update(position);
             Glide.with(mContext).load(newEntity.getImgUrlList().get(0))
                     .placeholder(R.mipmap.placeholder_small)
                     .into(newsImage);
@@ -103,7 +104,6 @@ public class MainAdapter extends LoadAdapter {
         }
 
     }
-
      class NoPicNewsViewHolder extends EntityHolder {
         @Bind(R.id.newsTitle)
         TextView newsTitleTV;
@@ -111,13 +111,13 @@ public class MainAdapter extends LoadAdapter {
         TextView newsTimeTV;
         @Bind(R.id.newsDescription)
         TextView newsDescriptionTV;
-         String showTime;
+        String showTime;
         public NoPicNewsViewHolder(View itemView) {
             super(itemView);
         }
         @Override
         protected void update(int position) {
-            News.NewslistEntity newEntity= mNewsList.get(position);
+            super.update(position);
             newsTitleTV.setText(newEntity.getTitle());
             newsDescriptionTV.setText(newEntity.getDescription());
             if((Long.parseLong(newEntity.getPutdate()))<20151207){
@@ -128,7 +128,7 @@ public class MainAdapter extends LoadAdapter {
             newsTimeTV.setText(showTime);
         }
 
-    }
+     }
 
      class MorePicNewsViewHolder extends EntityHolder {
 
@@ -150,8 +150,7 @@ public class MainAdapter extends LoadAdapter {
 
         @Override
         protected void update(int position) {
-            News.NewslistEntity newEntity = mNewsList.get(position);
-
+            super.update(position);
             Glide.with(mContext).load(newEntity.getImgUrlList().get(1))
                     .placeholder(R.mipmap.placeholder_small)
                     .into(newsImage1);
@@ -169,7 +168,12 @@ public class MainAdapter extends LoadAdapter {
             }
             newsTimeTV.setText(showTime);
         }
-    }
+
+         @Override
+         public void onClick(View v) {
+
+         }
+     }
 
 
 }

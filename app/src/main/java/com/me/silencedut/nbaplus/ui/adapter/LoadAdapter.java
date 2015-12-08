@@ -1,13 +1,14 @@
 package com.me.silencedut.nbaplus.ui.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 
 import com.me.silencedut.nbaplus.R;
 import com.me.silencedut.nbaplus.model.News;
+import com.me.silencedut.nbaplus.ui.activity.NewsDetileActivity;
 
 import java.util.List;
 
@@ -57,15 +58,32 @@ public abstract class LoadAdapter extends RecyclerView.Adapter<LoadAdapter.BaseV
     }
 
     protected  abstract class EntityHolder extends BaseViewHolder implements View.OnClickListener {
-        public EntityHolder(View itemVuiew) {
-            super(itemVuiew);
-            itemVuiew.setOnClickListener(this);
+        News.NewslistEntity newEntity;
+        public EntityHolder(View itemView) {
+            super(itemView);
+            itemView.setOnClickListener(this);
+
         }
 
         @Override
-        public void onClick(View view) {
+        protected void update(int position) {
+            newEntity= mNewsList.get(position);
+        }
+
+        @Override
+        public void onClick(View v) {
+
+            Intent intent = new Intent(mContext, NewsDetileActivity.class);
+            intent.putExtra(NewsDetileActivity.TITLE, newEntity.getTitle());
+            intent.putExtra(NewsDetileActivity.DETILE_URL, newEntity.getArticleUrl());
+            intent.putExtra(NewsDetileActivity.IMAGE_EXIST, newEntity.getImgUrlList().size() > 0);
+            if (newEntity.getImgUrlList().size()>0) {
+                intent.putExtra(NewsDetileActivity.IMAGE_URL, newEntity.getImgUrlList().get(0));
+            }
+            mContext.startActivity(intent);
 
         }
+
     }
 
     protected class LoadMoreViewHolder extends BaseViewHolder {

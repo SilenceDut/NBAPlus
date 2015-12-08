@@ -1,6 +1,5 @@
 package com.me.silencedut.nbaplus.ui.fragment;
 
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -10,12 +9,15 @@ import com.me.silencedut.nbaplus.app.AppService;
 import com.me.silencedut.nbaplus.data.Constant;
 import com.me.silencedut.nbaplus.event.Event;
 import com.me.silencedut.nbaplus.event.NewsEvent;
+import com.me.silencedut.nbaplus.model.News;
 import com.me.silencedut.nbaplus.ui.adapter.MainAdapter;
 
 /**
  * Created by SilenceDut on 2015/11/28.
  */
 public class MainFragment extends NewsFragment{
+
+    private static final int MIN_ITEM_SIZE=10;
 
     public static MainFragment newInstance() {
         MainFragment mainFragment = new MainFragment();
@@ -54,7 +56,36 @@ public class MainFragment extends NewsFragment{
     @Override
     public void onEventMainThread(Event newsEvent) {
         if(newsEvent!=null&&newsEvent instanceof NewsEvent) {
-            updateViews((NewsEvent) newsEvent);
+            updateViews((NewsEvent)newsEvent);
+            News news= ((NewsEvent)newsEvent).getNews();
+            mNewsId=news.getNextId();
+            switch (((NewsEvent)newsEvent).getNewsWay()) {
+                case INIT:
+                    mNewsListEntity.clear();
+                    mNewsListEntity.addAll(news.getNewslist());
+                    setRefreshing();
+                    mLoadAdapter.notifyDataSetChanged();
+                    break;
+                case UPDATE:
+                    mNewsListEntity.clear();
+                    mNewsListEntity.addAll(news.getNewslist());
+                    if(mNewsListEntity.size()<MIN_ITEM_SIZE) {
+                        AppService.getInstance().loadMoreNews(Constant.NEWSTYPE.NEWS.getNewsType(), mNewsId);
+                    }else {
+                        stopRefreshing();
+                        mLoadAdapter.notifyDataSetChanged();
+                    }
+                    break;
+                case LOADMORE:
+                    mNewsListEntity.addAll(news.getNewslist());
+                    stopAll();
+                    mLoadAdapter.notifyDataSetChanged();
+                    break;
+                default:
+                    break;
+            }
+
+
         }
     }
 
