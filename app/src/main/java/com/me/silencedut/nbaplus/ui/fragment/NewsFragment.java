@@ -75,8 +75,6 @@ public abstract class NewsFragment extends SwipeRefreshBaseFragment implements O
                 break;
         }
         mLoadAdapter.notifyDataSetChanged();
-        AppUtils.showSnackBar(newsContainer, R.string.load_success);
-
 
     }
 
