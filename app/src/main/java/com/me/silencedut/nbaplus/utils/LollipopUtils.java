@@ -7,9 +7,8 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-
 /**
- * Created by asan on 8/1/15.
+ * Created by SlienceDut on 2015/12/4.
  */
 public class LollipopUtils {
 

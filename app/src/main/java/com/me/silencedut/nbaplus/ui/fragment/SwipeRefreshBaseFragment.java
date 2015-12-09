@@ -10,13 +10,12 @@ import com.me.silencedut.nbaplus.event.Event;
 import butterknife.Bind;
 
 /**
- * Created by asan on 2015/11/28.
+ * Created by SilenceDut on 2015/11/28.
  */
 public abstract class SwipeRefreshBaseFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener {
     @Bind(R.id.swipeRefreshLayout) SwipeRefreshLayout mSwipeRefreshLayout;
     @Bind(R.id.toolbar)
     Toolbar mToolBar;
-    protected abstract void onEventMainThread(Event event);
     public void setRefreshing() {
         mSwipeRefreshLayout.post(new Runnable() {
             @Override

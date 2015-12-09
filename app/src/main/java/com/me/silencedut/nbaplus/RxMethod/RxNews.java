@@ -40,7 +40,7 @@ public class RxNews {
                 }, new Action1<Throwable>() {
                     @Override
                     public void call(Throwable throwable) {
-                        NewsEvent newsEvent= new NewsEvent(null,null);
+                        NewsEvent newsEvent= new NewsEvent(new News(), Constant.GETNEWSWAY.UPDATE);
                         newsEvent.setEventResult(Constant.Result.FAIL);
                         AppService.getBus().post(newsEvent);
                     }
@@ -51,12 +51,6 @@ public class RxNews {
     public static Subscription loadMoreNews(final String newsType,final String newsId) {
         Subscription subscription = AppService.getNbaPlus().loadMoreNews(newsType,newsId)
                 .subscribeOn(Schedulers.io())
-                .doOnNext(new Action1<News>() {
-                    @Override
-                    public void call(News news) {
-                        cacheNews(news,newsType);
-                    }
-                })
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Action1<News>() {
                     @Override
@@ -66,7 +60,7 @@ public class RxNews {
                 }, new Action1<Throwable>() {
                     @Override
                     public void call(Throwable throwable) {
-                        NewsEvent newsEvent= new NewsEvent(null,null);
+                        NewsEvent newsEvent= new NewsEvent(new News(), Constant.GETNEWSWAY.LOADMORE);
                         newsEvent.setEventResult(Constant.Result.FAIL);
                         AppService.getBus().post(newsEvent);
                     }
@@ -83,6 +77,10 @@ public class RxNews {
                     News news = AppService.getGson().fromJson(greenNewses.get(0).getNewslist(), News.class);
                     subscriber.onNext(news);
                     subscriber.onCompleted();
+                }else {
+                    NewsEvent newsEvent= new NewsEvent(new News(), Constant.GETNEWSWAY.INIT);
+                    newsEvent.setEventResult(Constant.Result.FAIL);
+                    AppService.getBus().post(newsEvent);
                 }
             }
         }).subscribeOn(Schedulers.io())

@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 
 /**
- * Created by asan on 9/25/15.
+ * Created by SlienceDut on 2015/12/15.
  */
 public class VersionUtils {
 

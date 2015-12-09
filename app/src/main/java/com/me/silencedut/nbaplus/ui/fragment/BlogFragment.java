@@ -1,5 +1,6 @@
 package com.me.silencedut.nbaplus.ui.fragment;
 
+import com.me.silencedut.nbaplus.R;
 import com.me.silencedut.nbaplus.app.AppService;
 import com.me.silencedut.nbaplus.data.Constant;
 import com.me.silencedut.nbaplus.event.Event;
@@ -36,8 +37,12 @@ public class BlogFragment extends NewsFragment {
 
     }
 
-    @Override
     protected void onEventMainThread(Event event) {
 
+    }
+
+    @Override
+    protected String getToolBarTitle() {
+        return getString(R.string.blog);
     }
 }

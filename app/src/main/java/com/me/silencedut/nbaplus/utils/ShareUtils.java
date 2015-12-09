@@ -26,7 +26,7 @@ import com.me.silencedut.nbaplus.R;
 
 
 /**
- * Created by drakeet on 8/17/15.
+ * Created by SlienceDut on 2015/12/9.
  */
 public class ShareUtils {
 

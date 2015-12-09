@@ -49,29 +49,43 @@ public class AppService {
     }
 
     public void addCompositeSub(int taskId) {
-        mCompositeSubscription= new CompositeSubscription();
-
-        mCompositeSubMap.put(taskId, mCompositeSubscription);
+        if(mCompositeSubMap.get(taskId)==null) {
+            mCompositeSubscription = new CompositeSubscription();
+            mCompositeSubMap.put(taskId, mCompositeSubscription);
+        }
     }
 
     public void removeCompositeSub(int taskId) {
-        mCompositeSubscription= mCompositeSubMap.get(taskId);
-        mCompositeSubscription.unsubscribe();
-        mCompositeSubMap.remove(taskId);
+        if(mCompositeSubMap!=null&& mCompositeSubMap.get(taskId)!=null){
+            mCompositeSubscription= mCompositeSubMap.get(taskId);
+            mCompositeSubscription.unsubscribe();
+            mCompositeSubMap.remove(taskId);
+        }
     }
 
-    public void initNews(String type) {
+    public void initNews(int taskId,String type) {
+        getCompositeSubscription(taskId);
         mCompositeSubscription.add(RxNews.initNews(type));
     }
 
-    public void updateNews(String type) {
-
+    public void updateNews(int taskId,String type) {
+        getCompositeSubscription(taskId);
         mCompositeSubscription.add(RxNews.updateNews(type));
     }
 
-    public void loadMoreNews(String type,String newsId) {
+    public void loadMoreNews(int taskId,String type,String newsId) {
+        getCompositeSubscription(taskId);
+        mCompositeSubscription.add(RxNews.loadMoreNews(type, newsId));
+    }
 
-        mCompositeSubscription.add(RxNews.loadMoreNews(type,newsId));
+    public void getCompositeSubscription(int taskId) {
+
+        if(mCompositeSubMap.get(taskId)==null) {
+            mCompositeSubscription = new CompositeSubscription();
+            mCompositeSubMap.put(taskId, mCompositeSubscription);
+        }else {
+            mCompositeSubscription= mCompositeSubMap.get(taskId);
+        }
     }
 
 

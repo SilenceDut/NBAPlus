@@ -4,7 +4,9 @@ import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-
+/**
+ * Created by SilenceDut on 2015/12/8.
+ */
 public class RecyclerViewLoadMoreListener extends RecyclerView.OnScrollListener {
 
     private LinearLayoutManager linearLayoutManager;

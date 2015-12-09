@@ -26,6 +26,11 @@ public abstract class BaseActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         initViews();
     }
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+    }
 
     @Override
     protected void onDestroy() {

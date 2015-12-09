@@ -8,7 +8,7 @@ import android.view.Display;
 import android.view.WindowManager;
 
 /**
- * Created by asanBrother on 26/7/2015.
+ * Created by SlienceDut on 2015/12/9.
  */
 public class NumericalUtil {
     private static int screenWidth = 0;

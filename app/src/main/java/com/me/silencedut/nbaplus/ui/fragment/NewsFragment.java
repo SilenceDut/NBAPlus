@@ -7,6 +7,7 @@ import android.view.View;
 
 import com.me.silencedut.nbaplus.R;
 import com.me.silencedut.nbaplus.data.Constant;
+import com.me.silencedut.nbaplus.event.AnimatEndEvent;
 import com.me.silencedut.nbaplus.event.NewsEvent;
 import com.me.silencedut.nbaplus.model.News;
 import com.me.silencedut.nbaplus.model.News.NewslistEntity;
@@ -21,13 +22,17 @@ import java.util.List;
 import butterknife.Bind;
 
 /**
- * Created by Administrator on 2015/12/4.
+ * Created by SilenceDut on 2015/12/4.
  */
 public abstract class NewsFragment extends SwipeRefreshBaseFragment implements OnLoadMoreListener {
     @Bind(R.id.rv_news)
     RecyclerView mNewsListView;
     @Bind(R.id.newsContainer)
     CoordinatorLayout newsContainer;
+    @Bind(R.id.refresh)
+    View refreshButton;
+    @Bind(R.id.mian_title)
+    View mainTitle;
 
     protected List<NewslistEntity> mNewsListEntity = new ArrayList<NewslistEntity>();
     protected LoadAdapter mLoadAdapter;
@@ -43,40 +48,6 @@ public abstract class NewsFragment extends SwipeRefreshBaseFragment implements O
         mNewsListView.setLayoutManager(linearLayoutManager);
         mNewsListView.addOnScrollListener(new RecyclerViewLoadMoreListener(linearLayoutManager, this, 0));
         setAdapter();
-
-    }
-
-    public void updateViews(NewsEvent newsEvent) {
-
-        if(Constant.Result.FAIL.equals(newsEvent.getEventResult())) {
-            stopRefreshing();
-            stopLoading();
-            AppUtils.showSnackBar(newsContainer, R.string.load_fail);
-            return;
-        }
-        News news= newsEvent.getNews();
-        mNewsId=news.getNextId();
-        switch (newsEvent.getNewsWay()) {
-            case INIT:
-                mNewsListEntity.clear();
-                mNewsListEntity.addAll(news.getNewslist());
-                setRefreshing();
-                break;
-            case UPDATE:
-                mNewsListEntity.clear();
-                mNewsListEntity.addAll(news.getNewslist());
-                if(mNewsListEntity.size()<10) {
-                    onLoadMore();
-                }
-                break;
-            case LOADMORE:
-                mNewsListEntity.addAll(news.getNewslist());
-                break;
-            default:
-                break;
-        }
-        stopAll();
-        mLoadAdapter.notifyDataSetChanged();
 
     }
 
@@ -96,14 +67,21 @@ public abstract class NewsFragment extends SwipeRefreshBaseFragment implements O
     }
 
 
-
-    @Override
-    protected String getToolBarTitle() {
-        return "";
+    protected void updateView(NewsEvent newsEvent) {
+        if(newsEvent.getNewsWay().equals(Constant.GETNEWSWAY.INIT)) {
+            setRefreshing();
+        }else {
+            stopRefreshing();
+            stopLoading();
+            AppUtils.showSnackBar(newsContainer, R.string.load_fail);
+        }
     }
 
-    public View getContainer() {
-        return newsContainer;
+
+
+    public void onEventMainThread(AnimatEndEvent animatEndEvent) {
+        setRefreshing();
+
     }
 
 }

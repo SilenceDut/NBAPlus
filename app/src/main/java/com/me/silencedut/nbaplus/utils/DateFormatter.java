@@ -8,7 +8,7 @@ import java.util.Date;
 
 
 /**
- * Created by asan on 2015/8/8.
+ * Created by SlienceDut on 2015/12/9.
  */
 public class DateFormatter {
 

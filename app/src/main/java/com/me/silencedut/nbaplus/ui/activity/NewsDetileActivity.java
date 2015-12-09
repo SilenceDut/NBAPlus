@@ -56,9 +56,17 @@ public class NewsDetileActivity extends SwipeBackActivity{
             mCollapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar_layout);
             mCollapsingToolbarLayout.setTitle(mGetIntent.getStringExtra(TITLE));
             mTitleImage = (ImageView)findViewById(R.id.titleImage);
-            Glide.with(this).load(mGetIntent.getStringExtra(IMAGE_URL))
+            mTitleImage.post(new Runnable() {
+                @Override
+                public void run() {
+                    Glide.with(NewsDetileActivity.this).load(mGetIntent.getStringExtra(IMAGE_URL))
                     .placeholder(R.color.colorPrimary)
                     .into(mTitleImage);
+                }
+            });
+//            Glide.with(this).load(mGetIntent.getStringExtra(IMAGE_URL))
+//                    .placeholder(R.color.colorPrimary)
+//                    .into(mTitleImage);
 
         }else {
             mToolBar.setBackgroundResource(R.color.colorPrimary);

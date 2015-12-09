@@ -15,13 +15,19 @@ import butterknife.ButterKnife;
  * Created by SilenceDut on 2015/11/28.
  */
 public abstract class BaseFragment extends Fragment {
+    private int mTaskId;
     protected abstract void initViews();
 
     protected abstract int getContentViewId();
 
+    protected int getTaskId (){
+        return mTaskId;
+    }
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mTaskId=getActivity().getTaskId();
         AppService.getInstance().getBus().register(this);
     }
 

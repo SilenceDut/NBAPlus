@@ -9,7 +9,7 @@ import android.graphics.PorterDuffColorFilter;
 import android.view.View;
 
 /**
- * Created by asanBrother on 1/8/2015
+ * Created by SlienceDut on 2015/12/2.
  */
 public class BitmapUtils {
     public static Bitmap drawViewToBitmap(View view, int width, int height, int downSampling,String color) {

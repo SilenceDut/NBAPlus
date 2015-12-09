@@ -6,7 +6,9 @@ import android.os.Environment;
 import android.util.Log;
 
 import java.io.File;
-
+/**
+ * Created by SlienceDut on 2015/12/15.
+ */
 public class DataClearManager {
 
     private static final String newsCacheurl = Environment.getExternalStorageDirectory().getAbsolutePath() + "nbaplus";

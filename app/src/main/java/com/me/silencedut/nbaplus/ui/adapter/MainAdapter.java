@@ -1,6 +1,10 @@
 package com.me.silencedut.nbaplus.ui.adapter;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +15,7 @@ import com.bumptech.glide.Glide;
 import com.me.silencedut.nbaplus.R;
 import com.me.silencedut.nbaplus.model.News;
 import com.me.silencedut.nbaplus.model.News.NewslistEntity;
+import com.me.silencedut.nbaplus.ui.activity.NewsDetileActivity;
 import com.me.silencedut.nbaplus.utils.DateFormatter;
 
 import org.joda.time.DateTime;
@@ -23,6 +28,11 @@ import butterknife.Bind;
  * Created by SilenceDut on 2015/12/4.
  */
 public class MainAdapter extends LoadAdapter {
+    private static final int ANIMATED_END_COUNT = 3;
+    @Override
+    protected void setAnimateEndCount(int animateEndCount) {
+        this.mAnimateEndCount=animateEndCount;
+    }
 
     enum VIEWTYPE{
         NORMAL(0),NOPIC(1),MOREPIC(2),LOADMORE(3),ERROR(4);
@@ -40,6 +50,7 @@ public class MainAdapter extends LoadAdapter {
         this.mContext = context;
         this.mNewsList=newsList;
         mInflater = LayoutInflater.from(context);
+        setAnimateEndCount(ANIMATED_END_COUNT);
     }
 
     @Override
@@ -101,6 +112,33 @@ public class MainAdapter extends LoadAdapter {
                 showTime = DateFormatter.getRecentlyTimeFormatText(new DateTime(Long.parseLong(newEntity.getPutdate())));
             }
             newsTimeTV.setText(showTime);
+        }
+
+        @Override
+        public void onClick(View view) {
+
+            Intent intent = new Intent(mContext, NewsDetileActivity.class);
+            intent.putExtra(NewsDetileActivity.TITLE, newEntity.getTitle());
+            intent.putExtra(NewsDetileActivity.DETILE_URL, newEntity.getArticleUrl());
+            intent.putExtra(NewsDetileActivity.IMAGE_EXIST, newEntity.getImgUrlList().size() > 0);
+            if (newEntity.getImgUrlList().size()>0) {
+                intent.putExtra(NewsDetileActivity.IMAGE_URL, newEntity.getImgUrlList().get(0));
+            }
+            ActivityOptionsCompat options =
+            ActivityOptionsCompat.makeScaleUpAnimation(view, //The View that the new activity is animating from
+                    (int) view.getWidth() / 2, (int) view.getHeight() / 2, //拉伸开始的坐标
+                    0, 0);//拉伸开始的区域大小，这里用（0，0）表示从无到全屏
+            ActivityCompat.startActivity((Activity) mContext, intent, options.toBundle());
+
+//效果不理想
+//            ActivityCompat.startActivity((Activity) mContext, intent, options.toBundle());
+//            ActivityOptionsCompat options =
+//                    ActivityOptionsCompat.makeSceneTransitionAnimation((Activity) mContext,
+//                            newsImage, mContext.getString(R.string.secondTab));
+//
+//            ActivityCompat.startActivity((Activity) mContext, intent, options.toBundle());
+
+
         }
 
     }
@@ -168,11 +206,6 @@ public class MainAdapter extends LoadAdapter {
             }
             newsTimeTV.setText(showTime);
         }
-
-         @Override
-         public void onClick(View v) {
-
-         }
      }
 
 
