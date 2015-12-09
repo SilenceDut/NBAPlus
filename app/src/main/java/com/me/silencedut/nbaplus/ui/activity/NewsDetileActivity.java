@@ -8,6 +8,7 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.me.silencedut.nbaplus.R;
+import com.me.silencedut.nbaplus.app.AppService;
 import com.me.silencedut.nbaplus.event.Event;
 import com.me.silencedut.nbaplus.utils.LollipopUtils;
 
@@ -71,9 +72,14 @@ public class NewsDetileActivity extends SwipeBackActivity{
         }else {
             mToolBar.setBackgroundResource(R.color.colorPrimary);
         }
-        LollipopUtils.setStatusBarColor(this, R.color.colorPrimary);
+
         mWebView.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
         mWebView.getSettings().setJavaScriptEnabled(true);
         mWebView.setBackgroundColor(0);
+        getNewsDetile();
+    }
+
+    private void getNewsDetile(){
+        AppService.getInstance().getNewsDetile(getTaskId(),mGetIntent.getStringExtra(DETILE_URL));
     }
 }

@@ -78,6 +78,11 @@ public class AppService {
         mCompositeSubscription.add(RxNews.loadMoreNews(type, newsId));
     }
 
+    public void getNewsDetile(int taskId,String contentUrl) {
+        getCompositeSubscription(taskId);
+        mCompositeSubscription.add(RxNews.getNewsDetile(contentUrl));
+    }
+
     public void getCompositeSubscription(int taskId) {
 
         if(mCompositeSubMap.get(taskId)==null) {

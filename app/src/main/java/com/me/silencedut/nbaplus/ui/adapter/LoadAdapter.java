@@ -81,7 +81,7 @@ public abstract class LoadAdapter extends RecyclerView.Adapter<LoadAdapter.BaseV
                         @Override
                         public void onAnimationEnd(Animator animation) {
 //                        startContentAnimation();
-                            if (position == mAnimateEndCount) {
+                            if (position == mAnimateEndCount||position>=getItemCount()-1) {
                                 AppService.getInstance().getBus().post(new AnimatEndEvent());
                             }
                         }

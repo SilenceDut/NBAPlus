@@ -81,7 +81,6 @@ public abstract class NewsFragment extends SwipeRefreshBaseFragment implements O
 
     public void onEventMainThread(AnimatEndEvent animatEndEvent) {
         setRefreshing();
-
     }
 
 }
