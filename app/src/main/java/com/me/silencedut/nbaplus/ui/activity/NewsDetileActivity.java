@@ -9,8 +9,9 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.me.silencedut.nbaplus.R;
 import com.me.silencedut.nbaplus.app.AppService;
+import com.me.silencedut.nbaplus.data.Constant;
 import com.me.silencedut.nbaplus.event.Event;
-import com.me.silencedut.nbaplus.utils.LollipopUtils;
+import com.me.silencedut.nbaplus.event.NewsDetileEvent;
 
 import butterknife.Bind;
 
@@ -35,7 +36,13 @@ public class NewsDetileActivity extends SwipeBackActivity{
 
     @Override
     public void onEventMainThread(Event event) {
+        if(event!=null&&event instanceof NewsDetileEvent) {
+            if(event.getEventResult().equals(Constant.Result.FAIL)) {
+                return;
+            }
 
+            mWebView.loadDataWithBaseURL(null, ((NewsDetileEvent)event).getContent(), "text/html", "UTF-8", null);
+        }
     }
 
 
@@ -80,6 +87,6 @@ public class NewsDetileActivity extends SwipeBackActivity{
     }
 
     private void getNewsDetile(){
-        AppService.getInstance().getNewsDetile(getTaskId(),mGetIntent.getStringExtra(DETILE_URL));
+        AppService.getInstance().getNewsDetile(getTaskId(), mGetIntent.getStringExtra(DETILE_URL));
     }
 }

@@ -2,17 +2,13 @@ package com.me.silencedut.nbaplus.ui.fragment;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 
 import com.me.silencedut.nbaplus.R;
 import com.me.silencedut.nbaplus.app.AppService;
 import com.me.silencedut.nbaplus.data.Constant;
-import com.me.silencedut.nbaplus.event.AnimatEndEvent;
-import com.me.silencedut.nbaplus.event.Event;
 import com.me.silencedut.nbaplus.event.NewsEvent;
 import com.me.silencedut.nbaplus.model.News;
 import com.me.silencedut.nbaplus.ui.adapter.MainAdapter;
@@ -37,6 +33,7 @@ public class MainFragment extends NewsFragment{
     void setAdapter() {
         mLoadAdapter=new MainAdapter(getActivity(),mNewsListEntity);
         mNewsListView.setAdapter(mLoadAdapter);
+        startIntroAnimation();
     }
 
     private void initCaChe() {
@@ -109,9 +106,6 @@ public class MainFragment extends NewsFragment{
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.menu_main, menu);
-
-
-        startIntroAnimation();
     }
 
 
