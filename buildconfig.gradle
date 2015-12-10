@@ -22,13 +22,9 @@ ext {
     ]
 
     otherDependdencies=[
-            rippleeffect :"com.github.traex.rippleeffect:library:1.3+",
             butterknife :"com.jakewharton:butterknife:7.0.1+",
-            volley:"com.mcxiaoke.volley:library:1.0.5+",
             glide :"com.github.bumptech.glide:volley-integration:1.3.1+",
             eventbus:"de.greenrobot:eventbus:2.4.0+",
-            snappydb:"com.snappydb:snappydb-lib:0.5.2+",
-            kryo:"com.esotericsoftware.kryo:kryo:2.24.0+",
             materialish_progress:"com.pnikosis:materialish-progress:1.5+",
             circleimageview :"de.hdodenhof:circleimageview:1.3.0+",
             licensesdialog :"de.psdev.licensesdialog:licensesdialog:1.8.0+",

@@ -7,6 +7,7 @@ import android.widget.FrameLayout;
 
 import com.me.silencedut.nbaplus.R;
 import com.me.silencedut.nbaplus.event.Event;
+import com.me.silencedut.nbaplus.ui.fragment.BlogFragment;
 import com.me.silencedut.nbaplus.ui.fragment.DrawerFragment;
 import com.me.silencedut.nbaplus.ui.fragment.MainFragment;
 import com.me.silencedut.nbaplus.ui.fragment.NewsFragment;
@@ -23,7 +24,7 @@ public class MainActivity extends BaseActivity {
         mNavigationFragment.setUp((FrameLayout) findViewById(R.id.main_content),
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.main_drawer));
-        mCurrentFragment= MainFragment.newInstance();
+        mCurrentFragment= BlogFragment.newInstance();
         transactionFragment(mCurrentFragment);
 
 

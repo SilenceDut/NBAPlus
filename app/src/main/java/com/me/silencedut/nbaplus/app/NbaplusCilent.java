@@ -10,18 +10,31 @@ import retrofit.RxJavaCallAdapterFactory;
  */
 public class NbaplusCilent {
     final NbaplusAPI nbaplus ;
+    final NewsDetileAPI newsDetileAPI;
     NbaplusCilent() {
-        Retrofit retrofit = new Retrofit.Builder()
+        Retrofit retrofit0 = new Retrofit.Builder()
                 .baseUrl("http://nbaplus.sinaapp.com/")
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
-        nbaplus=retrofit.create(NbaplusAPI.class);
+        nbaplus=retrofit0.create(NbaplusAPI.class);
+
+        Retrofit retrofit1 = new Retrofit.Builder()
+                .baseUrl("http://reader.res.meizu.com/reader/articlecontent/")
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        newsDetileAPI=retrofit1.create(NewsDetileAPI.class);
 
     }
 
     public NbaplusAPI getCilent() {
         return nbaplus;
+    }
+
+    public NewsDetileAPI getNewsDetileClient() {
+        return newsDetileAPI;
     }
 }

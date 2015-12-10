@@ -15,7 +15,6 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     protected abstract void initViews();
     protected abstract int getContentViewId();
-    public abstract void onEventMainThread(Event event) ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

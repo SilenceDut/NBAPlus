@@ -1,12 +1,14 @@
 package com.me.silencedut.nbaplus.model;
 
-import java.util.List;
+import org.joda.time.DateTime;
+
 import java.util.Map;
 
 /**
  * Created by SilenceDut on 2015/12/9.
  */
 public class NewsDetile {
+
     private String author;
 
     private Map<String,ContentImage> articleMediaMap;

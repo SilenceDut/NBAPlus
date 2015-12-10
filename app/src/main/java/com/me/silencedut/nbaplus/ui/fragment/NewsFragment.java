@@ -31,8 +31,6 @@ public abstract class NewsFragment extends SwipeRefreshBaseFragment implements O
     CoordinatorLayout newsContainer;
     @Bind(R.id.refresh)
     View refreshButton;
-    @Bind(R.id.mian_title)
-    View mainTitle;
 
     protected List<NewslistEntity> mNewsListEntity = new ArrayList<NewslistEntity>();
     protected LoadAdapter mLoadAdapter;

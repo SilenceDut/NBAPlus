@@ -49,7 +49,7 @@ public class News {
         private String description;
         private String title;
         private String putdate;
-        private int articleId;
+        private String articleId;
         private String contentSourceName;
         private String articleUrl;
         private Object topicVoteJson;
@@ -67,7 +67,7 @@ public class News {
             this.putdate = putdate;
         }
 
-        public void setArticleId(int articleId) {
+        public void setArticleId(String articleId) {
             this.articleId = articleId;
         }
 
@@ -99,7 +99,7 @@ public class News {
             return putdate;
         }
 
-        public int getArticleId() {
+        public String getArticleId() {
             return articleId;
         }
 

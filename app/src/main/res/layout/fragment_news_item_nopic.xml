@@ -19,13 +19,25 @@
         android:background="@drawable/shot_item_background">
         <TextView
             android:id="@+id/newsTitle"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingLeft="@dimen/margin_8dp"
+            android:layout_toLeftOf="@+id/newsTime"
             android:paddingTop="@dimen/view_margingtop"
-            android:paddingRight="@dimen/margin_10dp"
             android:textColor="@color/primary_text"
+            android:singleLine="true"
             android:textSize="16sp"
+            />
+        <TextView
+            android:id="@+id/newsTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/margin_8dp"
+            android:paddingRight="@dimen/margin_0dp"
+            android:paddingTop="@dimen/margin_10dp"
+            android:textColor="@color/secondary_text"
+            android:textSize="14sp"
             />
         <TextView
             android:id="@+id/newsDescription"
@@ -34,24 +46,14 @@
             android:layout_height="wrap_content"
             android:paddingLeft="@dimen/margin_12dp"
             android:paddingRight="@dimen/margin_12dp"
-            android:paddingTop="@dimen/margin_8dp"
+            android:paddingBottom="@dimen/margin_8dp"
+            android:paddingTop="@dimen/margin_6dp"
             android:textColor="@color/secondary_text"
-            android:maxLines="1"
+            android:maxLines="2"
             android:ellipsize="end"
             android:textSize="14sp"
             />
-        <TextView
-            android:id="@+id/newsTime"
-            android:layout_below="@+id/newsDescription"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:paddingLeft="@dimen/margin_8dp"
-            android:paddingTop="@dimen/margin_8dp"
-            android:paddingBottom="@dimen/view_margingtop"
-            android:textColor="@color/secondary_text"
-            android:textSize="14sp"
-            />
+
         <TextView
             android:id="@+id/newsSource"
             android:layout_below="@+id/newsTitle"

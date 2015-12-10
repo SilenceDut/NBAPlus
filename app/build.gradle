@@ -52,13 +52,9 @@ dependencies {
     compile googleDependencies.design
     compile googleDependencies.recyclerview_v7
     compile googleDependencies.cardview_v7
-    compile otherDependencies.rippleeffect
     compile otherDependencies.butterknife
-    compile otherDependencies.volley
     compile otherDependencies.glide
     compile otherDependencies.eventbus
-    compile otherDependencies.snappydb
-    compile otherDependencies.kryo
     compile otherDependencies.materialish_progress
     compile otherDependencies.circleimageview
     compile otherDependencies.licensesdialog

@@ -4,7 +4,6 @@ package com.me.silencedut.nbaplus.app;
 import com.google.gson.Gson;
 import com.me.silencedut.greendao.DBHelper;
 import com.me.silencedut.nbaplus.RxMethod.RxNews;
-import com.me.silencedut.nbaplus.data.Cache;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -21,11 +20,9 @@ public class AppService {
     private static EventBus sBus ;
     private static DBHelper sDBHelper;
     private static NbaplusAPI sNbaplus;
+    private static NewsDetileAPI sNewsDetileApi;
     private Map<Integer,CompositeSubscription> mCompositeSubMap;
     private CompositeSubscription mCompositeSubscription ;
-    private Cache mCache;
-
-
 
     public void initService() {
         sBus = new EventBus();
@@ -39,9 +36,8 @@ public class AppService {
             @Override
             public void run() {
                 sNbaplus=NbaplusFactory.getNbaplus();
+                sNewsDetileApi=NbaplusFactory.getNewsDetileInstance();
                 sDBHelper=DBHelper.getInstance(App.getContext());
-                mCache= Cache.getInstance();
-                mCache.initSnappyDB();
 
             }
         }).start();
@@ -78,9 +74,9 @@ public class AppService {
         mCompositeSubscription.add(RxNews.loadMoreNews(type, newsId));
     }
 
-    public void getNewsDetile(int taskId,String contentUrl) {
+    public void getNewsDetile(int taskId,String date,String detielId) {
         getCompositeSubscription(taskId);
-        mCompositeSubscription.add(RxNews.getNewsDetile(contentUrl));
+        mCompositeSubscription.add(RxNews.getNewsDetile(date,detielId));
     }
 
     public void getCompositeSubscription(int taskId) {
@@ -106,6 +102,10 @@ public class AppService {
 
     public static NbaplusAPI getNbaPlus() {
         return sNbaplus;
+    }
+
+    public static NewsDetileAPI getNewsDetileApi() {
+        return sNewsDetileApi;
     }
 
     public static DBHelper getDBHelper() {

@@ -5,6 +5,7 @@ import android.animation.AnimatorListenerAdapter;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.me.silencedut.nbaplus.R;
 import com.me.silencedut.nbaplus.app.AppService;
@@ -15,6 +16,8 @@ import com.me.silencedut.nbaplus.ui.adapter.MainAdapter;
 import com.me.silencedut.nbaplus.utils.AppUtils;
 import com.me.silencedut.nbaplus.utils.NumericalUtil;
 
+import butterknife.Bind;
+
 /**
  * Created by SilenceDut on 2015/11/28.
  */
@@ -22,7 +25,8 @@ public class MainFragment extends NewsFragment{
 
     private static final int MIN_ITEM_SIZE=10;
     private static final int ANIM_DURATION_TOOLBAR = 300;
-
+    @Bind(R.id.mian_title)
+    View mainTitle;
     public static MainFragment newInstance() {
         MainFragment mainFragment = new MainFragment();
         return mainFragment;
@@ -31,6 +35,7 @@ public class MainFragment extends NewsFragment{
 
     @Override
     void setAdapter() {
+        mainTitle.setVisibility(View.VISIBLE);
         mLoadAdapter=new MainAdapter(getActivity(),mNewsListEntity);
         mNewsListView.setAdapter(mLoadAdapter);
         startIntroAnimation();
@@ -57,7 +62,7 @@ public class MainFragment extends NewsFragment{
 
 
     public void onEventMainThread(NewsEvent newsEvent) {
-        if(newsEvent!=null) {
+        if(newsEvent!=null&&Constant.NEWSTYPE.NEWS.getNewsType().equals(newsEvent.getNewsType())) {
             if(Constant.Result.FAIL.equals(newsEvent.getEventResult())) {
                 updateView(newsEvent);
             }else {

@@ -2,6 +2,7 @@ package com.me.silencedut.nbaplus.ui.activity;
 
 import android.content.Intent;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.util.Log;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.ImageView;
@@ -12,6 +13,7 @@ import com.me.silencedut.nbaplus.app.AppService;
 import com.me.silencedut.nbaplus.data.Constant;
 import com.me.silencedut.nbaplus.event.Event;
 import com.me.silencedut.nbaplus.event.NewsDetileEvent;
+import com.me.silencedut.nbaplus.utils.AppUtils;
 
 import butterknife.Bind;
 
@@ -25,7 +27,8 @@ public class NewsDetileActivity extends SwipeBackActivity{
     private Intent mGetIntent;
     private ImageView mTitleImage;
     public static final String TITLE ="TITLE";
-    public static final String DETILE_URL="DETILE_URL";
+    public static final String DETILE_DATE="DETILE_DATE";
+    public static final String DETILE_ID="DETILE_ID";
     public static final String IMAGE_URL="IMAGE_URL";
     public static final String IMAGE_EXIST="IMAGE_EXIST";
 
@@ -34,14 +37,15 @@ public class NewsDetileActivity extends SwipeBackActivity{
         return hasTitleImage()? R.layout.activity_detile : R.layout.activity_detile_noimage;
     }
 
-    @Override
-    public void onEventMainThread(Event event) {
-        if(event!=null&&event instanceof NewsDetileEvent) {
-            if(event.getEventResult().equals(Constant.Result.FAIL)) {
+    public void onEventMainThread(NewsDetileEvent event) {
+        if(event!=null) {
+            if(Constant.Result.FAIL.equals(event.getEventResult())) {
+                AppUtils.showSnackBar(mSwipeBackLayout, R.string.load_fail);
                 return;
             }
 
-            mWebView.loadDataWithBaseURL(null, ((NewsDetileEvent)event).getContent(), "text/html", "UTF-8", null);
+            mWebView.loadDataWithBaseURL(null,event.getContent(), "text/html", "UTF-8", null);
+
         }
     }
 
@@ -87,6 +91,6 @@ public class NewsDetileActivity extends SwipeBackActivity{
     }
 
     private void getNewsDetile(){
-        AppService.getInstance().getNewsDetile(getTaskId(), mGetIntent.getStringExtra(DETILE_URL));
+        AppService.getInstance().getNewsDetile(getTaskId(), mGetIntent.getStringExtra(DETILE_DATE), mGetIntent.getStringExtra(DETILE_ID));
     }
 }

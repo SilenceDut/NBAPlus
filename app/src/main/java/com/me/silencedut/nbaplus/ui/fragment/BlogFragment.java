@@ -5,6 +5,10 @@ import com.me.silencedut.nbaplus.app.AppService;
 import com.me.silencedut.nbaplus.data.Constant;
 import com.me.silencedut.nbaplus.event.Event;
 import com.me.silencedut.nbaplus.event.NewsEvent;
+import com.me.silencedut.nbaplus.model.News;
+import com.me.silencedut.nbaplus.ui.adapter.BlogAdapter;
+import com.me.silencedut.nbaplus.ui.adapter.MainAdapter;
+import com.me.silencedut.nbaplus.utils.AppUtils;
 
 /**
  * Created by Administrator on 2015/12/4.
@@ -18,27 +22,63 @@ public class BlogFragment extends NewsFragment {
 
     @Override
     void setAdapter() {
+        mLoadAdapter=new BlogAdapter(getActivity(),mNewsListEntity);
+        mNewsListView.setAdapter(mLoadAdapter);
+        initCaChe();
+    }
 
+    private void initCaChe() {
+        AppService.getInstance().initNews(getTaskId(), Constant.NEWSTYPE.BLOG.getNewsType());
+    }
+
+    @Override
+    public void onRefresh() {
+        AppService.getInstance().updateNews(getTaskId(), Constant.NEWSTYPE.BLOG.getNewsType());
     }
 
 
     @Override
     public void onLoadMore() {
-//        if (mMainAdapter.canLoadMore()) {
-//            mMainAdapter.setLoading(true);
-//            mMainAdapter.notifyItemChanged(mMainAdapter.getItemCount() - 1);
-//            AppService.getInstance().loadMoreNews(Constant.NEWSTYPE.NEWS.getNewsType(), mNewsId);
-//        }
-
+        if (mLoadAdapter.canLoadMore()) {
+            mLoadAdapter.setLoading(true);
+            mLoadAdapter.notifyItemChanged(mLoadAdapter.getItemCount() - 1);
+            AppService.getInstance().loadMoreNews(getTaskId(),Constant.NEWSTYPE.BLOG.getNewsType(), mNewsId);
+        }
     }
 
-    @Override
-    public void onRefresh() {
+    public void onEventMainThread(NewsEvent newsEvent) {
+        if(newsEvent!=null&&Constant.NEWSTYPE.BLOG.getNewsType().equals(newsEvent.getNewsType())) {
+            if (Constant.Result.FAIL.equals(newsEvent.getEventResult())) {
+                updateView(newsEvent);
+            } else {
+                News news = newsEvent.getNews();
+                mNewsId = news.getNextId();
+                switch (newsEvent.getNewsWay()) {
+                    case INIT:
+                        mNewsListEntity.clear();
+                        mNewsListEntity.addAll(news.getNewslist());
+                        mLoadAdapter.updateItem(true);
+                        break;
+                    case UPDATE:
+                        mNewsListEntity.clear();
+                        mNewsListEntity.addAll(news.getNewslist());
+                        stopRefreshing();
+                        mLoadAdapter.updateItem(false);
+                        break;
+                    case LOADMORE:
+                        mNewsListEntity.addAll(news.getNewslist());
+                        stopAll();
+                        mLoadAdapter.updateItem(false);
+                        break;
+                    default:
+                        break;
+                }
+                if (Constant.GETNEWSWAY.UPDATE.equals(newsEvent.getNewsWay())) {
+                    AppUtils.showSnackBar(newsContainer, R.string.load_success);
+                }
 
-    }
-
-    protected void onEventMainThread(Event event) {
-
+            }
+        }
     }
 
     @Override

@@ -9,9 +9,15 @@ public class NewsEvent extends Event {
 
     private News news;
     private GETNEWSWAY getNewsWay;
+    private String newsType;
 
-    public NewsEvent(News news,GETNEWSWAY getNewsWay) {
+    public String getNewsType() {
+        return newsType;
+    }
+
+    public NewsEvent(News news,GETNEWSWAY getNewsWay,String newsType) {
         this.news=news;
+        this.newsType=newsType;
         this.getNewsWay=getNewsWay;
 
     }

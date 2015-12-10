@@ -34,7 +34,7 @@
             android:layout_height="wrap_content"
             android:paddingLeft="@dimen/margin_6dp"
             android:paddingTop="@dimen/view_margingtop"
-            android:paddingRight="@dimen/margin_10dp"
+            android:paddingRight="@dimen/margin_8dp"
             android:textColor="@color/primary_text"
             android:textSize="16sp"
             />

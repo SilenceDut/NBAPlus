@@ -7,6 +7,7 @@ import com.me.silencedut.greendao.GreenNewsDao;
 import com.me.silencedut.nbaplus.app.App;
 import com.me.silencedut.nbaplus.app.AppService;
 import com.me.silencedut.nbaplus.data.Constant;
+import com.me.silencedut.nbaplus.event.NewsDetileEvent;
 import com.me.silencedut.nbaplus.event.NewsEvent;
 import com.me.silencedut.nbaplus.model.News;
 import com.me.silencedut.nbaplus.model.NewsDetile;
@@ -43,12 +44,12 @@ public class RxNews {
                 .subscribe(new Action1<News>() {
                     @Override
                     public void call(News news) {
-                        AppService.getBus().post(new NewsEvent(news, Constant.GETNEWSWAY.UPDATE));
+                        AppService.getBus().post(new NewsEvent(news, Constant.GETNEWSWAY.UPDATE,newsType));
                     }
                 }, new Action1<Throwable>() {
                     @Override
                     public void call(Throwable throwable) {
-                        NewsEvent newsEvent= new NewsEvent(new News(), Constant.GETNEWSWAY.UPDATE);
+                        NewsEvent newsEvent= new NewsEvent(new News(), Constant.GETNEWSWAY.UPDATE,newsType);
                         newsEvent.setEventResult(Constant.Result.FAIL);
                         AppService.getBus().post(newsEvent);
                     }
@@ -63,12 +64,12 @@ public class RxNews {
                 .subscribe(new Action1<News>() {
                     @Override
                     public void call(News news) {
-                        AppService.getBus().post(new NewsEvent(news, Constant.GETNEWSWAY.LOADMORE));
+                        AppService.getBus().post(new NewsEvent(news, Constant.GETNEWSWAY.LOADMORE,newsType));
                     }
                 }, new Action1<Throwable>() {
                     @Override
                     public void call(Throwable throwable) {
-                        NewsEvent newsEvent= new NewsEvent(new News(), Constant.GETNEWSWAY.LOADMORE);
+                        NewsEvent newsEvent= new NewsEvent(new News(), Constant.GETNEWSWAY.LOADMORE,newsType);
                         newsEvent.setEventResult(Constant.Result.FAIL);
                         AppService.getBus().post(newsEvent);
                     }
@@ -76,14 +77,14 @@ public class RxNews {
         return subscription;
     }
 
-    public static Subscription getNewsDetile(final String contentUrl) {
-        Subscription subscription = AppService.getNbaPlus().getNewsDetile(contentUrl)
+    public static Subscription getNewsDetile(final String date,final String detileId) {
+        Subscription subscription = AppService.getNewsDetileApi().getNewsDetile(date,detileId+".json")
                 .subscribeOn(Schedulers.io())
                 .map(new Func1<NewsDetile, String>() {
                     @Override
                     public String call(NewsDetile newsDetile) {
                         int imageCount=0;
-                        String CSS_STYLE =String.format(Constant.CSS_STYLE , PreferenceUtils.getPrefString(App.getContext(), "font_size", "16"),"#eeeeee");
+                        String CSS_STYLE =String.format(Constant.CSS_STYLE , PreferenceUtils.getPrefString(App.getContext(), "font_size", "18"),"#333333");
                         String html ="<html><head>" +CSS_STYLE+ "</head><body>" +newsDetile.getContent()+"<p>（"+newsDetile.getAuthor()+"）<p></body></html>";
                         Pattern p=Pattern.compile("(<p class=\"reader_img_box\"><img id=\"img_\\d\" class=\"reader_img\" src=\"reader_img_src\" /></p>)+");
                         Matcher m=p.matcher(html);
@@ -98,10 +99,8 @@ public class RxNews {
                                 }
                             }
                             imageCount++;
-
                             m=p.matcher(html);
-                            Log.d("m.find", html);
-                        }
+                         }
                         return html;
                     }
                 })
@@ -109,14 +108,14 @@ public class RxNews {
                 .subscribe(new Action1<String>() {
                     @Override
                     public void call(String newsContent) {
-                        //AppService.getBus().post(new NewsEvent(news, Constant.GETNEWSWAY.LOADMORE));
+                        AppService.getBus().post(new NewsDetileEvent(newsContent));
                     }
                 }, new Action1<Throwable>() {
                     @Override
                     public void call(Throwable throwable) {
-//                        NewsEvent newsEvent= new NewsEvent(new News(), Constant.GETNEWSWAY.LOADMORE);
-//                        newsEvent.setEventResult(Constant.Result.FAIL);
-//                        AppService.getBus().post(newsEvent);
+                        NewsDetileEvent newsDetileEvent = new NewsDetileEvent(throwable.toString());
+                        newsDetileEvent.setEventResult(Constant.Result.FAIL);
+                        AppService.getBus().post(newsDetileEvent);
                     }
                 });
         return subscription;
@@ -132,7 +131,7 @@ public class RxNews {
                     subscriber.onNext(news);
                     subscriber.onCompleted();
                 }else {
-                    NewsEvent newsEvent= new NewsEvent(new News(), Constant.GETNEWSWAY.INIT);
+                    NewsEvent newsEvent= new NewsEvent(new News(), Constant.GETNEWSWAY.INIT,newsType);
                     newsEvent.setEventResult(Constant.Result.FAIL);
                     AppService.getBus().post(newsEvent);
                 }
@@ -141,7 +140,7 @@ public class RxNews {
                 .subscribe(new Action1<News>() {
                     @Override
                     public void call(News news) {
-                        AppService.getBus().post(new NewsEvent(news, Constant.GETNEWSWAY.INIT));
+                        AppService.getBus().post(new NewsEvent(news, Constant.GETNEWSWAY.INIT,newsType));
                     }
                 });
 

@@ -19,6 +19,8 @@ import com.me.silencedut.nbaplus.model.News;
 import com.me.silencedut.nbaplus.ui.activity.NewsDetileActivity;
 import com.me.silencedut.nbaplus.utils.NumericalUtil;
 
+import org.joda.time.DateTime;
+
 import java.util.List;
 
 import butterknife.Bind;
@@ -39,8 +41,45 @@ public abstract class LoadAdapter extends RecyclerView.Adapter<LoadAdapter.BaseV
     private boolean mAnimate=true;
     protected int mAnimateEndCount;
 
+    protected LoadAdapter(Context context,List<News.NewslistEntity> newsList) {
+        this.mContext = context;
+        this.mNewsList=newsList;
+        mInflater = LayoutInflater.from(context);
+    }
 
-    protected abstract void setAnimateEndCount(int animateEndCount);
+    enum VIEWTYPE{
+        NORMAL(0),NOPIC(1),MOREPIC(2),LOADMORE(3),ERROR(4);
+        private int viewType;
+        VIEWTYPE(int viewType) {
+            this.viewType=viewType;
+        }
+
+        public int getViewType() {
+            return viewType;
+        }
+    }
+
+    protected void setAnimateEndCount(int animateEndCount) {
+        this.mAnimateEndCount=animateEndCount;
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+
+        int itemType;
+        if(mNewsList==null||mNewsList.get(position)==null) {
+            itemType= VIEWTYPE.ERROR.getViewType();
+        }else if ( position == getItemCount() - 1) {
+            itemType= VIEWTYPE.LOADMORE.getViewType();
+        } else  if(mNewsList.get(position).getImgUrlList().size()==0){
+            itemType= VIEWTYPE.NOPIC.getViewType();
+        }else if(mNewsList.get(position).getImgUrlList().size()>=4){
+            itemType= VIEWTYPE.MOREPIC.getViewType();
+        }else {
+            itemType= VIEWTYPE.NORMAL.getViewType();
+        }
+        return itemType;
+    }
 
     @Override
     public int getItemCount() {
@@ -110,18 +149,17 @@ public abstract class LoadAdapter extends RecyclerView.Adapter<LoadAdapter.BaseV
             itemView.setOnClickListener(this);
 
         }
-
         @Override
         protected void update(int position) {
             newEntity= mNewsList.get(position);
         }
-
         @Override
         public void onClick(View view) {
 
             Intent intent = new Intent(mContext, NewsDetileActivity.class);
             intent.putExtra(NewsDetileActivity.TITLE, newEntity.getTitle());
-            intent.putExtra(NewsDetileActivity.DETILE_URL, newEntity.getArticleUrl());
+            intent.putExtra(NewsDetileActivity.DETILE_DATE, new DateTime(Long.parseLong(newEntity.getPutdate())).toString("yyyyMMdd"));
+            intent.putExtra(NewsDetileActivity.DETILE_ID, newEntity.getArticleId());
             intent.putExtra(NewsDetileActivity.IMAGE_EXIST, newEntity.getImgUrlList().size() > 0);
             if (newEntity.getImgUrlList().size()>0) {
                 intent.putExtra(NewsDetileActivity.IMAGE_URL, newEntity.getImgUrlList().get(0));
@@ -130,10 +168,8 @@ public abstract class LoadAdapter extends RecyclerView.Adapter<LoadAdapter.BaseV
                     ActivityOptionsCompat.makeScaleUpAnimation(view, //The View that the new activity is animating from
                             (int) view.getWidth() / 2, (int) view.getHeight() / 2, //拉伸开始的坐标
                             0, 0);//拉伸开始的区域大小，这里用（0，0）表示从无到全屏
-            //startNewAcitivity(options);
 
             ActivityCompat.startActivity((Activity) mContext, intent, options.toBundle());
-            //mContext.startActivity(intent);
 
         }
 
@@ -154,7 +190,7 @@ public abstract class LoadAdapter extends RecyclerView.Adapter<LoadAdapter.BaseV
         @Override
         protected void update(int position) {
             iconLoading.setVisibility(mLoading ? View.VISIBLE : View.GONE);
-            //iconFail.setVisibility(mLoading ? View.GONE : View.VISIBLE);
+            iconFail.setVisibility(mLoading ? View.GONE : View.VISIBLE);
         }
 
     }

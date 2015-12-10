@@ -5,6 +5,7 @@ package com.me.silencedut.nbaplus.app;
  */
 public class NbaplusFactory {
     private static NbaplusAPI sInstance=null;
+    private static NewsDetileAPI sNewsSetileInStance=null;
     private static final Object WATCH_DOG=new Object();
 
     private NbaplusFactory(){}
@@ -12,9 +13,22 @@ public class NbaplusFactory {
     public static NbaplusAPI getNbaplus() {
         synchronized (WATCH_DOG) {
             if(sInstance==null){
-                sInstance=new NbaplusCilent().getCilent();
+                NbaplusCilent nbaplusCilent = new NbaplusCilent();
+                sInstance=nbaplusCilent.getCilent();
+                sNewsSetileInStance=nbaplusCilent.getNewsDetileClient();
             }
             return sInstance;
+        }
+    }
+
+    public static NewsDetileAPI getNewsDetileInstance() {
+        synchronized (WATCH_DOG) {
+            if(sNewsSetileInStance==null){
+                NbaplusCilent nbaplusCilent = new NbaplusCilent();
+                sInstance=nbaplusCilent.getCilent();
+                sNewsSetileInStance=nbaplusCilent.getNewsDetileClient();
+            }
+            return sNewsSetileInStance;
         }
     }
 }

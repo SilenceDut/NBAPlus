@@ -7,7 +7,6 @@
     android:layout_width="match_parent"
     android:layout_height="?attr/actionBarSize"
     android:background="?attr/colorPrimary"
-    android:elevation="@dimen/default_elevation"
     app:elevation="@dimen/default_elevation"
     android:theme="@style/AppTheme.AppBarOverlay"
     app:popupTheme="@style/AppTheme.PopupOverlay"
@@ -15,10 +14,11 @@
     >
     <ImageView
         android:id="@+id/mian_title"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="150dp"
+        android:layout_height="30dp"
         android:layout_gravity="center"
-        android:src="@mipmap/main_title"
-        android:scaleType="center"
+        android:visibility="invisible"
+        android:src="@mipmap/icon_title"
+        android:scaleType="fitCenter"
     />
 </android.support.v7.widget.Toolbar>
