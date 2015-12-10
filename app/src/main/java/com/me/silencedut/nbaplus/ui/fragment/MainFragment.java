@@ -98,7 +98,6 @@ public class MainFragment extends NewsFragment{
 
             }
 
-
         }
     }
 

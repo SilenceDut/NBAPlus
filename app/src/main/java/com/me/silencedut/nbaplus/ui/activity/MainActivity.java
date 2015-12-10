@@ -24,7 +24,7 @@ public class MainActivity extends BaseActivity {
         mNavigationFragment.setUp((FrameLayout) findViewById(R.id.main_content),
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.main_drawer));
-        mCurrentFragment= BlogFragment.newInstance();
+        mCurrentFragment= MainFragment.newInstance();
         transactionFragment(mCurrentFragment);
 
 

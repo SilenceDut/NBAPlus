@@ -10,7 +10,7 @@
 
     <string name="exit_prompt">再按一次退出</string>
     <string name="load_success">加载成功</string>
-    <string name="load_fail">加载失败，请检查网络后重试</string>
+    <string name="load_fail">加载更多</string>
 
     <!--drawer-->
     <string name="news">新闻</string>
