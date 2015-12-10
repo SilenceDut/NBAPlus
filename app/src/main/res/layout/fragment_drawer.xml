@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -10,7 +9,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
         android:orientation="vertical">
 
         <RelativeLayout
@@ -22,6 +20,7 @@
                 android:layout_height="match_parent"
                 android:layout_alignBottom="@+id/main_left_layout_info"
                 android:src="@mipmap/main_left_header_bg"
+                android:visibility="gone"
                 android:scaleType="centerCrop"
                 android:adjustViewBounds="true" />
             <LinearLayout
@@ -38,6 +37,7 @@
                     android:id="@+id/main_left_img_avatar"
                     android:layout_width="72dp"
                     android:layout_height="72dp"
+                    android:src="@mipmap/lalakers"
                     app:border_width="1dp"
                     app:border_color="@color/white"/>
 
@@ -54,112 +54,13 @@
             </LinearLayout>
 
         </RelativeLayout>
-        <FrameLayout
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_drawer"
+            android:background="@color/primary_text"
+            android:scrollbars="none"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/view_margingtop"
-            android:foreground="?attr/selectableItemBackground"
-            android:clickable="true">
-            <RelativeLayout
-                style="@style/DrawerView"
-                android:id="@+id/first"
-                >
-                <ImageView
-                    style="@style/DrawerIcon"
-                    android:src="@drawable/drawer_icon_news" />
-                <TextView
-                    style="@style/DrawerTextView"
-                    android:text="@string/news" />
-            </RelativeLayout>
-        </FrameLayout>
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:foreground="?attr/selectableItemBackground"
-            android:clickable="true">
-            <RelativeLayout
-
-                style="@style/DrawerView"
-                android:id="@+id/second"
-                >
-                <ImageView
-                    style="@style/DrawerIcon"
-                    android:src="@drawable/drawer_icon_blog" />
-                <TextView
-                    style="@style/DrawerTextView"
-                    android:text="@string/blog" />
-            </RelativeLayout>
-        </FrameLayout>
-        <RelativeLayout
-
-            style="@style/DrawerView"
-            android:id="@+id/third"
-            android:visibility="gone"
-            >
-            <ImageView
-                style="@style/DrawerIcon"
-                android:src="@drawable/drawer_icon_gamedate" />
-            <TextView
-                style="@style/DrawerTextView"
-                android:text="@string/gameDate" />
-        </RelativeLayout>
-        <RelativeLayout
-
-            style="@style/DrawerView"
-            android:id="@+id/fourth"
-            android:visibility="gone"
-            >
-            <ImageView
-                style="@style/DrawerIcon"
-                android:src="@drawable/drawer_icon_sort" />
-            <TextView
-                style="@style/DrawerTextView"
-                android:text="@string/sort" />
-        </RelativeLayout>
-        <RelativeLayout
-            style="@style/DrawerView"
-            android:id="@+id/fivth"
-            android:visibility="gone"
-            >
-            <ImageView
-                style="@style/DrawerIcon"
-                android:src="@drawable/drawer_icon_summary" />
-            <TextView
-                style="@style/DrawerTextView"
-                android:text="@string/data" />
-        </RelativeLayout>
-
-
-        <View
-            android:id="@+id/divier"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/item_divider_line"
-            android:layout_marginTop="7dp"
-            android:layout_marginBottom="@dimen/view_margingtop"
-            android:background="@color/grey300"/>
-        <RelativeLayout
-
-            style="@style/DrawerView"
-            android:id="@+id/sixth"
-            >
-            <ImageView
-                style="@style/DrawerIcon"
-                android:src="@drawable/drawer_icon_about" />
-            <TextView
-                style="@style/DrawerTextView"
-                android:text="@string/about" />
-        </RelativeLayout>
-        <RelativeLayout
-            style="@style/DrawerView"
-            android:id="@+id/seventh"
-           >
-           <ImageView
-               style="@style/DrawerIcon"
-               android:src="@drawable/drawer_icon_setting" />
-           <TextView
-               style="@style/DrawerTextView"
-               android:text="@string/action_settings" />
-        </RelativeLayout>
+            android:layout_height="wrap_content"/>
 
     </LinearLayout>
 </ScrollView>

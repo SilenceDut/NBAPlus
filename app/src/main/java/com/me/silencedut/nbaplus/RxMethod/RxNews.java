@@ -1,7 +1,5 @@
 package com.me.silencedut.nbaplus.RxMethod;
 
-import android.util.Log;
-
 import com.me.silencedut.greendao.GreenNews;
 import com.me.silencedut.greendao.GreenNewsDao;
 import com.me.silencedut.nbaplus.app.App;

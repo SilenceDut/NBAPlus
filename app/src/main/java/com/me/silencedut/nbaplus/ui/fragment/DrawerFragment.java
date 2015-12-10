@@ -1,8 +1,5 @@
 package com.me.silencedut.nbaplus.ui.fragment;
 
-import android.annotation.TargetApi;
-import android.app.Activity;
-import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
@@ -11,26 +8,24 @@ import android.os.Bundle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.view.LayoutInflater;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
 import com.me.silencedut.nbaplus.R;
 import com.me.silencedut.nbaplus.event.DrawerClickEvent;
-import com.me.silencedut.nbaplus.event.Event;
-import com.me.silencedut.nbaplus.utils.PreferenceUtils;
+import com.me.silencedut.nbaplus.ui.adapter.DrawerAdapter;
 import com.me.silencedut.nbaplus.utils.blur.BitmapUtils;
 import com.me.silencedut.nbaplus.utils.blur.Blur;
 
 import butterknife.Bind;
-import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * Created by SilenceDut on 2015/11/28.
  */
-public class DrawerFragment extends BaseFragment implements View.OnClickListener {
+public class DrawerFragment extends BaseFragment {
 
     private static final int DOWNSCALE=8;
     private static final int BLUR_RADIUS=15;
@@ -40,21 +35,10 @@ public class DrawerFragment extends BaseFragment implements View.OnClickListener
     private int mCurrentSelectedPosition = 0;
     private int mPriviousSelectedPoosition=0;
 
-    private View rootView;
     private Bitmap mBitmap ;
     private Bitmap bitmap ;
-    @Bind(R.id.main_left_img_avatar)
-    CircleImageView avatar;
-    @Bind({R.id.first,R.id.second,R.id.third,R.id.fourth,R.id.fivth,R.id.sixth,R.id.seventh})
-    View[] mDrawerMenus;
-    private static final int[] drawerColor = new int[]{
-            R.color.deep_purple700,R.color.green800, R.color.indigo800,
-            R.color.amber800,R.color.cyan800,R.color.redA700
-    };
-    static final int SET_AVATAR = 0;
-
-    public static final String TEAM_ID="TEAM_ID" ;
-
+    @Bind(R.id.rv_drawer)
+    RecyclerView mDrawerRv;
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -68,12 +52,14 @@ public class DrawerFragment extends BaseFragment implements View.OnClickListener
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        rootView = super.onCreateView(inflater,container,savedInstanceState);
-
-        return rootView;
+    protected void initViews() {
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mDrawerRv.getContext());
+        DrawerAdapter drawerAdapter = new DrawerAdapter(mDrawerRv.getContext());
+        mDrawerRv.setLayoutManager(linearLayoutManager);
+        mDrawerRv.setAdapter(drawerAdapter);
+        drawerAdapter.notifyDataSetChanged();
     }
+
 
     public boolean isDrawerOpen() {
         return mDrawerLayout != null && mDrawerLayout.isDrawerOpen(mFragmentContainerView);
@@ -118,7 +104,6 @@ public class DrawerFragment extends BaseFragment implements View.OnClickListener
 
                 getActivity().invalidateOptionsMenu(); // calls onPrepareOptionsMenu()
             }
-            @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
             @Override
             public void onDrawerSlide(View drawerView, float slideOffset) {
                 super.onDrawerSlide(drawerView, slideOffset);
@@ -131,7 +116,7 @@ public class DrawerFragment extends BaseFragment implements View.OnClickListener
 
                     } else {
                         mBitmap = BitmapUtils.drawViewToBitmap(mContentLayout,
-                                rootView.getWidth(), rootView.getHeight(), DOWNSCALE, getResources().getString(drawerColor[2]));
+                                rootView.getWidth(), rootView.getHeight(), DOWNSCALE, getResources().getString(R.color.indigo800));
                         mBitmap = Blur.fastblur(mContentLayout.getContext(), mBitmap, BLUR_RADIUS);
                     }
                 }
@@ -148,16 +133,8 @@ public class DrawerFragment extends BaseFragment implements View.OnClickListener
 
         mDrawerLayout.setDrawerListener(mDrawerToggle);
 
-        avatar.setImageResource(PreferenceUtils.getPrefInt(getActivity(), TEAM_ID, R.mipmap.lalakers));
-        avatar.setOnClickListener(this);
-        selectItem();
-
     }
 
-    @Override
-    protected void initViews() {
-
-    }
 
 
     public void onEventMainThread(DrawerClickEvent drawerClickEvent) {
@@ -165,55 +142,7 @@ public class DrawerFragment extends BaseFragment implements View.OnClickListener
     }
 
 
-    private void selectItem() {
 
-        if (mDrawerLayout != null) {
-            mDrawerLayout.closeDrawer(mFragmentContainerView);
-            if(mCurrentSelectedPosition!=6&&mCurrentSelectedPosition!=5) {
-                unSelectLastItem();
-                mDrawerMenus[mCurrentSelectedPosition].setSelected(true);
-            }
-        }
-    }
-    private  void unSelectLastItem() {
-        if(mPriviousSelectedPoosition!=mCurrentSelectedPosition) {
-            mDrawerMenus[mPriviousSelectedPoosition].setSelected(false);
-        }
-    }
-    @Override
-    public void onClick(View view) {
-        if(!isAdded()) {
-            return;
-        }
-//        Intent intent = new Intent(getActivity(), SelectIconActivity.class);
-//        startActivityForResult(intent, SET_AVATAR);
-//        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-//            getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-//        }
-
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(requestCode==SET_AVATAR) {
-            if(resultCode==getActivity().RESULT_OK) {
-                int teamId = data.getIntExtra(TEAM_ID, R.mipmap.lalakers);
-                avatar.setImageResource(teamId);
-                PreferenceUtils.setPrefInt(getActivity(), TEAM_ID, teamId);
-            }
-        }
-    }
-
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-
-    }
-    @Override
-    public void onDetach() {
-        super.onDetach();
-//        mCallbacks = null;
-    }
 
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
