@@ -39,7 +39,6 @@ public class BlogAdapter extends LoadAdapter {
             case NOPIC:
                 viewHolder= new NormalBlogViewHolder(mInflater.inflate(R.layout.fragment_blog_item_normal, parent, false),false);break;
             case NORMAL:
-            case MOREPIC:
                 viewHolder= new NormalBlogViewHolder(mInflater.inflate(R.layout.fragment_blog_item_normal, parent, false),true);break;
             default:
                 break;
@@ -65,13 +64,12 @@ public class BlogAdapter extends LoadAdapter {
             super(view);
             itemView = view;
             this.hasImage = hasImage;
-
             if (!hasImage) {
                 mNewsImage.setVisibility(View.GONE);
                 description.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
             }
-        }
 
+        }
         @Override
         protected void update(int position) {
             super.update(position);
@@ -82,7 +80,7 @@ public class BlogAdapter extends LoadAdapter {
                         .placeholder(R.mipmap.placeholder_biger)
                         .into(mNewsImage);
             }
-            profileImage.setImageResource(isZhangJiaWei ? R.drawable.zhangjiawei : R.drawable.suqun);
+            profileImage.setImageResource(isZhangJiaWei ? R.mipmap.zhangjiawei : R.mipmap.suqun);
             author.setText(isZhangJiaWei ? "张佳玮  " : "苏群  ");
             mNwsTitle.setText(newEntity.getTitle());
             showTime = new DateTime(Long.parseLong(newEntity.getPutdate())).toString("yyyy年MM月dd日");
@@ -90,5 +88,7 @@ public class BlogAdapter extends LoadAdapter {
             description.setText(newEntity.getDescription() + "......");
         }
     }
+
+
 
 }

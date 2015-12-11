@@ -42,6 +42,7 @@ public abstract class SwipeBackActivity extends BaseActivity {
                 onBackPressed();
             }
         });
+        setTitle();
     }
 
 

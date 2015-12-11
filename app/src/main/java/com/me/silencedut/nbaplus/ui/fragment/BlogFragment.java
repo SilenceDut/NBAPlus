@@ -11,7 +11,7 @@ import com.me.silencedut.nbaplus.ui.adapter.MainAdapter;
 import com.me.silencedut.nbaplus.utils.AppUtils;
 
 /**
- * Created by Administrator on 2015/12/4.
+ * Created by SilenceDut on 2015/12/4.
  */
 public class BlogFragment extends NewsFragment {
 
@@ -22,8 +22,10 @@ public class BlogFragment extends NewsFragment {
 
     @Override
     void setAdapter() {
+        mSwipeRefreshLayout.setBackgroundResource(R.color.main_bg);
         mLoadAdapter=new BlogAdapter(getActivity(),mNewsListEntity);
         mNewsListView.setAdapter(mLoadAdapter);
+        mNewsListView.setVerticalScrollBarEnabled(false);
         initCaChe();
     }
 
@@ -48,6 +50,7 @@ public class BlogFragment extends NewsFragment {
 
     public void onEventMainThread(NewsEvent newsEvent) {
         if(newsEvent!=null&&Constant.NEWSTYPE.BLOG.getNewsType().equals(newsEvent.getNewsType())) {
+            mNewsEvent=newsEvent;
             if (Constant.Result.FAIL.equals(newsEvent.getEventResult())) {
                 updateView(newsEvent);
             } else {

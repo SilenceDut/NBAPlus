@@ -15,6 +15,8 @@ import android.view.View;
 import android.widget.FrameLayout;
 
 import com.me.silencedut.nbaplus.R;
+import com.me.silencedut.nbaplus.app.AppService;
+import com.me.silencedut.nbaplus.data.Constant;
 import com.me.silencedut.nbaplus.event.DrawerClickEvent;
 import com.me.silencedut.nbaplus.ui.adapter.DrawerAdapter;
 import com.me.silencedut.nbaplus.utils.blur.BitmapUtils;
@@ -32,11 +34,9 @@ public class DrawerFragment extends BaseFragment {
     private ActionBarDrawerToggle mDrawerToggle;
     private DrawerLayout mDrawerLayout;
     private View mFragmentContainerView;
-    private int mCurrentSelectedPosition = 0;
-    private int mPriviousSelectedPoosition=0;
-
     private Bitmap mBitmap ;
     private Bitmap bitmap ;
+    private DrawerClickEvent mDrawerClickEvent;
     @Bind(R.id.rv_drawer)
     RecyclerView mDrawerRv;
 
@@ -54,10 +54,9 @@ public class DrawerFragment extends BaseFragment {
     @Override
     protected void initViews() {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mDrawerRv.getContext());
-        DrawerAdapter drawerAdapter = new DrawerAdapter(mDrawerRv.getContext());
+        DrawerAdapter drawerAdapter = new DrawerAdapter(getActivity());
         mDrawerRv.setLayoutManager(linearLayoutManager);
         mDrawerRv.setAdapter(drawerAdapter);
-        drawerAdapter.notifyDataSetChanged();
     }
 
 
@@ -83,10 +82,10 @@ public class DrawerFragment extends BaseFragment {
             @Override
             public void onDrawerClosed(View drawerView) {
                 super.onDrawerClosed(drawerView);
-                if (!isAdded()) {
-                    return;
+                if(mDrawerClickEvent!=null){
+                    mDrawerClickEvent.setEventResult(Constant.Result.SUCCESS);
+                    AppService.getBus().post(mDrawerClickEvent);
                 }
-
                 getActivity().invalidateOptionsMenu(); // calls onPrepareOptionsMenu()
                 if(mBitmap!=null){
                     mBitmap.recycle();
@@ -100,8 +99,6 @@ public class DrawerFragment extends BaseFragment {
                 if (!isAdded()) {
                     return;
                 }
-                mPriviousSelectedPoosition=mCurrentSelectedPosition;
-
                 getActivity().invalidateOptionsMenu(); // calls onPrepareOptionsMenu()
             }
             @Override
@@ -116,7 +113,7 @@ public class DrawerFragment extends BaseFragment {
 
                     } else {
                         mBitmap = BitmapUtils.drawViewToBitmap(mContentLayout,
-                                rootView.getWidth(), rootView.getHeight(), DOWNSCALE, getResources().getString(R.color.indigo800));
+                                rootView.getWidth(), rootView.getHeight(), DOWNSCALE, "#42283593");
                         mBitmap = Blur.fastblur(mContentLayout.getContext(), mBitmap, BLUR_RADIUS);
                     }
                 }
@@ -135,14 +132,13 @@ public class DrawerFragment extends BaseFragment {
 
     }
 
-
-
     public void onEventMainThread(DrawerClickEvent drawerClickEvent) {
-        //upDateView(drawerClickEvent);
+        if(Constant.Result.SUCCESS.equals(drawerClickEvent.getEventResult())) {
+            return;
+        }
+        mDrawerClickEvent=drawerClickEvent;
+        closeDrawer();
     }
-
-
-
 
     @Override
     public void onConfigurationChanged(Configuration newConfig) {

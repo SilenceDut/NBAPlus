@@ -9,7 +9,7 @@ import android.content.pm.PackageManager;
 public class VersionUtils {
 
     public static String setUpVersionName(Context context) {
-        String versionName = null;
+        String versionName = "1.0";
         try {
             versionName = context.getApplicationContext().getPackageManager()
                     .getPackageInfo(context.getApplicationContext().getPackageName(), 0).versionName;

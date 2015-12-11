@@ -28,10 +28,10 @@
                     android:id="@+id/collapsing_toolbar_layout"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    app:collapsedTitleTextAppearance="@style/MyToolbarTextStyle"
                     app:contentScrim="?attr/colorPrimary"
-                    app:expandedTitleMarginStart="5dp"
+                    app:collapsedTitleTextAppearance="@style/MyToolbarTextStyle"
                     app:expandedTitleTextAppearance="@style/MyToolbarTextStyle"
+                    app:expandedTitleMarginStart="8dp"
                     app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
                     <ImageView
@@ -41,7 +41,6 @@
                         android:scaleType="fitXY"
                         app:layout_collapseMode="parallax"
                         app:layout_collapseParallaxMultiplier="0.7" />
-
                     <android.support.v7.widget.Toolbar
                         android:id="@+id/toolbar"
                         android:layout_width="match_parent"

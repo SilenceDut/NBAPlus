@@ -2,6 +2,7 @@ package com.me.silencedut.nbaplus.ui.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,22 +10,32 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.me.silencedut.nbaplus.R;
+import com.me.silencedut.nbaplus.app.AppService;
+import com.me.silencedut.nbaplus.data.Constant;
+import com.me.silencedut.nbaplus.event.DrawerClickEvent;
+
+import java.util.Arrays;
 
 import butterknife.Bind;
+import butterknife.ButterKnife;
 
 /**
- * Created by SilenceDUt on 2015/12/10.
+ * Created by SilenceDut on 2015/12/10.
  */
 public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.DrawerItemViewHolder> {
 
-    private static final int[] icon_id=new int[]{R.id.news,R.id.blog};
-    private static final int[] name_id=new int[]{R.string.news,R.string.blog};
-    private Context mContext;
+    private static final int[] icon_id={R.drawable.drawer_icon_news,R.drawable.drawer_icon_blog,R.drawable.drawer_icon_setting};
+    private static final int[] name_id={R.string.news,R.string.blog,R.string.action_settings};
+    private static final int TOPVIEW_POSITION=0;
+    private static final int BOTTOMVIEW_POSITION=1;
+    private static final int SETTING_POSITION=2;
+
+
     private LayoutInflater mInflater;
     private int mSelectedPosition;
 
     public DrawerAdapter(Context context) {
-        this.mContext = context;
+        super();
         mInflater = LayoutInflater.from(context);
     }
 
@@ -42,23 +53,45 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.DrawerItem
     class DrawerItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         @Bind(R.id.drawer)
         View drawer;
+        @Bind(R.id.top_divider)
+        View top_divider;
+        @Bind(R.id.bottom_divider)
+        View bottom_divider;
         @Bind(R.id.drawer_icon)
         ImageView iconIV;
         @Bind(R.id.drawer_name)
         TextView nameTV;
         public DrawerItemViewHolder(View itemView) {
             super(itemView);
+            ButterKnife.bind(this, itemView);
+            itemView.setOnClickListener(this);
         }
         public void update(int position) {
+            if(position==TOPVIEW_POSITION) {
+                top_divider.setVisibility(View.VISIBLE);
+            }
+
+            if(position==BOTTOMVIEW_POSITION) {
+                bottom_divider.setVisibility(View.VISIBLE);
+            }
             iconIV.setImageResource(icon_id[position]);
             nameTV.setText(name_id[position]);
+
             if(mSelectedPosition==position){
                 drawer.setSelected(true);
+            }else {
+                drawer.setSelected(false);
             }
         }
 
         @Override
         public void onClick(View v) {
+            DrawerClickEvent drawerClickEvent = new DrawerClickEvent(name_id[getLayoutPosition()]);
+            drawerClickEvent.setEventResult(Constant.Result.FAIL);
+            AppService.getBus().post(drawerClickEvent);
+            if(getLayoutPosition()== SETTING_POSITION) {
+                return;
+            }
             mSelectedPosition=getLayoutPosition();
             notifyDataSetChanged();
         }

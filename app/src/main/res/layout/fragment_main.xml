@@ -8,7 +8,7 @@
     android:orientation="vertical">
     <include layout="@layout/toolbar"/>
     <android.support.v4.widget.SwipeRefreshLayout
-        android:layout_marginTop="?attr/actionBarSize"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
         android:id="@+id/swipeRefreshLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -20,22 +20,5 @@
             android:layout_height="match_parent"
             />
     </android.support.v4.widget.SwipeRefreshLayout>
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/refresh"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|right"
-        android:layout_marginBottom="@dimen/fab_margin"
-        android:layout_marginRight="@dimen/fab_margin"
-        android:src="@mipmap/ic_refresh_white"
-        android:clickable="true"
-        app:borderWidth="0dp"
-        app:elevation="6dp"
-        app:layout_anchor="@id/rv_news"
-        app:layout_anchorGravity="bottom|right|end"
-        app:pressedTranslationZ="12dp"
-
-        />
-
 </android.support.design.widget.CoordinatorLayout>
     <!--https://guides.codepath.com/android/Floating-Action-Buttons-->

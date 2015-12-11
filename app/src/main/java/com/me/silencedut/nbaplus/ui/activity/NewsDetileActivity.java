@@ -56,9 +56,8 @@ public class NewsDetileActivity extends SwipeBackActivity{
 
     @Override
     void setTitle() {
-        mToolBar.setTitle(mGetIntent.getStringExtra(TITLE));
-    }
 
+    }
     @Override
     protected void initViews() {
         super.initViews();
@@ -80,8 +79,9 @@ public class NewsDetileActivity extends SwipeBackActivity{
 //                    .placeholder(R.color.colorPrimary)
 //                    .into(mTitleImage);
 
-        }else {
+        } else {
             mToolBar.setBackgroundResource(R.color.colorPrimary);
+            mToolBar.setTitle(mGetIntent.getStringExtra(TITLE));
         }
 
         mWebView.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);

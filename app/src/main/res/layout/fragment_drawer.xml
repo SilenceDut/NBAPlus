@@ -1,66 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:id="@+id/scrollview_drawer"
-
-    >
-    <LinearLayout
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    android:orientation="vertical">
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        >
 
-        <RelativeLayout
+        <ImageView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent"
+            android:layout_alignBottom="@+id/main_left_layout_info"
+            android:src="@mipmap/main_left_header_bg"
+            android:scaleType="centerCrop"
+            android:adjustViewBounds="true" />
+        <LinearLayout
+            android:id="@+id/main_left_layout_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="32dp"
+            android:paddingBottom="8dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:orientation="vertical">
 
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_alignBottom="@+id/main_left_layout_info"
-                android:src="@mipmap/main_left_header_bg"
-                android:visibility="gone"
-                android:scaleType="centerCrop"
-                android:adjustViewBounds="true" />
-            <LinearLayout
-                android:id="@+id/main_left_layout_info"
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/main_left_img_avatar"
+                android:layout_width="72dp"
+                android:layout_height="72dp"
+                android:src="@mipmap/lalakers"
+                app:border_width="1dp"
+                app:border_color="@color/white"/>
+
+            <TextView
+                android:id="@+id/main_left_tv_login_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingTop="32dp"
-                android:paddingBottom="8dp"
-                android:paddingLeft="16dp"
-                android:paddingRight="16dp"
-                android:orientation="vertical">
+                android:layout_marginTop="8dp"
+                android:layout_gravity="center_horizontal"
+                android:textColor="@android:color/white"
+                android:textSize="16sp"
+                android:text="@string/my_team" />
 
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/main_left_img_avatar"
-                    android:layout_width="72dp"
-                    android:layout_height="72dp"
-                    android:src="@mipmap/lalakers"
-                    app:border_width="1dp"
-                    app:border_color="@color/white"/>
+        </LinearLayout>
 
-                <TextView
-                    android:id="@+id/main_left_tv_login_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:layout_gravity="center_horizontal"
-                    android:textColor="@android:color/white"
-                    android:textSize="16sp"
-                    android:text="@string/my_team" />
+    </RelativeLayout>
 
-            </LinearLayout>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_drawer"
+        android:background="@android:color/transparent"
+        android:scrollbars="none"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
-        </RelativeLayout>
+</LinearLayout>
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rv_drawer"
-            android:background="@color/primary_text"
-            android:scrollbars="none"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-    </LinearLayout>
-</ScrollView>

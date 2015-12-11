@@ -4,6 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".MainActivity">
     <item
-        android:id="@+id/share"
-        android:title="@string/exit" />
+        android:id="@+id/about"
+        android:title="@string/about" />
 </menu>

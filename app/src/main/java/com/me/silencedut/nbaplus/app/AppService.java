@@ -4,9 +4,12 @@ package com.me.silencedut.nbaplus.app;
 import com.google.gson.Gson;
 import com.me.silencedut.greendao.DBHelper;
 import com.me.silencedut.nbaplus.RxMethod.RxNews;
+import com.me.silencedut.nbaplus.model.News;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import de.greenrobot.event.EventBus;
 import rx.subscriptions.CompositeSubscription;
@@ -21,6 +24,7 @@ public class AppService {
     private static DBHelper sDBHelper;
     private static NbaplusAPI sNbaplus;
     private static NewsDetileAPI sNewsDetileApi;
+    private static ExecutorService sSingleThreadExecutor;
     private Map<Integer,CompositeSubscription> mCompositeSubMap;
     private CompositeSubscription mCompositeSubscription ;
 
@@ -28,19 +32,20 @@ public class AppService {
         sBus = new EventBus();
         sGson=new Gson();
         mCompositeSubMap=new HashMap<Integer,CompositeSubscription>();
+        sSingleThreadExecutor= Executors.newSingleThreadExecutor();
+
         backGroundInit();
     }
 
     private void backGroundInit() {
-        new Thread(new Runnable() {
+        sSingleThreadExecutor.execute(new Runnable() {
             @Override
             public void run() {
-                sNbaplus=NbaplusFactory.getNbaplus();
-                sNewsDetileApi=NbaplusFactory.getNewsDetileInstance();
-                sDBHelper=DBHelper.getInstance(App.getContext());
-
+                sNbaplus = NbaplusFactory.getNbaplus();
+                sNewsDetileApi = NbaplusFactory.getNewsDetileInstance();
+                sDBHelper = DBHelper.getInstance(App.getContext());
             }
-        }).start();
+        });
 
     }
 
@@ -76,7 +81,7 @@ public class AppService {
 
     public void getNewsDetile(int taskId,String date,String detielId) {
         getCompositeSubscription(taskId);
-        mCompositeSubscription.add(RxNews.getNewsDetile(date,detielId));
+        mCompositeSubscription.add(RxNews.getNewsDetile(date, detielId));
     }
 
     public void getCompositeSubscription(int taskId) {
@@ -87,6 +92,10 @@ public class AppService {
         }else {
             mCompositeSubscription= mCompositeSubMap.get(taskId);
         }
+    }
+
+    public void cacheNews(News news,final String newsType) {
+        RxNews.cacheNews(news,newsType);
     }
 
 
@@ -114,6 +123,10 @@ public class AppService {
 
     public static Gson getGson() {
         return sGson;
+    }
+
+    public static ExecutorService getSingleThreadExecutor(){
+        return sSingleThreadExecutor;
     }
 
 }

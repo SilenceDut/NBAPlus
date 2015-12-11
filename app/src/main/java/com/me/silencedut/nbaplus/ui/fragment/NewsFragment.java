@@ -3,14 +3,17 @@ package com.me.silencedut.nbaplus.ui.fragment;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.MenuItem;
 import android.view.View;
 
 import com.me.silencedut.nbaplus.R;
+import com.me.silencedut.nbaplus.app.AppService;
 import com.me.silencedut.nbaplus.data.Constant;
 import com.me.silencedut.nbaplus.event.AnimatEndEvent;
 import com.me.silencedut.nbaplus.event.NewsEvent;
 import com.me.silencedut.nbaplus.model.News;
 import com.me.silencedut.nbaplus.model.News.NewslistEntity;
+import com.me.silencedut.nbaplus.ui.activity.AboutActivity;
 import com.me.silencedut.nbaplus.ui.adapter.LoadAdapter;
 import com.me.silencedut.nbaplus.ui.listener.RecyclerViewLoadMoreListener;
 import com.me.silencedut.nbaplus.ui.listener.RecyclerViewLoadMoreListener.OnLoadMoreListener;
@@ -29,10 +32,10 @@ public abstract class NewsFragment extends SwipeRefreshBaseFragment implements O
     RecyclerView mNewsListView;
     @Bind(R.id.newsContainer)
     CoordinatorLayout newsContainer;
-    @Bind(R.id.refresh)
-    View refreshButton;
+
 
     protected List<NewslistEntity> mNewsListEntity = new ArrayList<NewslistEntity>();
+    protected NewsEvent mNewsEvent;
     protected LoadAdapter mLoadAdapter;
     protected String mNewsId="";
 
@@ -75,7 +78,32 @@ public abstract class NewsFragment extends SwipeRefreshBaseFragment implements O
         }
     }
 
+    @Override
+    public void onStop() {
+        super.onStop();
+        // sometimes refresh maybe get no date ,so cache the date when fragment onstop
+        if(mNewsEvent==null){
+            return;
+        }
+        News news=new News();
+        news.setNewslist(mNewsListEntity);
+        news.setNextId(mNewsId);
+        AppService.getInstance().cacheNews(news,mNewsEvent.getNewsType());
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+        switch (id) {
+            case R.id.about :
+                AboutActivity.navigateFrom(getActivity());
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
     public void onEventMainThread(AnimatEndEvent animatEndEvent) {
         setRefreshing();

@@ -32,12 +32,6 @@ public class RxNews {
     public static Subscription updateNews(final String newsType) {
         Subscription subscription = AppService.getNbaPlus().updateNews(newsType)
                 .subscribeOn(Schedulers.io())
-                .doOnNext(new Action1<News>() {
-                    @Override
-                    public void call(News news) {
-                       cacheNews(news,newsType);
-                    }
-                })
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Action1<News>() {
                     @Override
@@ -144,15 +138,21 @@ public class RxNews {
 
         return subscription;
     }
-    private static void cacheNews(News news, String newsType) {
-        GreenNewsDao greenNewsDao = AppService.getDBHelper().getDaoSession().getGreenNewsDao();
-        DeleteQuery deleteQuery = greenNewsDao.queryBuilder()
-                .where(GreenNewsDao.Properties.Type.eq(newsType))
-                .buildDelete();
-        deleteQuery.executeDeleteWithoutDetachingEntities();
-        String newsList = AppService.getGson().toJson(news);
-        GreenNews greenNews = new GreenNews(null,newsList,newsType);
-        greenNewsDao.insert(greenNews);
+    public static void cacheNews(final News news,final String newsType) {
+        AppService.getInstance().getSingleThreadExecutor().execute(new Runnable() {
+            @Override
+            public void run() {
+                GreenNewsDao greenNewsDao = AppService.getDBHelper().getDaoSession().getGreenNewsDao();
+                DeleteQuery deleteQuery = greenNewsDao.queryBuilder()
+                        .where(GreenNewsDao.Properties.Type.eq(newsType))
+                        .buildDelete();
+                deleteQuery.executeDeleteWithoutDetachingEntities();
+                String newsList = AppService.getGson().toJson(news);
+                GreenNews greenNews = new GreenNews(null, newsList, newsType);
+                greenNewsDao.insert(greenNews);
+            }
+        });
+
     }
 
     private static List<GreenNews> getCacheNews(String newsType) {

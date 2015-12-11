@@ -10,7 +10,7 @@
     <dimen name="default_elevation">4dp</dimen>
 
     <dimen name="icon_size">24dp</dimen>
-    <dimen name="drawer_text_margin">72dp</dimen>
+    <dimen name="drawer_text_margin">32dp</dimen>
     <dimen name="navigation_drawer_width">240dp</dimen>
     <dimen name="appbar_layout_height">230dp</dimen>
     <dimen name="navigation_drawer_item_height">48dp</dimen>

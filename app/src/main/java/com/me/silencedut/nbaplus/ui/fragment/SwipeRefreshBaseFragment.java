@@ -3,6 +3,7 @@ package com.me.silencedut.nbaplus.ui.fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 
 import com.me.silencedut.nbaplus.R;
 import com.me.silencedut.nbaplus.event.Event;
