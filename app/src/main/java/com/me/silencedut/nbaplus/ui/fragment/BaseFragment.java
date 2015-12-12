@@ -15,9 +15,10 @@ import butterknife.ButterKnife;
  * Created by SilenceDut on 2015/11/28.
  */
 public abstract class BaseFragment extends Fragment {
+
     private int mTaskId;
     protected View rootView;
-    protected abstract void initViews();
+    protected abstract void initViews() ;
 
     protected abstract int getContentViewId();
 
@@ -31,7 +32,6 @@ public abstract class BaseFragment extends Fragment {
         mTaskId=getActivity().getTaskId();
         AppService.getInstance().getBus().register(this);
     }
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -40,7 +40,6 @@ public abstract class BaseFragment extends Fragment {
         initViews();
         return rootView;
     }
-
     @Override
     public void onDestroy() {
         super.onDestroy();

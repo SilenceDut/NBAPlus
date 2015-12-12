@@ -2,7 +2,6 @@ package com.me.silencedut.nbaplus.ui.activity;
 
 import android.content.Intent;
 import android.support.design.widget.CollapsingToolbarLayout;
-import android.util.Log;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.ImageView;
@@ -11,7 +10,6 @@ import com.bumptech.glide.Glide;
 import com.me.silencedut.nbaplus.R;
 import com.me.silencedut.nbaplus.app.AppService;
 import com.me.silencedut.nbaplus.data.Constant;
-import com.me.silencedut.nbaplus.event.Event;
 import com.me.silencedut.nbaplus.event.NewsDetileEvent;
 import com.me.silencedut.nbaplus.utils.AppUtils;
 
@@ -56,7 +54,7 @@ public class NewsDetileActivity extends SwipeBackActivity{
 
     @Override
     void setTitle() {
-
+        mToolBar.setTitle(R.string.app_name);
     }
     @Override
     protected void initViews() {
@@ -75,15 +73,11 @@ public class NewsDetileActivity extends SwipeBackActivity{
                     .into(mTitleImage);
                 }
             });
-//            Glide.with(this).load(mGetIntent.getStringExtra(IMAGE_URL))
-//                    .placeholder(R.color.colorPrimary)
-//                    .into(mTitleImage);
 
         } else {
             mToolBar.setBackgroundResource(R.color.colorPrimary);
-            mToolBar.setTitle(mGetIntent.getStringExtra(TITLE));
+            
         }
-
         mWebView.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
         mWebView.getSettings().setJavaScriptEnabled(true);
         mWebView.setBackgroundColor(0);

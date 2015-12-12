@@ -26,5 +26,11 @@
     <dimen name="margin_4dp">4dp</dimen>
     <dimen name="margin_2dp">2dp</dimen>
     <dimen name="margin_0dp">0dp</dimen>
+
+    <dimen name="tableInditorheight">4dp</dimen>
+    <dimen name="tableheight">40dp</dimen>
+
+    <dimen name="toolbar_evelation">0dp</dimen>
     <dimen name="item_divider_line">1px</dimen>
+
 </resources>

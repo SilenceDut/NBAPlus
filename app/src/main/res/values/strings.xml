@@ -14,6 +14,7 @@
 
     <!--drawer-->
     <string name="news">新闻</string>
+    <string name="main"></string>
     <string name="blog">博客</string>
     <string name="sort">排名</string>
     <string name="data">数据统计</string>
@@ -23,11 +24,10 @@
     <string name="advice">反馈</string>
     <string name="action_settings">设置</string>
 
-    <string name="theme_day">日间模式</string>
-    <string name="theme_night">夜间模式</string>
-    <string name="exit">分享应用</string>
-    <string name="action_share">分享应用</string>
-    <string name="share_text">发现了一款非常美观的App「NBAPlus」，太赞了! 推荐~：http://fir.im/mengmeizhi </string>
+    <string name="team">球队</string>
+    <string name="player">球员</string>
+
+
     <string name="about_app_name_with_introduce">NBAPlus - 最专注的NBA信息平台</string>
     <string name="about_introduce">介绍</string>
     <string name="introduce">NBAPlus 是一款专注于NBA新闻和动态的平台 \n\n更全面、更方便、更快捷是的获取NBA资讯\n\n所有资讯均来自互联网，如有侵权，请告知！</string>
@@ -36,7 +36,22 @@
     <string name="notices">开源协议</string>
     <string name="open_source">开放源代码许可</string>
 
-    <!--preferences key-->
+    <!--preferences -->
+    <string name="news_detile_load_image">正文中加载图片</string>
+    <string name="load_current">当前为自动加载正文中的图片（默认）</string>
+    <string name="noload_current">当前为不加载正文中的图片</string>
+
+    <string name="system_setting">系统设置</string>
+
+    <string name="actile_font_size">正文字号</string>
+    <string name="big_font">大号字体</string>
+    <string name="medium_font">中号字体</string>
+    <string name="small_font">小号字体</string>
+
+    <string name="clear_cache">清除缓存</string>
+
+    <string name="version_update">检查更新</string>
+
     <string name="load_big_image">load_big_image</string>
     <string name="clear_data">clear_data</string>
     <string name="data_cleared">已清除缓存数据</string>

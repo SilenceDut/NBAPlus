@@ -3,11 +3,9 @@ package com.me.silencedut.nbaplus.ui.fragment;
 import com.me.silencedut.nbaplus.R;
 import com.me.silencedut.nbaplus.app.AppService;
 import com.me.silencedut.nbaplus.data.Constant;
-import com.me.silencedut.nbaplus.event.Event;
 import com.me.silencedut.nbaplus.event.NewsEvent;
 import com.me.silencedut.nbaplus.model.News;
-import com.me.silencedut.nbaplus.ui.adapter.BlogAdapter;
-import com.me.silencedut.nbaplus.ui.adapter.MainAdapter;
+import com.me.silencedut.nbaplus.ui.adapter.RecycleAdapter.BlogAdapter;
 import com.me.silencedut.nbaplus.utils.AppUtils;
 
 /**
@@ -85,7 +83,7 @@ public class BlogFragment extends NewsFragment {
     }
 
     @Override
-    protected String getToolBarTitle() {
-        return getString(R.string.blog);
+    protected int getTitle() {
+        return R.string.blog;
     }
 }

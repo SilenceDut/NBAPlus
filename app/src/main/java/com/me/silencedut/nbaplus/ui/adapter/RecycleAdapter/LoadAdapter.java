@@ -1,4 +1,4 @@
-package com.me.silencedut.nbaplus.ui.adapter;
+package com.me.silencedut.nbaplus.ui.adapter.RecycleAdapter;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;

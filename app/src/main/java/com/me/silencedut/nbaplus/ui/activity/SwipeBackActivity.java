@@ -33,7 +33,8 @@ public abstract class SwipeBackActivity extends BaseActivity {
 
     }
 
-    private void initToolBar() {
+    protected void initToolBar() {
+        setTitle();
         setSupportActionBar(mToolBar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         mToolBar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -42,7 +43,7 @@ public abstract class SwipeBackActivity extends BaseActivity {
                 onBackPressed();
             }
         });
-        setTitle();
+
     }
 
 

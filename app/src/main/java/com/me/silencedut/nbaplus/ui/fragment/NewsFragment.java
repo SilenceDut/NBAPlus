@@ -3,7 +3,7 @@ package com.me.silencedut.nbaplus.ui.fragment;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 
 import com.me.silencedut.nbaplus.R;
@@ -13,8 +13,7 @@ import com.me.silencedut.nbaplus.event.AnimatEndEvent;
 import com.me.silencedut.nbaplus.event.NewsEvent;
 import com.me.silencedut.nbaplus.model.News;
 import com.me.silencedut.nbaplus.model.News.NewslistEntity;
-import com.me.silencedut.nbaplus.ui.activity.AboutActivity;
-import com.me.silencedut.nbaplus.ui.adapter.LoadAdapter;
+import com.me.silencedut.nbaplus.ui.adapter.RecycleAdapter.LoadAdapter;
 import com.me.silencedut.nbaplus.ui.listener.RecyclerViewLoadMoreListener;
 import com.me.silencedut.nbaplus.ui.listener.RecyclerViewLoadMoreListener.OnLoadMoreListener;
 import com.me.silencedut.nbaplus.utils.AppUtils;
@@ -45,11 +44,23 @@ public abstract class NewsFragment extends SwipeRefreshBaseFragment implements O
     protected void initViews() {
         super.initViews();
         setHasOptionsMenu(true);
+        initToolbar();
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mNewsListView.getContext());
         mNewsListView.setLayoutManager(linearLayoutManager);
         mNewsListView.addOnScrollListener(new RecyclerViewLoadMoreListener(linearLayoutManager, this, 0));
+        mNewsListView.setOnTouchListener(
+                new View.OnTouchListener() {
+                    @Override
+                    public boolean onTouch(View v, MotionEvent event) {
+                        if (mSwipeRefreshLayout.isRefreshing()) {
+                            return true;
+                        } else {
+                            return false;
+                        }
+                    }
+                }
+        );
         setAdapter();
-
     }
 
     protected void stopAll() {
@@ -90,21 +101,6 @@ public abstract class NewsFragment extends SwipeRefreshBaseFragment implements O
         news.setNextId(mNewsId);
         AppService.getInstance().cacheNews(news,mNewsEvent.getNewsType());
     }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        switch (id) {
-            case R.id.about :
-                AboutActivity.navigateFrom(getActivity());
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
     public void onEventMainThread(AnimatEndEvent animatEndEvent) {
         setRefreshing();
     }

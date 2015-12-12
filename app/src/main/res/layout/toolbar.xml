@@ -1,29 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.AppBarLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.Toolbar
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-    android:id="@+id/app_bar_layout"
+    android:id="@+id/toolbar"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="?attr/actionBarSize"
+    android:background="?attr/colorPrimary"
+    android:theme="@style/AppTheme.AppBarOverlay"
+    app:popupTheme="@style/AppTheme.PopupOverlay"
+    app:layout_scrollFlags="scroll|enterAlways"
     >
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
-        app:elevation="@dimen/margin_0dp"
-        android:theme="@style/AppTheme.AppBarOverlay"
-        app:popupTheme="@style/AppTheme.PopupOverlay"
-        app:layout_scrollFlags="scroll|enterAlways"
-        >
-        <ImageView
-            android:id="@+id/mian_title"
-            android:layout_width="150dp"
-            android:layout_height="30dp"
-            android:layout_gravity="center"
-            android:visibility="invisible"
-            android:src="@mipmap/icon_title"
-            android:scaleType="fitCenter"
-        />
-    </android.support.v7.widget.Toolbar>
-</android.support.design.widget.AppBarLayout>
+</android.support.v7.widget.Toolbar>

@@ -1,17 +1,19 @@
-package com.me.silencedut.nbaplus.ui.adapter;
+package com.me.silencedut.nbaplus.ui.adapter.RecycleAdapter;
 
 
 import android.content.Context;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import com.bumptech.glide.Glide;
 import com.me.silencedut.nbaplus.R;
 import com.me.silencedut.nbaplus.model.News.NewslistEntity;
 import com.me.silencedut.nbaplus.utils.DateFormatter;
+
 import org.joda.time.DateTime;
+
 import java.util.List;
 
 import butterknife.Bind;

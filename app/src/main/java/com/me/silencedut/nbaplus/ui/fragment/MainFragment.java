@@ -2,9 +2,6 @@ package com.me.silencedut.nbaplus.ui.fragment;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 
 import com.me.silencedut.nbaplus.R;
@@ -12,7 +9,7 @@ import com.me.silencedut.nbaplus.app.AppService;
 import com.me.silencedut.nbaplus.data.Constant;
 import com.me.silencedut.nbaplus.event.NewsEvent;
 import com.me.silencedut.nbaplus.model.News;
-import com.me.silencedut.nbaplus.ui.adapter.MainAdapter;
+import com.me.silencedut.nbaplus.ui.adapter.RecycleAdapter.MainAdapter;
 import com.me.silencedut.nbaplus.utils.AppUtils;
 import com.me.silencedut.nbaplus.utils.NumericalUtil;
 
@@ -106,17 +103,9 @@ public class MainFragment extends NewsFragment{
     }
 
     @Override
-    protected String getToolBarTitle() {
-        return "";
+    protected int getTitle() {
+        return R.string.main;
     }
-
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.menu_main, menu);
-    }
-
-
 
     private void startIntroAnimation() {
         int actionbarSize = NumericalUtil.dp2px(56);

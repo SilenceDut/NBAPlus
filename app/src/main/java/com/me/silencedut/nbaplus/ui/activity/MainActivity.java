@@ -2,7 +2,6 @@ package com.me.silencedut.nbaplus.ui.activity;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
-import android.view.View;
 import android.widget.FrameLayout;
 
 import com.me.silencedut.nbaplus.R;
@@ -11,6 +10,8 @@ import com.me.silencedut.nbaplus.event.DrawerClickEvent;
 import com.me.silencedut.nbaplus.ui.fragment.BlogFragment;
 import com.me.silencedut.nbaplus.ui.fragment.DrawerFragment;
 import com.me.silencedut.nbaplus.ui.fragment.MainFragment;
+import com.me.silencedut.nbaplus.ui.fragment.SettingFragment;
+import com.me.silencedut.nbaplus.ui.fragment.SortFragment;
 
 public class MainActivity extends BaseActivity {
     private DrawerFragment mNavigationFragment;
@@ -30,10 +31,10 @@ public class MainActivity extends BaseActivity {
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.main_drawer));
         mCurrentFragment= MainFragment.newInstance();
-        transactionFragment(mCurrentFragment);
+        transactionSupportFragment(mCurrentFragment);
     }
 
-    private void transactionFragment(Fragment fragment) {
+    private void transactionSupportFragment(Fragment fragment) {
         getSupportFragmentManager().beginTransaction().replace(R.id.main_content, fragment).commit();
     }
 
@@ -41,20 +42,26 @@ public class MainActivity extends BaseActivity {
         if(Constant.Result.FAIL.equals(drawerClickEvent.getEventResult())||drawerClickEvent.getDrawId()==mCurrentDrawId) {
             return;
         }
-
-        switch (drawerClickEvent.getDrawId()) {
+        mCurrentDrawId=drawerClickEvent.getDrawId();
+        switch (mCurrentDrawId) {
             case R.string.news:
                 mCurrentFragment=MainFragment.newInstance();
-                mCurrentDrawId=drawerClickEvent.getDrawId();
                 break;
             case R.string.blog:
                 mCurrentFragment=BlogFragment.newInstance();
-                mCurrentDrawId=drawerClickEvent.getDrawId();
+                break;
+            case R.string.sort:
+                mCurrentFragment= SortFragment.newInstance();
+                break;
+            case R.string.action_settings:
+                mCurrentFragment= SettingFragment.newInstance();
                 break;
             default:
                 break;
         }
-        transactionFragment(mCurrentFragment);
+
+        transactionSupportFragment(mCurrentFragment);
+
     }
 
     @Override

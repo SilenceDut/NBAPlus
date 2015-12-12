@@ -9,13 +9,14 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/item_head"
         >
-
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_alignBottom="@+id/main_left_layout_info"
             android:src="@mipmap/main_left_header_bg"
+            android:clickable="false"
             android:scaleType="centerCrop"
             android:adjustViewBounds="true" />
         <LinearLayout

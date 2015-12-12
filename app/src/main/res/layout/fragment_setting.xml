@@ -1,0 +1,122 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/main_bg"
+    >
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:theme="@style/AppTheme.AppBarOverlay"
+        app:popupTheme="@style/AppTheme.PopupOverlay"
+        android:elevation="@dimen/margin_4dp"
+        >
+    </android.support.v7.widget.Toolbar>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margin_12dp"
+        android:layout_marginTop="@dimen/margin_12dp"
+        android:text="@string/system_setting"
+        android:textColor="@color/colorAccent"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/margin_12dp"
+        >
+        <TextView
+            android:id="@android:id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/load_big_image"
+            android:textColor="@color/primary_text"
+            android:textSize="16sp"/>
+
+        <TextView
+            android:id="@android:id/summary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@android:id/title"
+            android:text="@string/load_current"
+            android:textColor="@color/secondary_text"
+            android:textSize="14sp"/>
+        
+        <android.support.v7.widget.SwitchCompat
+            android:layout_alignParentRight="true"
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@android:id/widget_frame"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right|center_vertical"
+        android:orientation="vertical">
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        android:text="@string/about_introduce"
+        android:textColor="@color/colorAccent"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_card"
+        android:padding="@dimen/margin_8dp"
+        android:text="@string/introduce"
+        android:textColor="@color/secondary_text"
+        android:textIsSelectable="true"
+        android:textSize="14sp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        android:layout_marginTop="12dp"
+        android:text="@string/contact_to_me"
+        android:textColor="@color/colorAccent"/>
+    <TextView
+        android:id="@+id/email"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/navigation_drawer_item_height"
+        android:drawableLeft="@mipmap/drawer_icon_advice"
+        android:background="@drawable/bg_card"
+        android:drawablePadding="@dimen/margin_8dp"
+        android:paddingLeft="@dimen/margin_8dp"
+        android:gravity="center_vertical"
+        android:text="@string/email"
+        android:textColor="@color/secondary_text"
+        android:textSize="16sp"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        android:layout_marginTop="12dp"
+        android:text="@string/notices"
+        android:textColor="@color/colorAccent"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/navigation_drawer_item_height"
+        android:drawableLeft="@mipmap/notice"
+        android:background="@drawable/bg_card"
+        android:drawablePadding="@dimen/margin_8dp"
+        android:paddingLeft="@dimen/margin_8dp"
+        android:gravity="center_vertical"
+        android:text="@string/open_source"
+        android:onClick="onMultipleClick"
+        android:textColor="@color/colorAccent"
+        android:textSize="14sp"
+        />
+</LinearLayout>

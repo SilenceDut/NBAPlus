@@ -18,7 +18,7 @@ import com.me.silencedut.nbaplus.R;
 import com.me.silencedut.nbaplus.app.AppService;
 import com.me.silencedut.nbaplus.data.Constant;
 import com.me.silencedut.nbaplus.event.DrawerClickEvent;
-import com.me.silencedut.nbaplus.ui.adapter.DrawerAdapter;
+import com.me.silencedut.nbaplus.ui.adapter.RecycleAdapter.DrawerAdapter;
 import com.me.silencedut.nbaplus.utils.blur.BitmapUtils;
 import com.me.silencedut.nbaplus.utils.blur.Blur;
 
@@ -39,6 +39,8 @@ public class DrawerFragment extends BaseFragment {
     private DrawerClickEvent mDrawerClickEvent;
     @Bind(R.id.rv_drawer)
     RecyclerView mDrawerRv;
+    @Bind(R.id.item_head)
+    View head;
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -57,6 +59,12 @@ public class DrawerFragment extends BaseFragment {
         DrawerAdapter drawerAdapter = new DrawerAdapter(getActivity());
         mDrawerRv.setLayoutManager(linearLayoutManager);
         mDrawerRv.setAdapter(drawerAdapter);
+        head.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
     }
 
 
