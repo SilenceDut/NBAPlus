@@ -42,7 +42,6 @@ public class SettingFragment extends ToorbarBaseFragment implements View.OnClick
 
     private static final String[] fontSizeName={"大号字体","中号字体","小号字体"};
     private static final String[] fontSizeValue={"22","18","16"};
-    private int mSelect;
     private boolean mIsLoadImage;
     private String mFontSize;
 
@@ -66,10 +65,10 @@ public class SettingFragment extends ToorbarBaseFragment implements View.OnClick
         rl_update_version.setOnClickListener(this);
         rl_clear_cache.setOnClickListener(this);
         tv_cache_size.setText(DataClearManager.getApplicationDataSize(App.getContext()));
-        mFontSize=PreferenceUtils.getPrefString(getActivity(), Constant.ACTILEFONTSIZE,"18");
-        mSelect=Arrays.asList(fontSizeValue).indexOf(mFontSize);
-        tv_font_size.setText(fontSizeName[mSelect]);
-        mIsLoadImage=PreferenceUtils.getPrefBoolean(getActivity(), Constant.LOADIMAGE,true);
+        mFontSize=PreferenceUtils.getPrefString(getActivity(), Constant.ACTILEFONTSIZE, "18");
+        int select=Arrays.asList(fontSizeValue).indexOf(mFontSize);
+        tv_font_size.setText(fontSizeName[select]);
+        mIsLoadImage=PreferenceUtils.getPrefBoolean(getActivity(), Constant.LOADIMAGE, true);
         sc_load_image.setChecked(mIsLoadImage);
 
     }
@@ -116,23 +115,12 @@ public class SettingFragment extends ToorbarBaseFragment implements View.OnClick
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                mSelect=which;
+                                mFontSize=fontSizeValue[which];
+                                tv_font_size.setText(fontSizeName[which]);
+                                PreferenceUtils.setPrefString(getActivity(), Constant.ACTILEFONTSIZE, mFontSize);
+                                dialog.dismiss();
                             }
                         })
-                .setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        mSelect=Arrays.asList(fontSizeValue).indexOf(mFontSize);
-                    }
-                })
-                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        mFontSize=fontSizeValue[mSelect];
-                        tv_font_size.setText(fontSizeName[mSelect]);
-                        PreferenceUtils.setPrefString(getActivity(), Constant.ACTILEFONTSIZE, mFontSize);
-                    }
-                })
                .show();
     }
 

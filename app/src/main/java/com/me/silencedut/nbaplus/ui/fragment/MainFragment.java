@@ -2,6 +2,9 @@ package com.me.silencedut.nbaplus.ui.fragment;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.View;
 
 import com.me.silencedut.nbaplus.R;
@@ -22,6 +25,13 @@ public class MainFragment extends NewsFragment{
     //private static boolean mFirstAnimate=true;
     @Bind(R.id.mian_title)
     View mainTitle;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Log.d("mMainFragment", savedInstanceState + "whywhywhy+;;;;");
+    }
+
     public static MainFragment newInstance() {
         MainFragment mainFragment = new MainFragment();
         return mainFragment;

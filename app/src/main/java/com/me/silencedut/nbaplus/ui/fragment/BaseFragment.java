@@ -31,6 +31,7 @@ public abstract class BaseFragment extends Fragment {
         super.onCreate(savedInstanceState);
         mTaskId=getActivity().getTaskId();
         AppService.getInstance().getBus().register(this);
+
     }
     @Nullable
     @Override
