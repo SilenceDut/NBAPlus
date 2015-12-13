@@ -2,6 +2,7 @@ package com.me.silencedut.nbaplus.ui.activity;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
+import android.util.Log;
 import android.widget.FrameLayout;
 
 import com.me.silencedut.nbaplus.R;
@@ -17,6 +18,7 @@ public class MainActivity extends BaseActivity {
     private DrawerFragment mNavigationFragment;
     private Fragment mCurrentFragment;
     private int mCurrentDrawId=R.string.news;
+    private MainFragment mMainFragment;
 
     @Override
     protected int getContentViewId() {
@@ -45,7 +47,12 @@ public class MainActivity extends BaseActivity {
         mCurrentDrawId=drawerClickEvent.getDrawId();
         switch (mCurrentDrawId) {
             case R.string.news:
-                mCurrentFragment=MainFragment.newInstance();
+                if(mMainFragment==null) {
+                    Log.d("mMainFragment",mMainFragment+"");
+                    mMainFragment=MainFragment.newInstance();
+                }
+                mCurrentFragment=mMainFragment;
+
                 break;
             case R.string.blog:
                 mCurrentFragment=BlogFragment.newInstance();
@@ -63,6 +70,10 @@ public class MainActivity extends BaseActivity {
         transactionSupportFragment(mCurrentFragment);
 
     }
+
+//    private BaseFragment getFragment(String fragmentName) {
+//
+//    }
 
     @Override
     public void onBackPressed() {

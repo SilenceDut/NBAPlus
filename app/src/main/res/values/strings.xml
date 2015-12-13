@@ -41,23 +41,17 @@
     <string name="load_current">当前为自动加载正文中的图片（默认）</string>
     <string name="noload_current">当前为不加载正文中的图片</string>
 
+    <!--Settings-->
     <string name="system_setting">系统设置</string>
-
+    <string name="other_setting">其他设置</string>
     <string name="actile_font_size">正文字号</string>
     <string name="big_font">大号字体</string>
     <string name="medium_font">中号字体</string>
     <string name="small_font">小号字体</string>
-
     <string name="clear_cache">清除缓存</string>
-
     <string name="version_update">检查更新</string>
 
-    <string name="load_big_image">load_big_image</string>
-    <string name="clear_data">clear_data</string>
     <string name="data_cleared">已清除缓存数据</string>
-    <string name="update">update</string>
-    <string name="font_size">font_size</string>
-    <string name="check_for_update">check_for_update</string>
     <string name="my_team">我的主队</string>
 
 </resources>

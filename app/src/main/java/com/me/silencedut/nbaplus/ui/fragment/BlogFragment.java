@@ -4,9 +4,7 @@ import com.me.silencedut.nbaplus.R;
 import com.me.silencedut.nbaplus.app.AppService;
 import com.me.silencedut.nbaplus.data.Constant;
 import com.me.silencedut.nbaplus.event.NewsEvent;
-import com.me.silencedut.nbaplus.model.News;
 import com.me.silencedut.nbaplus.ui.adapter.RecycleAdapter.BlogAdapter;
-import com.me.silencedut.nbaplus.utils.AppUtils;
 
 /**
  * Created by SilenceDut on 2015/12/4.
@@ -48,37 +46,7 @@ public class BlogFragment extends NewsFragment {
 
     public void onEventMainThread(NewsEvent newsEvent) {
         if(newsEvent!=null&&Constant.NEWSTYPE.BLOG.getNewsType().equals(newsEvent.getNewsType())) {
-            mNewsEvent=newsEvent;
-            if (Constant.Result.FAIL.equals(newsEvent.getEventResult())) {
-                updateView(newsEvent);
-            } else {
-                News news = newsEvent.getNews();
-                mNewsId = news.getNextId();
-                switch (newsEvent.getNewsWay()) {
-                    case INIT:
-                        mNewsListEntity.clear();
-                        mNewsListEntity.addAll(news.getNewslist());
-                        mLoadAdapter.updateItem(true);
-                        break;
-                    case UPDATE:
-                        mNewsListEntity.clear();
-                        mNewsListEntity.addAll(news.getNewslist());
-                        stopRefreshing();
-                        mLoadAdapter.updateItem(false);
-                        break;
-                    case LOADMORE:
-                        mNewsListEntity.addAll(news.getNewslist());
-                        stopAll();
-                        mLoadAdapter.updateItem(false);
-                        break;
-                    default:
-                        break;
-                }
-                if (Constant.GETNEWSWAY.UPDATE.equals(newsEvent.getNewsWay())) {
-                    AppUtils.showSnackBar(newsContainer, R.string.load_success);
-                }
-
-            }
+            updateView(newsEvent);
         }
     }
 

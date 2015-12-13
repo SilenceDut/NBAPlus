@@ -9,6 +9,8 @@
 
     <dimen name="default_elevation">4dp</dimen>
 
+    <dimen name="setting_margin">24dp</dimen>
+
     <dimen name="icon_size">24dp</dimen>
     <dimen name="drawer_text_margin">32dp</dimen>
     <dimen name="navigation_drawer_width">240dp</dimen>

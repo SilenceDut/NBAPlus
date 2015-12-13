@@ -4,7 +4,6 @@ package com.me.silencedut.nbaplus.app;
 import com.google.gson.Gson;
 import com.me.silencedut.greendao.DBHelper;
 import com.me.silencedut.nbaplus.RxMethod.RxNews;
-import com.me.silencedut.nbaplus.model.News;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -93,11 +92,6 @@ public class AppService {
             mCompositeSubscription= mCompositeSubMap.get(taskId);
         }
     }
-
-    public void cacheNews(News news,final String newsType) {
-        RxNews.cacheNews(news,newsType);
-    }
-
 
     private AppService(){}
 

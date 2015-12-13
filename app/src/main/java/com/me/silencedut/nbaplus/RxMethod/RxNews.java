@@ -32,6 +32,12 @@ public class RxNews {
     public static Subscription updateNews(final String newsType) {
         Subscription subscription = AppService.getNbaPlus().updateNews(newsType)
                 .subscribeOn(Schedulers.io())
+                .doOnNext(new Action1<News>() {
+                    @Override
+                    public void call(News news) {
+                        cacheNews(news,newsType);
+                    }
+                })
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Action1<News>() {
                     @Override
@@ -76,7 +82,7 @@ public class RxNews {
                     @Override
                     public String call(NewsDetile newsDetile) {
                         int imageCount=0;
-                        String CSS_STYLE =String.format(Constant.CSS_STYLE , PreferenceUtils.getPrefString(App.getContext(), "font_size", "18"),"#333333");
+                        String CSS_STYLE =String.format(Constant.CSS_STYLE , PreferenceUtils.getPrefString(App.getContext(), Constant.ACTILEFONTSIZE, "18"),"#333333");
                         String html ="<html><head>" +CSS_STYLE+ "</head><body>" +newsDetile.getContent()+"<p>（"+newsDetile.getAuthor()+"）<p></body></html>";
                         Pattern p=Pattern.compile("(<p class=\"reader_img_box\"><img id=\"img_\\d\" class=\"reader_img\" src=\"reader_img_src\" /></p>)+");
                         Matcher m=p.matcher(html);
@@ -84,7 +90,7 @@ public class RxNews {
                             if(imageCount==0) {
                                 html=html.replace(html.substring(m.start(), (m.end())),"");
                             }else {
-                                if(PreferenceUtils.getPrefBoolean(App.getContext(),"load_big_image",true)) {
+                                if(PreferenceUtils.getPrefBoolean(App.getContext(),Constant.LOADIMAGE,true)) {
                                     html = html.replace(html.substring(m.start(), (m.end())), "<img src="
                                             + newsDetile.getArticleMediaMap().get(String.format("img_%d", imageCount)).getUrl() + " "
                                             + "width=\"100%\" height=\"auto\">");
@@ -139,19 +145,15 @@ public class RxNews {
         return subscription;
     }
     public static void cacheNews(final News news,final String newsType) {
-        AppService.getInstance().getSingleThreadExecutor().execute(new Runnable() {
-            @Override
-            public void run() {
-                GreenNewsDao greenNewsDao = AppService.getDBHelper().getDaoSession().getGreenNewsDao();
-                DeleteQuery deleteQuery = greenNewsDao.queryBuilder()
-                        .where(GreenNewsDao.Properties.Type.eq(newsType))
-                        .buildDelete();
-                deleteQuery.executeDeleteWithoutDetachingEntities();
-                String newsList = AppService.getGson().toJson(news);
-                GreenNews greenNews = new GreenNews(null, newsList, newsType);
-                greenNewsDao.insert(greenNews);
-            }
-        });
+
+        GreenNewsDao greenNewsDao = AppService.getDBHelper().getDaoSession().getGreenNewsDao();
+        DeleteQuery deleteQuery = greenNewsDao.queryBuilder()
+                .where(GreenNewsDao.Properties.Type.eq(newsType))
+                .buildDelete();
+        deleteQuery.executeDeleteWithoutDetachingEntities();
+        String newsList = AppService.getGson().toJson(news);
+        GreenNews greenNews = new GreenNews(null, newsList, newsType);
+        greenNewsDao.insert(greenNews);
 
     }
 

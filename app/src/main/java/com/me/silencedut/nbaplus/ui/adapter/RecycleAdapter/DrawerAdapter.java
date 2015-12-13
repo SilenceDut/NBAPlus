@@ -42,6 +42,7 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.DrawerItem
     @Override
     public void onBindViewHolder(DrawerItemViewHolder holder, int position) {
         holder.update(position);
+
     }
 
 

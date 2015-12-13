@@ -8,9 +8,7 @@ import com.me.silencedut.nbaplus.R;
 import com.me.silencedut.nbaplus.app.AppService;
 import com.me.silencedut.nbaplus.data.Constant;
 import com.me.silencedut.nbaplus.event.NewsEvent;
-import com.me.silencedut.nbaplus.model.News;
 import com.me.silencedut.nbaplus.ui.adapter.RecycleAdapter.MainAdapter;
-import com.me.silencedut.nbaplus.utils.AppUtils;
 import com.me.silencedut.nbaplus.utils.NumericalUtil;
 
 import butterknife.Bind;
@@ -20,8 +18,8 @@ import butterknife.Bind;
  */
 public class MainFragment extends NewsFragment{
 
-    private static final int MIN_ITEM_SIZE=10;
     private static final int ANIM_DURATION_TOOLBAR = 300;
+    //private static boolean mFirstAnimate=true;
     @Bind(R.id.mian_title)
     View mainTitle;
     public static MainFragment newInstance() {
@@ -29,13 +27,12 @@ public class MainFragment extends NewsFragment{
         return mainFragment;
     }
 
-
     @Override
     void setAdapter() {
         mainTitle.setVisibility(View.VISIBLE);
         mLoadAdapter=new MainAdapter(getActivity(),mNewsListEntity);
         mNewsListView.setAdapter(mLoadAdapter);
-        startIntroAnimation();
+        startIntoAnimation();
     }
 
     private void initCaChe() {
@@ -60,45 +57,7 @@ public class MainFragment extends NewsFragment{
 
     public void onEventMainThread(NewsEvent newsEvent) {
         if(newsEvent!=null&&Constant.NEWSTYPE.NEWS.getNewsType().equals(newsEvent.getNewsType())) {
-            mNewsEvent=newsEvent;
-            if(Constant.Result.FAIL.equals(newsEvent.getEventResult())) {
-                updateView(newsEvent);
-            }else {
-                News news = newsEvent.getNews();
-                mNewsId = news.getNextId();
-                switch (newsEvent.getNewsWay()) {
-                    case INIT:
-                        mNewsListEntity.clear();
-                        mNewsListEntity.addAll(news.getNewslist());
-                        mLoadAdapter.updateItem(true);
-                        break;
-                    case UPDATE:
-                        mNewsListEntity.clear();
-                        mNewsListEntity.addAll(news.getNewslist());
-                        //if the data get by refresh is less ,load more instantly
-                        if (mNewsListEntity.size() < MIN_ITEM_SIZE) {
-                            AppService.getInstance().loadMoreNews(getTaskId(), Constant.NEWSTYPE.NEWS.getNewsType(), mNewsId);
-                        } else {
-                            stopRefreshing();
-                            mLoadAdapter.updateItem(false);
-                        }
-                        break;
-                    case LOADMORE:
-                        mNewsListEntity.addAll(news.getNewslist());
-                        if (mNewsListEntity.size() < MIN_ITEM_SIZE) {
-                            AppService.getInstance().loadMoreNews(getTaskId(), Constant.NEWSTYPE.NEWS.getNewsType(), mNewsId);
-                        } else {
-                            stopAll();
-                            mLoadAdapter.updateItem(false);
-                        }
-                        break;
-                    default:
-                        break;
-                }
-                if(Constant.GETNEWSWAY.UPDATE.equals(newsEvent.getNewsWay())){
-                    AppUtils.showSnackBar(newsContainer, R.string.load_success);
-                }
-            }
+            updateView(newsEvent);
         }
     }
 
@@ -107,7 +66,11 @@ public class MainFragment extends NewsFragment{
         return R.string.main;
     }
 
-    private void startIntroAnimation() {
+    private void startIntoAnimation() {
+//        if(!mFirstAnimate) {
+//            return;
+//        }
+//        mFirstAnimate=false;
         int actionbarSize = NumericalUtil.dp2px(56);
         mToolBar.setTranslationY(-actionbarSize);
         mainTitle.setTranslationY(-actionbarSize);
@@ -123,7 +86,7 @@ public class MainFragment extends NewsFragment{
                 .setListener(new AnimatorListenerAdapter() {
                     @Override
                     public void onAnimationEnd(Animator animation) {
-                        //                        startContentAnimation();
+                        // startContentAnimation();
                         initCaChe();
                     }
                 }).start();

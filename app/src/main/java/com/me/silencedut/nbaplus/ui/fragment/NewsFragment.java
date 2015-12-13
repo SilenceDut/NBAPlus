@@ -7,7 +7,6 @@ import android.view.MotionEvent;
 import android.view.View;
 
 import com.me.silencedut.nbaplus.R;
-import com.me.silencedut.nbaplus.app.AppService;
 import com.me.silencedut.nbaplus.data.Constant;
 import com.me.silencedut.nbaplus.event.AnimatEndEvent;
 import com.me.silencedut.nbaplus.event.NewsEvent;
@@ -34,7 +33,6 @@ public abstract class NewsFragment extends SwipeRefreshBaseFragment implements O
 
 
     protected List<NewslistEntity> mNewsListEntity = new ArrayList<NewslistEntity>();
-    protected NewsEvent mNewsEvent;
     protected LoadAdapter mLoadAdapter;
     protected String mNewsId="";
 
@@ -80,27 +78,46 @@ public abstract class NewsFragment extends SwipeRefreshBaseFragment implements O
 
 
     protected void updateView(NewsEvent newsEvent) {
-        if(newsEvent.getNewsWay().equals(Constant.GETNEWSWAY.INIT)) {
-            setRefreshing();
-        }else {
-            stopRefreshing();
-            stopLoading();
-            AppUtils.showSnackBar(newsContainer, R.string.load_fail);
+
+        if (Constant.Result.FAIL.equals(newsEvent.getEventResult())) {
+            if(newsEvent.getNewsWay().equals(Constant.GETNEWSWAY.INIT)) {
+                setRefreshing();
+            }else {
+                stopAll();
+                AppUtils.showSnackBar(newsContainer, R.string.load_fail);
+            }
+        } else {
+            News news = newsEvent.getNews();
+            mNewsId = news.getNextId();
+            switch (newsEvent.getNewsWay()) {
+                case INIT:
+                    mNewsListEntity.clear();
+                    mNewsListEntity.addAll(news.getNewslist());
+                    mLoadAdapter.updateItem(true);
+                    break;
+                case UPDATE:
+                    mNewsListEntity.clear();
+                    mNewsListEntity.addAll(news.getNewslist());
+                    stopRefreshing();
+                    mLoadAdapter.updateItem(false);
+                    break;
+                case LOADMORE:
+                    mNewsListEntity.addAll(news.getNewslist());
+                    stopLoading();
+                    mLoadAdapter.updateItem(false);
+                    break;
+                default:
+                    break;
+            }
+            if (Constant.GETNEWSWAY.UPDATE.equals(newsEvent.getNewsWay())) {
+                AppUtils.showSnackBar(newsContainer, R.string.load_success);
+            }
+
         }
+
+
     }
 
-    @Override
-    public void onStop() {
-        super.onStop();
-        // sometimes refresh maybe get no date ,so cache the date when fragment onstop
-        if(mNewsEvent==null){
-            return;
-        }
-        News news=new News();
-        news.setNewslist(mNewsListEntity);
-        news.setNextId(mNewsId);
-        AppService.getInstance().cacheNews(news,mNewsEvent.getNewsType());
-    }
     public void onEventMainThread(AnimatEndEvent animatEndEvent) {
         setRefreshing();
     }

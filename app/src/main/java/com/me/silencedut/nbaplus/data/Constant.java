@@ -5,6 +5,8 @@ package com.me.silencedut.nbaplus.data;
  */
 public class Constant {
 
+    public static final String LOADIMAGE = "LOADIMAGE";
+    public static final String ACTILEFONTSIZE = "ACTILEFONTSIZE";
 
     public static final String CSS_STYLE ="<style>* {font-size:%spx;line-height:28px;}p {color:%s;}</style>";
 
