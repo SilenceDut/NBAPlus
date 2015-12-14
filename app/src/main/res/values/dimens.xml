@@ -35,4 +35,7 @@
     <dimen name="toolbar_evelation">0dp</dimen>
     <dimen name="item_divider_line">1px</dimen>
 
+    <!-- Preference fragment padding, sides -->
+    <dimen name="preference_fragment_padding_side">8dp</dimen>
+
 </resources>

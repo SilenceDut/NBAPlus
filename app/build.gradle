@@ -6,6 +6,7 @@ android {
     buildToolsVersion globalConfiguration.AndroidBuildToolsVersion
 
     defaultConfig {
+
         applicationId globalConfiguration.applicationId
         minSdkVersion globalConfiguration.AndridMinSdkVersion
         targetSdkVersion globalConfiguration.AndroidTargetSdkVersion

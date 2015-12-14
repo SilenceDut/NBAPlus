@@ -1,6 +1,8 @@
 package com.me.silencedut.nbaplus.ui.fragment;
 
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.SwitchCompat;
 import android.util.Log;
@@ -14,7 +16,6 @@ import com.me.silencedut.nbaplus.event.Event;
 import com.me.silencedut.nbaplus.utils.AppUtils;
 import com.me.silencedut.nbaplus.utils.DataClearManager;
 import com.me.silencedut.nbaplus.utils.PreferenceUtils;
-import com.squareup.okhttp.Request;
 
 import java.util.Arrays;
 
@@ -78,6 +79,7 @@ public class SettingFragment extends ToorbarBaseFragment implements View.OnClick
         mIsLoadImage=PreferenceUtils.getPrefBoolean(getActivity(), Constant.LOADIMAGE, true);
         sc_load_image.setChecked(mIsLoadImage);
         tv_version.setText(AppUtils.getVersionName(getActivity()));
+        checkUpdateVersion();
     }
 
     @Override
@@ -105,7 +107,7 @@ public class SettingFragment extends ToorbarBaseFragment implements View.OnClick
                 clearCache();
                 break;
             case R.id.rl_update_version:
-                checkUpdateVersion();
+                jumpToWeb();
                 break;
             default:
                 break;
@@ -131,6 +133,7 @@ public class SettingFragment extends ToorbarBaseFragment implements View.OnClick
                .show();
     }
 
+
     private void clearCache(){
         DataClearManager.cleanApplicationData(App.getContext());
         tv_cache_size.setText(DataClearManager.getApplicationDataSize(App.getContext()));
@@ -138,21 +141,26 @@ public class SettingFragment extends ToorbarBaseFragment implements View.OnClick
     }
 
     private void checkUpdateVersion() {
-        Log.d("checkUpdateVersion", "checkUpdateVersion" );
-        FIR.checkForUpdateInFIR("a57f219d7777976f51e88257299f34b1", new VersionCheckCallback() {
+Log.d("checkUpdateVersion","checkUpdateVersion");
+        FIR.checkForUpdateInFIR("3cc3405d811293a22ec506387c452a3d", new VersionCheckCallback() {
             @Override
             public void onSuccess(AppVersion appVersion, boolean b) {
                 super.onSuccess(appVersion, b);
-                Log.d("checkUpdateVersion", "appVersion" + appVersion);
-            }
-
-            @Override
-            public void onFail(Request request, Exception e) {
-                super.onFail(request, e);
-                Log.d("checkUpdateVersion", "e" + e);
+                Log.d("checkUpdateVersion", "appVersion"+appVersion.getVersionName());
+                if (AppUtils.getVersionName(getActivity()).equals(appVersion.getVersionName())) {
+                    return;
+                }
+                tv_version.setText("可更新至 v" + appVersion.getVersionName());
             }
 
         });
+    }
+
+    private void jumpToWeb() {
+
+        Uri uri = Uri.parse(Constant.APP_FIR_IM_URL);
+        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+        startActivity(intent);
     }
 
     public static String getClassName() {

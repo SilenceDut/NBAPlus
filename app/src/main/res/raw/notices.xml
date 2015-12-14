@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+  ~ Copyright 2013 Philip Schiffer
+  ~
+  ~    Licensed under the Apache License, Version 2.0 (the "License");
+  ~    you may not use this file except in compliance with the License.
+  ~    You may obtain a copy of the License at
+  ~
+  ~        http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~    Unless required by applicable law or agreed to in writing, software
+  ~    distributed under the License is distributed on an "AS IS" BASIS,
+  ~    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~    See the License for the specific language governing permissions and
+  ~    limitations under the License.
+  -->
+<notices>
+    <notice>
+        <name>glide</name>
+        <url>https://github.com/bumptech/glide</url>
+        <copyright>Copyright 2014 Google, Inc.</copyright>
+        <license>Apache Software License 2.0</license>
+    </notice>
+    <notice>
+        <name>retrofit2.0</name>
+        <url>https://github.com/square/retrofit</url>
+        <copyright>Copyright 2013 Square, Inc.</copyright>
+        <license>Apache Software License 2.0</license>
+    </notice>
+    <notice>
+        <name>leakcanary</name>
+        <url>https://github.com/square/leakcanary</url>
+        <copyright>Copyright 2015 Square, Inc.</copyright>
+        <license>Apache Software License 2.0</license>
+    </notice>
+    <notice>
+        <name>rxjava</name>
+        <url>https://github.com/ReactiveX/RxJava</url>
+        <copyright>Copyright 2013 Netflix, Inc.</copyright>
+        <license>Apache Software License 2.0</license>
+    </notice>
+    <notice>
+        <name>greendao</name>
+        <url>https://github.com/greenrobot/greenDAO</url>
+        <copyright></copyright>
+        <license>Apache Software License 2.0</license>
+    </notice>
+    <notice>
+        <name>butterknife</name>
+        <url>https://github.com/JakeWharton/butterknife</url>
+        <copyright>Copyright 2013 Jake Wharton</copyright>
+        <license>Apache Software License 2.0</license>
+    </notice>
+
+    <notice>
+        <name>EventBus</name>
+        <url>https://github.com/greenrobot/EventBus</url>
+        <copyright/>
+        <license>Apache Software License 2.0</license>
+    </notice>
+
+    <notice>
+        <name>materialish-progress</name>
+        <url>https://github.com/pnikosis/materialish-progress</url>
+        <copyright>Copyright 2014 Nico Hormazábal</copyright>
+        <license>Apache Software License 2.0</license>
+    </notice>
+    <notice>
+        <name>CircleImageView</name>
+        <url>https://github.com/hdodenhof/CircleImageView/</url>
+        <copyright>Copyright 2014 - 2015 Henning Dodenhof</copyright>
+        <license>Apache Software License 2.0</license>
+    </notice>
+    <notice>
+        <name>Joda Time</name>
+        <url>http://joda-time.sourceforge.net/</url>
+        <copyright>Copyright 2001-2005 Stephen Colebourne</copyright>
+        <license>Apache Software License 2.0</license>
+    </notice>
+
+</notices>
