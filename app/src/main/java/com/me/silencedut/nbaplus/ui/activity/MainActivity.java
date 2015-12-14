@@ -1,9 +1,7 @@
 package com.me.silencedut.nbaplus.ui.activity;
 
-import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
-import android.util.Log;
 import android.widget.FrameLayout;
 
 import com.me.silencedut.nbaplus.R;
@@ -57,7 +55,7 @@ public class MainActivity extends BaseActivity {
     private void initDrawerMap() {
         mDrawerIdMap.put(R.string.news,MainFragment.getClassName());
         mDrawerIdMap.put(R.string.blog,BlogFragment.getClassName());
-//        mDrawerIdMap.put(R.string.sort,SortFragment.getClassName());
+        mDrawerIdMap.put(R.string.sort,SortFragment.getClassName());
         mDrawerIdMap.put(R.string.setting, SettingFragment.getClassName());
     }
 
