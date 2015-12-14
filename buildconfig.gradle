@@ -6,8 +6,8 @@ ext {
             AndroidTargetSdkVersion : 23,
             AndroidCompileSdkVersion : 23,
             applicationId : "me.silencedut.nbaplus",
-            versionCode:1,
-            versionName:"1.0.3"
+            versionCode:3,
+            versionName:"0.5.2"
     ]
 
     //LibrariesVersion
@@ -28,7 +28,7 @@ ext {
             materialish_progress:"com.pnikosis:materialish-progress:1.5+",
             circleimageview :"de.hdodenhof:circleimageview:1.3.0+",
             licensesdialog :"de.psdev.licensesdialog:licensesdialog:1.8.0+",
-            integration:"im.fir:sdk:latest.integration@aar",
+            fir_sdk:"im.fir:sdk:latest.integration@aar",
             retrofit_2_0:"com.squareup.retrofit:retrofit:2.0.0-beta2",
             retrofit_converter_gson:"com.squareup.retrofit:converter-gson:2.0.0-beta2",
             leakcanary_debug:"com.squareup.leakcanary:leakcanary-android:1.3.1",

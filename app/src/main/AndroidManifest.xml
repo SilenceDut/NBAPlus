@@ -45,7 +45,7 @@
             >
         </activity>
 
-        <meta-data android:value="f97cfc10a8143d3ed9c1faa439931aff" android:name="BUG_HD_SDK_GENERAL_KEY" />
+        <meta-data android:value="3cc3405d811293a22ec506387c452a3d" android:name="BUG_HD_SDK_GENERAL_KEY" />
 
     </application>
 
