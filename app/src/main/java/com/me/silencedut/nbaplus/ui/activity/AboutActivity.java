@@ -73,7 +73,6 @@ public class AboutActivity extends SwipeBackActivity  implements RevealBackgroun
 
     }
 
-
     @Override
     public void onStateChange(int state) {
 
