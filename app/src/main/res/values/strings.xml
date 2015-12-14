@@ -10,7 +10,8 @@
 
     <string name="exit_prompt">再按一次退出</string>
     <string name="load_success">加载成功</string>
-    <string name="load_fail">加载更多</string>
+    <string name="load_more">加载更多</string>
+    <string name="load_fail">加载失败</string>
 
     <!--drawer-->
     <string name="news">新闻</string>
@@ -22,7 +23,7 @@
     <string name="about">关于</string>
     <string name="gameDate">赛程</string>
     <string name="advice">反馈</string>
-    <string name="action_settings">设置</string>
+    <string name="setting">设置</string>
 
     <string name="team">球队</string>
     <string name="player">球员</string>

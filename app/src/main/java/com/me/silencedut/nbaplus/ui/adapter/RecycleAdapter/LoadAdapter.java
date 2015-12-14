@@ -133,12 +133,15 @@ public abstract class LoadAdapter extends RecyclerView.Adapter<LoadAdapter.BaseV
         this.mLoading = loading;
     }
 
+    public void setAnimate(boolean animate) {
+        this.mAnimate = animate;
+    }
+
     public boolean canLoadMore() {
         return !mLoading;
     }
 
-    public void updateItem(boolean animate) {
-        this.mAnimate=animate;
+    public void updateItem() {
         notifyDataSetChanged();
     }
 

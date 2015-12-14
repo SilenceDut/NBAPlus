@@ -1,5 +1,6 @@
 package com.me.silencedut.nbaplus.ui.activity;
 
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
@@ -9,6 +10,7 @@ import com.me.silencedut.nbaplus.R;
 import com.me.silencedut.nbaplus.data.Constant;
 import com.me.silencedut.nbaplus.event.DrawerClickEvent;
 import com.me.silencedut.nbaplus.ui.fragment.BaseFragment;
+import com.me.silencedut.nbaplus.ui.fragment.BlogFragment;
 import com.me.silencedut.nbaplus.ui.fragment.DrawerFragment;
 import com.me.silencedut.nbaplus.ui.fragment.MainFragment;
 import com.me.silencedut.nbaplus.ui.fragment.SettingFragment;
@@ -19,10 +21,11 @@ import java.util.Map;
 
 public class MainActivity extends BaseActivity {
     private DrawerFragment mNavigationFragment;
-    private Fragment mCurrentFragment;
+    private BaseFragment mCurrentFragment;
     private int mCurrentDrawId=R.string.news;
     private Map<String,BaseFragment> mBaseFragmentMap = new HashMap<>();
-    private MainFragment mMainFragment=null;
+    private Map<Integer,String> mDrawerIdMap = new HashMap<>();
+
 
     @Override
     protected int getContentViewId() {
@@ -36,12 +39,9 @@ public class MainActivity extends BaseActivity {
         mNavigationFragment.setUp((FrameLayout) findViewById(R.id.main_content),
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.main_drawer));
-        mCurrentFragment= getFragment("MainFragment");
+        initDrawerMap();
+        mCurrentFragment= getFragment(mDrawerIdMap.get(R.string.news));
         transactionSupportFragment(mCurrentFragment);
-    }
-
-    private void transactionSupportFragment(Fragment fragment) {
-        getSupportFragmentManager().beginTransaction().replace(R.id.main_content, fragment).commit();
     }
 
     public void onEventMainThread(DrawerClickEvent drawerClickEvent) {
@@ -49,35 +49,18 @@ public class MainActivity extends BaseActivity {
             return;
         }
         mCurrentDrawId=drawerClickEvent.getDrawId();
-        switch (mCurrentDrawId) {
-            case R.string.news:
-                //if(mMainFragment==null) {
-                    Log.d("mMainFragment",mMainFragment+"");
-                    mMainFragment=MainFragment.newInstance();
-               // }
-                Log.d("mMainFragment",mMainFragment+"mMainFragment");
-                mCurrentFragment=getFragment("app.src.main.java.com.me.silencedut.nbaplus.ui.fragment.BlogFragment");
-                Log.d("mCurrentFragment",mCurrentFragment+"mMainFragment");
-
-                break;
-            case R.string.blog:
-                mCurrentFragment=getFragment("BlogFragment");
-                Log.d("mCurrentFragment",mCurrentFragment+"BlogFragment");
-                //mCurrentFragment=BlogFragment.newInstance();
-                break;
-            case R.string.sort:
-                mCurrentFragment= SortFragment.newInstance();
-                break;
-            case R.string.action_settings:
-                mCurrentFragment= SettingFragment.newInstance();
-                break;
-            default:
-                break;
-        }
-
+        mCurrentFragment=getFragment(mDrawerIdMap.get(mCurrentDrawId));
         transactionSupportFragment(mCurrentFragment);
-
     }
+
+
+    private void initDrawerMap() {
+        mDrawerIdMap.put(R.string.news,MainFragment.getClassName());
+        mDrawerIdMap.put(R.string.blog,BlogFragment.getClassName());
+//        mDrawerIdMap.put(R.string.sort,SortFragment.getClassName());
+        mDrawerIdMap.put(R.string.setting, SettingFragment.getClassName());
+    }
+
 
     private BaseFragment getFragment(String fragmentName) {
         BaseFragment baseFragment = mBaseFragmentMap.get(fragmentName);
@@ -85,13 +68,18 @@ public class MainActivity extends BaseActivity {
             try {
                 baseFragment=(BaseFragment)Class.forName(fragmentName).newInstance();
             } catch (Exception e) {
-                Log.d("mCurrentFragment",e+"--------Exception");
-                baseFragment=SettingFragment.newInstance();
+                baseFragment=MainFragment.newInstance();
             }
             mBaseFragmentMap.put(fragmentName,baseFragment);
         }
         return baseFragment;
     }
+
+
+    private void transactionSupportFragment(Fragment fragment) {
+        getSupportFragmentManager().beginTransaction().replace(R.id.main_content, fragment).commit();
+    }
+
 
     @Override
     public void onBackPressed() {
@@ -101,8 +89,4 @@ public class MainActivity extends BaseActivity {
             finish();
         }
     }
-
-
-
-
 }

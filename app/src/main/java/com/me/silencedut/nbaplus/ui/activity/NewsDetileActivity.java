@@ -2,12 +2,17 @@ package com.me.silencedut.nbaplus.ui.activity;
 
 import android.content.Intent;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.util.Log;
+import android.view.ViewGroup;
 import android.webkit.WebSettings;
+
 import android.webkit.WebView;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.me.silencedut.nbaplus.R;
+import com.me.silencedut.nbaplus.app.App;
 import com.me.silencedut.nbaplus.app.AppService;
 import com.me.silencedut.nbaplus.data.Constant;
 import com.me.silencedut.nbaplus.event.NewsDetileEvent;
@@ -19,7 +24,8 @@ import butterknife.Bind;
  * Created by asan on 2015/12/8.
  */
 public class NewsDetileActivity extends SwipeBackActivity{
-    @Bind(R.id.webview)
+    @Bind(R.id.webLayout)
+    FrameLayout mWebLayout;
     WebView mWebView;
     private CollapsingToolbarLayout mCollapsingToolbarLayout;
     private Intent mGetIntent;
@@ -29,6 +35,7 @@ public class NewsDetileActivity extends SwipeBackActivity{
     public static final String DETILE_ID="DETILE_ID";
     public static final String IMAGE_URL="IMAGE_URL";
     public static final String IMAGE_EXIST="IMAGE_EXIST";
+
 
     @Override
     protected int getContentViewId() {
@@ -41,9 +48,7 @@ public class NewsDetileActivity extends SwipeBackActivity{
                 AppUtils.showSnackBar(mSwipeBackLayout, R.string.load_fail);
                 return;
             }
-
             mWebView.loadDataWithBaseURL(null,event.getContent(), "text/html", "UTF-8", null);
-
         }
     }
 
@@ -78,13 +83,25 @@ public class NewsDetileActivity extends SwipeBackActivity{
             mToolBar.setBackgroundResource(R.color.colorPrimary);
             
         }
+        mWebView = new WebView(getApplicationContext());
         mWebView.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
         mWebView.getSettings().setJavaScriptEnabled(true);
         mWebView.setBackgroundColor(0);
+        mWebLayout.addView(mWebView);
+
         getNewsDetile();
     }
 
     private void getNewsDetile(){
         AppService.getInstance().getNewsDetile(getTaskId(), mGetIntent.getStringExtra(DETILE_DATE), mGetIntent.getStringExtra(DETILE_ID));
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if(mWebLayout!=null) {
+            mWebLayout.removeAllViews();
+            mWebView.destroy();
+        }
     }
 }

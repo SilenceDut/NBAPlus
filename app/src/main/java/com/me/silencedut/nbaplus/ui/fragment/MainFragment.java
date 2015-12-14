@@ -22,17 +22,17 @@ import butterknife.Bind;
 public class MainFragment extends NewsFragment{
 
     private static final int ANIM_DURATION_TOOLBAR = 300;
-    //private static boolean mFirstAnimate=true;
+    private static boolean mFirstAnimate=true;
     @Bind(R.id.mian_title)
     View mainTitle;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.d("mMainFragment", savedInstanceState + "whywhywhy+;;;;");
     }
 
     public static MainFragment newInstance() {
+
         MainFragment mainFragment = new MainFragment();
         return mainFragment;
     }
@@ -42,7 +42,14 @@ public class MainFragment extends NewsFragment{
         mainTitle.setVisibility(View.VISIBLE);
         mLoadAdapter=new MainAdapter(getActivity(),mNewsListEntity);
         mNewsListView.setAdapter(mLoadAdapter);
-        startIntoAnimation();
+        mLoadAdapter.setAnimate(mFirstAnimate);
+        if(mFirstAnimate) {
+            startIntoAnimation();
+            mFirstAnimate=false;
+        }else {
+            initCaChe();
+        }
+
     }
 
     private void initCaChe() {
@@ -71,16 +78,14 @@ public class MainFragment extends NewsFragment{
         }
     }
 
+
     @Override
     protected int getTitle() {
         return R.string.main;
     }
 
     private void startIntoAnimation() {
-//        if(!mFirstAnimate) {
-//            return;
-//        }
-//        mFirstAnimate=false;
+
         int actionbarSize = NumericalUtil.dp2px(56);
         mToolBar.setTranslationY(-actionbarSize);
         mainTitle.setTranslationY(-actionbarSize);
@@ -100,6 +105,10 @@ public class MainFragment extends NewsFragment{
                         initCaChe();
                     }
                 }).start();
+    }
+
+    public static String getClassName() {
+        return "com.me.silencedut.nbaplus.ui.fragment.MainFragment";
     }
 
 

@@ -1,5 +1,7 @@
 package com.me.silencedut.nbaplus.utils;
 
+import android.content.Context;
+import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.support.design.widget.Snackbar;
@@ -15,6 +17,18 @@ import com.me.silencedut.nbaplus.app.App;
  * Created by SilenceDut on 2015/12/11.
  */
 public class AppUtils {
+
+    public static String getVersionName(Context context) {
+        String versionName = null;
+        try {
+            versionName = context.getApplicationContext().getPackageManager()
+                    .getPackageInfo(context.getApplicationContext().getPackageName(), 0).versionName;
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        return versionName;
+    }
+
 
     public static void showSnackBar(View view,int id) {
         Resources resources  =App.getContext().getResources();

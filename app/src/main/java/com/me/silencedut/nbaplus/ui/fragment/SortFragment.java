@@ -62,4 +62,9 @@ public class SortFragment extends ToorbarBaseFragment{
     protected int getTitle() {
         return R.string.sort;
     }
+
+    public static String getClassName() {
+        return "com.me.silencedut.nbaplus.ui.fragment.SortFragment";
+    }
+
 }

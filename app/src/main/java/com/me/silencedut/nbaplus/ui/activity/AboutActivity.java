@@ -9,7 +9,7 @@ import android.widget.TextView;
 import com.me.silencedut.nbaplus.R;
 import com.me.silencedut.nbaplus.event.Event;
 import com.me.silencedut.nbaplus.ui.wigdets.RevealBackgroundView;
-import com.me.silencedut.nbaplus.utils.VersionUtils;
+import com.me.silencedut.nbaplus.utils.AppUtils;
 
 import butterknife.Bind;
 import de.psdev.licensesdialog.LicensesDialog;
@@ -34,13 +34,14 @@ public class AboutActivity extends SwipeBackActivity  implements RevealBackgroun
     @Override
     protected void initViews() {
         super.initViews();
+        setTitle();
         setupRevealBackground();
     }
 
     @Override
     void setTitle() {
         mToolBar.setTitle(getResources().getString(R.string.about));
-        mVersionTextView.setText("Version " + VersionUtils.setUpVersionName(this));
+        mVersionTextView.setText("Version " + AppUtils.getVersionName(this));
     }
 
     @Override

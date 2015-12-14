@@ -3,6 +3,7 @@ package com.me.silencedut.nbaplus.ui.fragment;
 import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.SwitchCompat;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -13,10 +14,14 @@ import com.me.silencedut.nbaplus.event.Event;
 import com.me.silencedut.nbaplus.utils.AppUtils;
 import com.me.silencedut.nbaplus.utils.DataClearManager;
 import com.me.silencedut.nbaplus.utils.PreferenceUtils;
+import com.squareup.okhttp.Request;
 
 import java.util.Arrays;
 
 import butterknife.Bind;
+import im.fir.sdk.FIR;
+import im.fir.sdk.callback.VersionCheckCallback;
+import im.fir.sdk.version.AppVersion;
 
 /**
  * Created by SilenceDut on 2015/12/12.
@@ -33,12 +38,14 @@ public class SettingFragment extends ToorbarBaseFragment implements View.OnClick
     View rl_font_size;
     @Bind(R.id.tv_font_size)
     TextView tv_font_size;
-    @Bind(R.id.rl_update_version)
-    View rl_update_version;
     @Bind(R.id.cache_size)
     TextView tv_cache_size;
     @Bind(R.id.rl_clear_cache)
     View rl_clear_cache;
+    @Bind(R.id.rl_update_version)
+    View rl_update_version;
+    @Bind(R.id.tv_version)
+    TextView tv_version;
 
     private static final String[] fontSizeName={"大号字体","中号字体","小号字体"};
     private static final String[] fontSizeValue={"22","18","16"};
@@ -52,7 +59,7 @@ public class SettingFragment extends ToorbarBaseFragment implements View.OnClick
 
     @Override
     protected int getTitle() {
-        return R.string.action_settings;
+        return R.string.setting;
     }
 
     @Override
@@ -70,7 +77,7 @@ public class SettingFragment extends ToorbarBaseFragment implements View.OnClick
         tv_font_size.setText(fontSizeName[select]);
         mIsLoadImage=PreferenceUtils.getPrefBoolean(getActivity(), Constant.LOADIMAGE, true);
         sc_load_image.setChecked(mIsLoadImage);
-
+        tv_version.setText(AppUtils.getVersionName(getActivity()));
     }
 
     @Override
@@ -131,6 +138,24 @@ public class SettingFragment extends ToorbarBaseFragment implements View.OnClick
     }
 
     private void checkUpdateVersion() {
+        Log.d("checkUpdateVersion", "checkUpdateVersion" );
+        FIR.checkForUpdateInFIR("a57f219d7777976f51e88257299f34b1", new VersionCheckCallback() {
+            @Override
+            public void onSuccess(AppVersion appVersion, boolean b) {
+                super.onSuccess(appVersion, b);
+                Log.d("checkUpdateVersion", "appVersion" + appVersion);
+            }
 
+            @Override
+            public void onFail(Request request, Exception e) {
+                super.onFail(request, e);
+                Log.d("checkUpdateVersion", "e" + e);
+            }
+
+        });
+    }
+
+    public static String getClassName() {
+        return "com.me.silencedut.nbaplus.ui.fragment.SettingFragment";
     }
 }

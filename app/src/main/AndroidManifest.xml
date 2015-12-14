@@ -7,6 +7,7 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
 
 
     <application
@@ -43,6 +44,8 @@
             android:theme="@style/AppTheme.TransparentActivity"
             >
         </activity>
+
+        <meta-data android:value="f97cfc10a8143d3ed9c1faa439931aff" android:name="BUG_HD_SDK_GENERAL_KEY" />
 
     </application>
 

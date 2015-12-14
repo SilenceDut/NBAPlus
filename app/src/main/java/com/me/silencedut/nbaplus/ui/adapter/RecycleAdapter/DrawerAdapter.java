@@ -21,10 +21,10 @@ import butterknife.ButterKnife;
  */
 public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.DrawerItemViewHolder> {
 
-    private static final int[] icon_id = {R.drawable.drawer_icon_news, R.drawable.drawer_icon_blog, R.drawable.drawer_icon_sort, R.drawable.drawer_icon_setting};
-    private static final int[] name_id = {R.string.news, R.string.blog, R.string.sort, R.string.action_settings};
+    private static final int[] icon_id = {R.drawable.drawer_icon_news, R.drawable.drawer_icon_blog,  R.drawable.drawer_icon_setting};
+    private static final int[] name_id = {R.string.news, R.string.blog,  R.string.setting};
     private static final int TOPVIEW_POSITION = 0;
-    private static final int BOTTOMVIEW_POSITION = 2;
+    private static final int BOTTOMVIEW_POSITION = 1;
 
     private LayoutInflater mInflater;
     private int mSelectedPosition;

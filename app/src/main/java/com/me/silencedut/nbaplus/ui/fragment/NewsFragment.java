@@ -93,22 +93,22 @@ public abstract class NewsFragment extends SwipeRefreshBaseFragment implements O
                 case INIT:
                     mNewsListEntity.clear();
                     mNewsListEntity.addAll(news.getNewslist());
-                    mLoadAdapter.updateItem(true);
                     break;
                 case UPDATE:
                     mNewsListEntity.clear();
                     mNewsListEntity.addAll(news.getNewslist());
                     stopRefreshing();
-                    mLoadAdapter.updateItem(false);
+                    mLoadAdapter.setAnimate(false);
                     break;
                 case LOADMORE:
                     mNewsListEntity.addAll(news.getNewslist());
                     stopLoading();
-                    mLoadAdapter.updateItem(false);
+                    mLoadAdapter.setAnimate(false);
                     break;
                 default:
                     break;
             }
+            mLoadAdapter.updateItem();
             if (Constant.GETNEWSWAY.UPDATE.equals(newsEvent.getNewsWay())) {
                 AppUtils.showSnackBar(newsContainer, R.string.load_success);
             }

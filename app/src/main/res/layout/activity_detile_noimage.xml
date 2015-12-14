@@ -25,11 +25,11 @@
                 android:scrollbars="vertical"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-                <WebView
-                    android:id="@+id/webview"
+                <FrameLayout
+                    android:id="@+id/webLayout"
                     android:layout_margin="@dimen/margin_8dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"></WebView>
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
             </android.support.v4.widget.NestedScrollView>
         </android.support.design.widget.CoordinatorLayout>
     </RelativeLayout>

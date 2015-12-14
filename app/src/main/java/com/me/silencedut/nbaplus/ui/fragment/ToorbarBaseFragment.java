@@ -12,11 +12,12 @@ import com.me.silencedut.nbaplus.ui.activity.AboutActivity;
 import butterknife.Bind;
 
 /**
- * Created by asan on 2015/12/12.
+ * Created by SlienceDut on 2015/12/12.
  */
 public abstract class ToorbarBaseFragment extends BaseFragment{
     @Bind(R.id.toolbar)
     Toolbar mToolBar;
+
 
     protected abstract int getTitle();
 

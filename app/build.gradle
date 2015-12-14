@@ -20,6 +20,15 @@ android {
     packagingOptions {
         exclude 'META-INF/services/javax.annotation.processing.Processor'
     }
+
+    applicationVariants.all { variant ->
+        variant.outputs.each { output ->
+            output.outputFile = new File(
+                    output.outputFile.parent,
+                    "nbaplus-${variant.versionName}.apk".toLowerCase())
+        }
+    }
+
     buildTypes {
         release {
             applicationIdSuffix ".release"
@@ -58,7 +67,7 @@ dependencies {
     compile otherDependencies.materialish_progress
     compile otherDependencies.circleimageview
     compile otherDependencies.licensesdialog
-    compile otherDependencies.integration
+    compile otherDependencies.fir_sdk
     compile otherDependencies.retrofit_2_0
     compile otherDependencies.retrofit_converter_gson
     compile otherDependencies.rxandroid
@@ -69,5 +78,5 @@ dependencies {
     releaseCompile otherDependencies.leakcanary_release
 
     compile files('libs/joda-time-2.8.2.jar')
-    compile files('libs/gson-2.5.jar')
+
 }

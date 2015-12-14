@@ -10,7 +10,7 @@ import com.me.silencedut.nbaplus.ui.adapter.RecycleAdapter.BlogAdapter;
  * Created by SilenceDut on 2015/12/4.
  */
 public class BlogFragment extends NewsFragment {
-
+    private static boolean mFirstAnimate=true;
     public static BlogFragment newInstance() {
         BlogFragment blogFragment = new BlogFragment();
         return blogFragment;
@@ -22,6 +22,8 @@ public class BlogFragment extends NewsFragment {
         mLoadAdapter=new BlogAdapter(getActivity(),mNewsListEntity);
         mNewsListView.setAdapter(mLoadAdapter);
         mNewsListView.setVerticalScrollBarEnabled(false);
+        mLoadAdapter.setAnimate(mFirstAnimate);
+        mFirstAnimate=false;
         initCaChe();
     }
 
@@ -36,7 +38,7 @@ public class BlogFragment extends NewsFragment {
 
 
     @Override
-    public void onLoadMore() {
+     public void onLoadMore() {
         if (mLoadAdapter.canLoadMore()) {
             mLoadAdapter.setLoading(true);
             mLoadAdapter.notifyItemChanged(mLoadAdapter.getItemCount() - 1);
@@ -54,4 +56,9 @@ public class BlogFragment extends NewsFragment {
     protected int getTitle() {
         return R.string.blog;
     }
+
+    public static String getClassName() {
+        return "com.me.silencedut.nbaplus.ui.fragment.BlogFragment";
+    }
+
 }
