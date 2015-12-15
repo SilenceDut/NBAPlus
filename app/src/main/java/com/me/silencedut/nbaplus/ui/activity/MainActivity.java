@@ -55,7 +55,6 @@ public class MainActivity extends BaseActivity {
     private void initDrawerMap() {
         mDrawerIdMap.put(R.string.news,MainFragment.getClassName());
         mDrawerIdMap.put(R.string.blog,BlogFragment.getClassName());
-        mDrawerIdMap.put(R.string.sort,SortFragment.getClassName());
         mDrawerIdMap.put(R.string.setting, SettingFragment.getClassName());
     }
 

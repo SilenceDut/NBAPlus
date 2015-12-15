@@ -147,7 +147,6 @@ public class SettingFragment extends ToorbarBaseFragment implements View.OnClick
             @Override
             public void onSuccess(AppVersion appVersion, boolean b) {
                 super.onSuccess(appVersion, b);
-                Log.d("checkUpdateVersion", "appVersion" + appVersion.getVersionName());
                 if (AppUtils.getVersionName(getActivity()).equals(appVersion.getVersionName())) {
                     return;
                 }
