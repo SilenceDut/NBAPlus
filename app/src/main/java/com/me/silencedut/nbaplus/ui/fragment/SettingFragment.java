@@ -16,6 +16,7 @@ import com.me.silencedut.nbaplus.event.Event;
 import com.me.silencedut.nbaplus.utils.AppUtils;
 import com.me.silencedut.nbaplus.utils.DataClearManager;
 import com.me.silencedut.nbaplus.utils.PreferenceUtils;
+import com.squareup.okhttp.Request;
 
 import java.util.Arrays;
 
@@ -141,18 +142,17 @@ public class SettingFragment extends ToorbarBaseFragment implements View.OnClick
     }
 
     private void checkUpdateVersion() {
-Log.d("checkUpdateVersion","checkUpdateVersion");
-        FIR.checkForUpdateInFIR("3cc3405d811293a22ec506387c452a3d", new VersionCheckCallback() {
+
+        FIR.checkForUpdateInFIR(Constant.API_TOKEN_FIR, new VersionCheckCallback() {
             @Override
             public void onSuccess(AppVersion appVersion, boolean b) {
                 super.onSuccess(appVersion, b);
-                Log.d("checkUpdateVersion", "appVersion"+appVersion.getVersionName());
+                Log.d("checkUpdateVersion", "appVersion" + appVersion.getVersionName());
                 if (AppUtils.getVersionName(getActivity()).equals(appVersion.getVersionName())) {
                     return;
                 }
                 tv_version.setText("可更新至 v" + appVersion.getVersionName());
             }
-
         });
     }
 

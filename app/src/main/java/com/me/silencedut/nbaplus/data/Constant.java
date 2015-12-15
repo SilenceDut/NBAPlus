@@ -6,6 +6,7 @@ package com.me.silencedut.nbaplus.data;
 public class Constant {
 
     public static final String APP_FIR_IM_URL="http://fir.im/nbaplus";
+    public static final String API_TOKEN_FIR="ff55b0c5cb165ec0b04c473cf77c8995";
 
     public static final String LOADIMAGE = "LOADIMAGE";
     public static final String ACTILEFONTSIZE = "ACTILEFONTSIZE";
