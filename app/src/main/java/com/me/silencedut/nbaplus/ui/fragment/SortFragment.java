@@ -25,8 +25,8 @@ public class SortFragment extends ToorbarBaseFragment{
     List<BaseFragment> mSortTableFrahment=new ArrayList<>();
 
     public static SortFragment newInstance() {
-        SortFragment blogFragment = new SortFragment();
-        return blogFragment;
+        SortFragment sortFragment = new SortFragment();
+        return sortFragment;
     }
 
     @Override
@@ -37,8 +37,8 @@ public class SortFragment extends ToorbarBaseFragment{
         mTabLayout.addTab(mTabLayout.newTab().setText(tableTitles.get(0)));
         mTabLayout.addTab(mTabLayout.newTab().setText(tableTitles.get(1)));
 
-        mSortTableFrahment.add(BlogFragment.newInstance());
-        mSortTableFrahment.add(MainFragment.newInstance());
+        mSortTableFrahment.add(TeamSortFragment.newInstance());
+        mSortTableFrahment.add(PlayerSortFragment.newInstance());
         FragmentSortAdapter adapter =
                 new FragmentSortAdapter(getChildFragmentManager(), mSortTableFrahment, tableTitles);
         mViewPager.setAdapter(adapter);

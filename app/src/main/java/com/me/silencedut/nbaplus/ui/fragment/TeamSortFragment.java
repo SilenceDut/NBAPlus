@@ -6,11 +6,16 @@ import com.me.silencedut.nbaplus.event.Event;
 /**
  * Created by SilenceDut on 2015/12/12.
  */
-public class TeamSortFragment extends SwipeRefreshBaseFragment{
+public class TeamSortFragment extends BaseFragment{
 
     public static TeamSortFragment newInstance() {
         TeamSortFragment teamSortFragment = new TeamSortFragment();
         return teamSortFragment;
+    }
+
+    @Override
+    protected void initViews() {
+
     }
 
     @Override
@@ -19,17 +24,10 @@ public class TeamSortFragment extends SwipeRefreshBaseFragment{
     }
 
 
-    @Override
-    public void onRefresh() {
 
-    }
 
     public void onEventMainThread(Event event) {
 
     }
 
-    @Override
-    protected int getTitle() {
-        return R.string.sort;
-    }
 }

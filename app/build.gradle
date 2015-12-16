@@ -77,7 +77,6 @@ dependencies {
     compile otherDependencies.greendao
     debugCompile otherDependencies.leakcanary_debug
     releaseCompile otherDependencies.leakcanary_release
-
     compile files('libs/joda-time-2.8.2.jar')
-
+    compile project(':chartlibrary')
 }
