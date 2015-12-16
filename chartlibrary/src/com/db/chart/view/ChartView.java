@@ -56,6 +56,7 @@ public abstract class ChartView extends RelativeLayout{
 
 	private static final int DEFAULT_GRID_ROWS = 5;
 	private static final int DEFAULT_GRID_COLUMNS = 5;
+	public static final int LABELTEXTMAXLINE=4;
 
 
 	public enum GridType {
@@ -151,7 +152,7 @@ public abstract class ChartView extends RelativeLayout{
 
 			// Define chart frame
 			mChartTop = getPaddingTop() + verController.getLabelHeight()/2;
-			mChartBottom = getMeasuredHeight() - getPaddingBottom()-3*(int)(style.labelsPaint.descent()-style.labelsPaint.ascent());
+			mChartBottom = getMeasuredHeight() - getPaddingBottom()-LABELTEXTMAXLINE*(int)(style.labelsPaint.descent()-style.labelsPaint.ascent());
 			mChartLeft = getPaddingLeft();
 			mChartRight = getMeasuredWidth() - getPaddingRight();
 

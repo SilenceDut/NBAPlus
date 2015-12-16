@@ -32,13 +32,14 @@ public class SortFragment extends ToorbarBaseFragment{
     @Override
     protected void initViews() {
         super.initViews();
-        tableTitles.add(getResources().getString(R.string.team));
         tableTitles.add(getResources().getString(R.string.player));
+        tableTitles.add(getResources().getString(R.string.team));
+
         mTabLayout.addTab(mTabLayout.newTab().setText(tableTitles.get(0)));
         mTabLayout.addTab(mTabLayout.newTab().setText(tableTitles.get(1)));
-
-        mSortTableFrahment.add(TeamSortFragment.newInstance());
         mSortTableFrahment.add(PlayerSortFragment.newInstance());
+        mSortTableFrahment.add(TeamSortFragment.newInstance());
+
         FragmentSortAdapter adapter =
                 new FragmentSortAdapter(getChildFragmentManager(), mSortTableFrahment, tableTitles);
         mViewPager.setAdapter(adapter);
@@ -46,6 +47,8 @@ public class SortFragment extends ToorbarBaseFragment{
         mViewPager.setOffscreenPageLimit(2);
         mTabLayout.setupWithViewPager(mViewPager);
         mTabLayout.setTabsFromPagerAdapter(adapter);
+
+
     }
 
 

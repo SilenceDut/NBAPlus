@@ -53,7 +53,7 @@ public class RhythmAdapter extends BaseAdapter {
         RelativeLayout relativeLayout = (RelativeLayout) this.mInflater.inflate(R.layout.adapter_rhythm_icon, null);
         //设置item布局的大小以及Y轴的位置
         relativeLayout.setLayoutParams(new RelativeLayout.LayoutParams((int) itemWidth, mContext.getResources().getDimensionPixelSize(R.dimen.rhythm_item_height)));
-        relativeLayout.setTranslationY(itemWidth*1/7);
+        relativeLayout.setTranslationY(itemWidth*5/7);
 
         //设置第二层RelativeLayout布局的宽和高
         RelativeLayout childRelativeLayout = (RelativeLayout) relativeLayout.getChildAt(0);

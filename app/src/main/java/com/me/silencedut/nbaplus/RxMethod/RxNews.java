@@ -30,7 +30,7 @@ import rx.schedulers.Schedulers;
  */
 public class RxNews {
     public static Subscription updateNews(final String newsType) {
-        Subscription subscription = AppService.getNbaPlus().updateNews(newsType)
+        Subscription subscription = AppService.getNbaplus().updateNews(newsType)
                 .subscribeOn(Schedulers.io())
                 .doOnNext(new Action1<News>() {
                     @Override
@@ -56,7 +56,7 @@ public class RxNews {
     }
 
     public static Subscription loadMoreNews(final String newsType,final String newsId) {
-        Subscription subscription = AppService.getNbaPlus().loadMoreNews(newsType, newsId)
+        Subscription subscription = AppService.getNbaplus().loadMoreNews(newsType, newsId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Action1<News>() {

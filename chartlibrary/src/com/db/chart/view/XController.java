@@ -19,8 +19,6 @@ package com.db.chart.view;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Paint.Align;
-import android.text.Layout;
-import android.text.StaticLayout;
 
 
 /**
@@ -174,7 +172,7 @@ public class XController extends AxisController{
 
             final float labelsVerticalCoord = getLabelsVerticalPosition();
             for(int i = 0; i < nLabels; i++){
-                float y = labelsVerticalCoord+(3-labels.get(i).split("\n").length)*(chartView.style.labelsPaint.descent() - chartView.style.labelsPaint.ascent())/2;
+                float y = labelsVerticalCoord+(ChartView.LABELTEXTMAXLINE-labels.get(i).split("\n").length)*(chartView.style.labelsPaint.descent() - chartView.style.labelsPaint.ascent())/2;
                 for (String line: labels.get(i).split("\n")) {
 
                     canvas.drawText(line,

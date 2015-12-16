@@ -31,9 +31,9 @@ public class BarFragment extends BaseFragment {
 
     @Bind(R.id.barchart1)
     BarChartView mChartOne;
-    @Bind(R.id.play1)
+    @Bind(R.id.change)
     ImageButton mPlayOne;
-    private  String[] mLabelsOne= { "科比\n布莱\n恩特\n克雷\n汤普森\n(勇士)","科比\n布莱\n恩特\n克雷\n汤普森\n(勇士)","克雷汤普森\n勇士","克雷汤普森\n勇士","科比\n布莱\n恩特\n克雷\n汤普森\n(勇士)"};
+    private  String[] mLabelsOne= { "科比布莱\n恩特克雷\n汤普森\n(勇士)","科比布莱\n恩特克雷\n汤普森\n(勇士)","克雷汤普森\n勇士","克雷汤普森\n勇士","科比布莱\n恩特克雷\n汤普森\n(勇士)"};
     private  float [][] mValuesOne = {{16, 7.5f, 5.5f, 4.5f,12f}};
     int Max=16;
     Paint gridPaint;

@@ -4,6 +4,7 @@ package com.me.silencedut.nbaplus.app;
 import com.google.gson.Gson;
 import com.me.silencedut.greendao.DBHelper;
 import com.me.silencedut.nbaplus.RxMethod.RxNews;
+import com.me.silencedut.nbaplus.RxMethod.RxStats;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -25,7 +26,6 @@ public class AppService {
     private static NewsDetileAPI sNewsDetileApi;
     private static ExecutorService sSingleThreadExecutor;
     private Map<Integer,CompositeSubscription> mCompositeSubMap;
-    private CompositeSubscription mCompositeSubscription ;
 
     public void initService() {
         sBus = new EventBus();
@@ -49,48 +49,53 @@ public class AppService {
     }
 
     public void addCompositeSub(int taskId) {
+        CompositeSubscription compositeSubscription;
         if(mCompositeSubMap.get(taskId)==null) {
-            mCompositeSubscription = new CompositeSubscription();
-            mCompositeSubMap.put(taskId, mCompositeSubscription);
+            compositeSubscription = new CompositeSubscription();
+            mCompositeSubMap.put(taskId, compositeSubscription);
         }
     }
 
     public void removeCompositeSub(int taskId) {
+        CompositeSubscription compositeSubscription;
         if(mCompositeSubMap!=null&& mCompositeSubMap.get(taskId)!=null){
-            mCompositeSubscription= mCompositeSubMap.get(taskId);
-            mCompositeSubscription.unsubscribe();
+            compositeSubscription= mCompositeSubMap.get(taskId);
+            compositeSubscription.unsubscribe();
             mCompositeSubMap.remove(taskId);
         }
     }
 
     public void initNews(int taskId,String type) {
-        getCompositeSubscription(taskId);
-        mCompositeSubscription.add(RxNews.initNews(type));
+        getCompositeSubscription(taskId).add(RxNews.initNews(type));
     }
 
     public void updateNews(int taskId,String type) {
-        getCompositeSubscription(taskId);
-        mCompositeSubscription.add(RxNews.updateNews(type));
+        getCompositeSubscription(taskId).add(RxNews.updateNews(type));
+        getAllStats(taskId);
     }
 
     public void loadMoreNews(int taskId,String type,String newsId) {
-        getCompositeSubscription(taskId);
-        mCompositeSubscription.add(RxNews.loadMoreNews(type, newsId));
+        getCompositeSubscription(taskId).add(RxNews.loadMoreNews(type, newsId));
     }
 
     public void getNewsDetile(int taskId,String date,String detielId) {
-        getCompositeSubscription(taskId);
-        mCompositeSubscription.add(RxNews.getNewsDetile(date, detielId));
+        getCompositeSubscription(taskId).add(RxNews.getNewsDetile(date, detielId));
     }
 
-    public void getCompositeSubscription(int taskId) {
+    public void getAllStats(int taskId) {
 
+        getCompositeSubscription(taskId).add(RxStats.getAllStats());
+    }
+
+    public CompositeSubscription getCompositeSubscription(int taskId) {
+        CompositeSubscription compositeSubscription ;
         if(mCompositeSubMap.get(taskId)==null) {
-            mCompositeSubscription = new CompositeSubscription();
-            mCompositeSubMap.put(taskId, mCompositeSubscription);
+            compositeSubscription = new CompositeSubscription();
+            mCompositeSubMap.put(taskId, compositeSubscription);
         }else {
-            mCompositeSubscription= mCompositeSubMap.get(taskId);
+            compositeSubscription= mCompositeSubMap.get(taskId);
         }
+        return compositeSubscription;
     }
 
     private AppService(){}
@@ -103,7 +108,7 @@ public class AppService {
         return sBus;
     }
 
-    public static NbaplusAPI getNbaPlus() {
+    public static NbaplusAPI getNbaplus() {
         return sNbaplus;
     }
 

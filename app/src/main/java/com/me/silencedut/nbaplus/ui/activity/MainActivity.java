@@ -47,15 +47,19 @@ public class MainActivity extends BaseActivity {
             return;
         }
         mCurrentDrawId=drawerClickEvent.getDrawId();
-        mCurrentFragment=getFragment(mDrawerIdMap.get(mCurrentDrawId));
+        if(mCurrentDrawId==R.string.sort) {
+            mCurrentFragment=SortFragment.newInstance();
+        }else {
+            mCurrentFragment = getFragment(mDrawerIdMap.get(mCurrentDrawId));
+        }
         transactionSupportFragment(mCurrentFragment);
     }
+
 
 
     private void initDrawerMap() {
         mDrawerIdMap.put(R.string.news,MainFragment.getClassName());
         mDrawerIdMap.put(R.string.blog,BlogFragment.getClassName());
-        mDrawerIdMap.put(R.string.sort,SortFragment.getClassName());
         mDrawerIdMap.put(R.string.setting, SettingFragment.getClassName());
     }
 
