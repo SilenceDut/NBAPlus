@@ -47,6 +47,7 @@ public class MainActivity extends BaseActivity {
         if(Constant.Result.FAIL.equals(drawerClickEvent.getEventResult())||drawerClickEvent.getDrawId()==mCurrentDrawId) {
             return;
         }
+
         mCurrentDrawId=drawerClickEvent.getDrawId();
         if(mCurrentDrawId==R.string.statistics) {
             mCurrentFragment=StatisticsFragment.newInstance();

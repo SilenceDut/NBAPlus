@@ -28,6 +28,7 @@
                 android:layout_toLeftOf="@+id/change"
                 android:layout_marginRight="5dp"
                 android:src="@mipmap/play_chart"
+                android:textColor="@color/white"
                 android:text="场均"
                 />
             <ImageView

@@ -20,6 +20,7 @@ import com.db.chart.view.YController;
 import com.db.chart.view.animation.Animation;
 import com.me.silencedut.nbaplus.R;
 import com.me.silencedut.nbaplus.event.PlaceholderEvent;
+import com.me.silencedut.nbaplus.utils.AnimatorUtils;
 
 import java.util.ArrayList;
 
@@ -33,16 +34,23 @@ public class BarFragment extends BaseFragment {
     @Bind(R.id.cardItem)
     View mCardItem;
     @Bind(R.id.barchart1)
-    BarChartView mChartOne;
+    BarChartView mStatChart;
     @Bind(R.id.change)
     ImageView mChange;
     private static final String STATKIND="STATKIND";
     private static final String CURRENTCOLOR="CURRENTCOLOR";
-    private int mLastColor=Color.parseColor("#448AFF");
+    private static final int PRECOLOR=Color.parseColor("#bcaaa4");
+    private static final int CHART_TEXT_COLOR=Color.parseColor("#e3f2fd");
+    private static final int STEP=2;
     private int mCurrentColor;
     private String mStatKind;
-    private  String[] mLabelsOne= { "科比\n布莱\n恩特\n克雷\n汤普森\n(勇士)","科比\n布莱\n恩特\n克雷\n汤普森\n(勇士)","克雷汤普森\n勇士","克雷汤普森\n勇士","科比\n布莱\n恩特\n克雷\n汤普森\n(勇士)"};
-    private  float [] mValuesOne = {16, 7.5f, 5.5f, 4.5f,12f};
+    private boolean mShowDaily=true;
+    private String[] mLables;
+    private float [] mStatValues ;
+    private String[] mLables1= { "科比布莱\n恩特克雷\n汤普森\n(勇士)","科比布莱\n恩特克雷\n汤普森\n(勇士)","克雷汤普森\n勇士","克雷汤普森\n勇士","科比\n布莱\n恩特\n克雷\n汤普森\n(勇士)"};
+    private float [] mStatValues1 = {17, 6f, 12f, 8.5f,12f};
+    private String[] mLables2= { "科比布莱\n恩特克雷\n汤普森\n(勇士)","科比\n布莱\n恩特\n克雷\n汤普森\n(勇士)","克雷汤普森\n勇士","克雷汤普森\n勇士","科比\n布莱\n恩特\n克雷\n汤普森\n(勇士)"};
+    private float [] mStatValues2 = {4, 3.5f, 5.5f, 4.5f,3f};
     private int mMax=16;
     Paint gridPaint;
     BarChartView barChart;
@@ -61,25 +69,28 @@ public class BarFragment extends BaseFragment {
 
     @Override
     protected void initViews() {
-        //parseArguments();
+        parseArguments();
         mChange.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                dismissChart(0, mChartOne, mChange);
+                dismissChart(0, mStatChart, mChange);
             }
         });
-        showChart(0, mChartOne, mChange);
+        showChart(0, mStatChart, mChange);
     }
 
 
-
+    
     public void showChat() {
-        showChart(0, mChartOne, mChange);
+        showChart(0, mStatChart, mChange);
     }
 
     private void parseArguments() {
         Bundle args = getArguments();
+        if(args==null) {
+            return;
+        }
         mStatKind = args.getString(STATKIND);
         mCurrentColor = args.getInt(CURRENTCOLOR);
     }
@@ -100,6 +111,7 @@ public class BarFragment extends BaseFragment {
      * @param btn    Play button
      */
     private void showChart(final int tag, final ChartView chart, final View btn){
+        
         dismissPlay(btn);
         Runnable action =  new Runnable() {
             @Override
@@ -114,7 +126,6 @@ public class BarFragment extends BaseFragment {
         switch(tag) {
             case 0:
                 produceOne(chart, action); break;
-
             default:
         }
     }
@@ -159,7 +170,8 @@ public class BarFragment extends BaseFragment {
             btn.setVisibility(View.VISIBLE);
     }
 
-
+    
+    
     /**
      * Dismiss CardView play button
      * @param btn    Play button
@@ -172,37 +184,58 @@ public class BarFragment extends BaseFragment {
             btn.setVisibility(View.INVISIBLE);
     }
 
-    public void produceOne(ChartView chart, Runnable action){
-        barChart = (BarChartView) chart;
+    private void prepareStst() {
+        mLables=mShowDaily?mLables1:mLables2;
+        mStatValues=mShowDaily?mStatValues1:mStatValues2;
+        mMax=((int)mStatValues[0]/STEP+1)*STEP;
 
+        mShowDaily=!mShowDaily;
+    }
+
+
+
+
+
+    public void produceOne(ChartView chart, Runnable action){
+        int currentColor;
+        int preClor;
+        preClor=mShowDaily?PRECOLOR:mCurrentColor;
+        currentColor=mShowDaily?mCurrentColor:PRECOLOR;
+        prepareStst();
+        AnimatorUtils.showCardBackgroundColorAnimation(mCardItem, preClor, currentColor, 400);
+        if(mLables.length<5||mStatValues.length<5) {
+            return;
+        }
+        barChart = (BarChartView) chart;
         Tooltip tooltip = new Tooltip(getActivity(), R.layout.barchart_one_tooltip);
+
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
             tooltip.setEnterAnimation(PropertyValuesHolder.ofFloat(View.ALPHA, 1));
             tooltip.setExitAnimation(PropertyValuesHolder.ofFloat(View.ALPHA, 0));
         }
         barChart.setTooltips(tooltip);
 
-        BarSet barSet = new BarSet(mLabelsOne, mValuesOne);
-        barSet.setColor(Color.parseColor("#795548"));
+        BarSet barSet = new BarSet(mLables, mStatValues);
+        barSet.setColor(preClor);
         barChart.addData(barSet);
         barChart.setSetSpacing(Tools.fromDpToPx(-15));
         barChart.setBarSpacing(Tools.fromDpToPx(20));
         barChart.setRoundCorners(Tools.fromDpToPx(4));
 
         gridPaint = new Paint();
-        gridPaint.setColor(Color.parseColor("#e3f2fd"));
+        gridPaint.setColor(CHART_TEXT_COLOR);
         gridPaint.setStyle(Paint.Style.STROKE);
         gridPaint.setAntiAlias(true);
         gridPaint.setStrokeWidth(Tools.fromDpToPx(.75f));
 
         barChart.setBorderSpacing(5)
-                .setAxisBorderValues(0, mMax, 2)
-                .setGrid(BarChartView.GridType.FULL, mMax, 10, gridPaint)
+                .setAxisBorderValues(0, mMax, STEP)
+                .setGrid(BarChartView.GridType.FULL, mMax, 6, gridPaint)
                 .setYAxis(false)
                 .setXLabels(XController.LabelPosition.OUTSIDE)
-                .setYLabels(YController.LabelPosition.NONE)
-                .setLabelsColor(Color.parseColor("#e3f2fd"))
-                .setAxisColor(Color.parseColor("#e3f2fd"));
+                .setYLabels(YController.LabelPosition.OUTSIDE)
+                .setLabelsColor(CHART_TEXT_COLOR)
+                .setAxisColor(CHART_TEXT_COLOR);
 
         int[] order = {2, 1, 3, 0, 4};
         final Runnable auxAction = action;
@@ -216,7 +249,7 @@ public class BarFragment extends BaseFragment {
         barChart.show(new Animation()
                 .setOverlap(.5f, order)
                 .setEndAction(chartOneAction));
-        // AnimatorUtils.showCardBackgroundColorAnimation(mCardItem, mLastColor, mCurrentColor, 400);
+
 
     }
 
@@ -233,24 +266,24 @@ public class BarFragment extends BaseFragment {
 
     private void showTooltipOne(){
 
-        ArrayList<Rect> areas = mChartOne.getEntriesArea(0);
+        ArrayList<Rect> areas = mStatChart.getEntriesArea(0);
 
         for(int i = 0; i < areas.size(); i++) {
 
                 Tooltip tooltip = new Tooltip(getActivity(), R.layout.barchart_one_tooltip, R.id.value);
-                tooltip.prepare(areas.get(i), mValuesOne[i]);
+                tooltip.prepare(areas.get(i), mStatValues[i]);
                 if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
                     tooltip.setEnterAnimation(PropertyValuesHolder.ofFloat(View.ALPHA, 1));
                     tooltip.setExitAnimation(PropertyValuesHolder.ofFloat(View.ALPHA, 0));
                 }
-                mChartOne.showTooltip(tooltip, true);
+                mStatChart.showTooltip(tooltip, true);
 
         }
 
     }
 
     private void dismissTooltipOne(){
-        mChartOne.dismissAllTooltips();
+        mStatChart.dismissAllTooltips();
     }
 
 }

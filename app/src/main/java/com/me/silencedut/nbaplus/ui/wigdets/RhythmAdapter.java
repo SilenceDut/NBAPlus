@@ -1,16 +1,15 @@
 package com.me.silencedut.nbaplus.ui.wigdets;
 
 import android.content.Context;
+import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.me.silencedut.nbaplus.R;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class RhythmAdapter extends BaseAdapter {
 
@@ -21,30 +20,30 @@ public class RhythmAdapter extends BaseAdapter {
     /**
      * 数据源
      */
-    private List<Card> mCardList;
-
+    private int[] mColorList;
+private static final String[] sStatNames={"得分","篮板","助攻","抢断","盖帽"};
     private LayoutInflater mInflater;
     private Context mContext;
 
 
-    public RhythmAdapter(Context context, List<Card> cardList) {
+    public RhythmAdapter(Context context, int[] colorList) {
         this.mContext = context;
-        this.mCardList = new ArrayList();
-        this.mCardList.addAll(cardList);
+        this.mColorList=colorList;
         if (context != null)
             this.mInflater = LayoutInflater.from(context);
     }
 
     public int getCount() {
-        return this.mCardList.size();
+        return this.mColorList.length;
     }
 
     public Object getItem(int position) {
-        return this.mCardList.get(position);
+        return this.mColorList[position];
     }
 
-    public long getItemId(int paramInt) {
-        return (this.mCardList.get(paramInt)).getUid();
+    @Override
+    public long getItemId(int position) {
+        return position;
     }
 
 
@@ -58,6 +57,10 @@ public class RhythmAdapter extends BaseAdapter {
 
         //设置第二层RelativeLayout布局的宽和高
         RelativeLayout childRelativeLayout = (RelativeLayout) relativeLayout.getChildAt(0);
+        CardView cardRhythm = (CardView)relativeLayout.findViewById(R.id.card_rhythm);
+        TextView statName=(TextView)relativeLayout.findViewById(R.id.stat_name);
+        cardRhythm.setCardBackgroundColor(mColorList[position]);
+        statName.setText(sStatNames[position]);
         int relativeLayoutWidth = (int) itemWidth - 2 * mContext.getResources().getDimensionPixelSize(R.dimen.rhythm_icon_margin);
         childRelativeLayout.setLayoutParams(new RelativeLayout.LayoutParams(relativeLayoutWidth, mContext.getResources().getDimensionPixelSize(R.dimen.rhythm_item_height) - 2 * mContext.getResources().getDimensionPixelSize(R.dimen.rhythm_icon_margin)));
         return relativeLayout;

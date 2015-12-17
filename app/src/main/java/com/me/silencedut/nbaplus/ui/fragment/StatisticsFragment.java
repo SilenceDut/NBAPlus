@@ -1,11 +1,12 @@
 package com.me.silencedut.nbaplus.ui.fragment;
 
+import android.graphics.Color;
 import android.support.v4.view.ViewPager;
 
 import com.me.silencedut.nbaplus.R;
 import com.me.silencedut.nbaplus.event.Event;
+import com.me.silencedut.nbaplus.event.RhythmPositonEvent;
 import com.me.silencedut.nbaplus.ui.adapter.FragmentAdapter.StatPageAdapter;
-import com.me.silencedut.nbaplus.ui.wigdets.Card;
 import com.me.silencedut.nbaplus.ui.wigdets.RhythmAdapter;
 import com.me.silencedut.nbaplus.ui.wigdets.RhythmLayout;
 
@@ -23,7 +24,11 @@ public class StatisticsFragment extends ToorbarBaseFragment{
     RhythmLayout mRhythmLayout;
     @Bind(R.id.player_page)
     ViewPager mViewPager;
-
+    List<BarFragment> mBatFrgments;
+    private int mCurrentPosition;
+    private static final String[] sStatKinds={"points","rebs","assi","ste","blk"};
+    private static final int[] sChartColors={Color.parseColor("#26a69a"),Color.parseColor("#5c6bc0"),Color.parseColor("#42a5f5"),
+            Color.parseColor("#4dd0e1"),Color.parseColor("#66bb6a")};
     public static StatisticsFragment newInstance() {
         StatisticsFragment statisticsFragment = new StatisticsFragment();
         return statisticsFragment;
@@ -37,22 +42,13 @@ public class StatisticsFragment extends ToorbarBaseFragment{
     @Override
     protected void initViews() {
         super.initViews();
-        List<BarFragment> list = new ArrayList<>();
-
-        list.add(new BarFragment());
-        list.add(new BarFragment());
-        list.add(new BarFragment());
-        list.add(new BarFragment());
-        list.add(new BarFragment());
-        List<Card> cardList = new ArrayList<>();
-        for (int i = 0; i < 5; i++) {
-            Card card = new Card();
-            cardList.add(card);
+        mBatFrgments=new ArrayList<>(5);
+        for (int index=0;index<sStatKinds.length;index++) {
+            mBatFrgments.add(BarFragment.newInstace(sStatKinds[index],sChartColors[index]));
         }
-
-        RhythmAdapter adapter = new RhythmAdapter(getContext(), cardList);
+        RhythmAdapter adapter = new RhythmAdapter(getContext(),sChartColors);
         mRhythmLayout.setAdapter(adapter);
-        mViewPager.setAdapter(new StatPageAdapter(getFragmentManager(), list));
+        mViewPager.setAdapter(new StatPageAdapter(getFragmentManager(), mBatFrgments));
         mViewPager.setOffscreenPageLimit(5);
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -62,8 +58,6 @@ public class StatisticsFragment extends ToorbarBaseFragment{
 
             @Override
             public void onPageSelected(int position) {
-
-               // AnimatorUtils.showBackgroundColorAnimation(rl_changeing_color, Color.parseColor("#448AFF"), Color.parseColor("#00838f"), 500);
             }
 
             @Override
@@ -82,7 +76,10 @@ public class StatisticsFragment extends ToorbarBaseFragment{
 
 
     public void onEventMainThread(Event event) {
-
+        if(event instanceof RhythmPositonEvent) {
+            mCurrentPosition=((RhythmPositonEvent) event).getPosition();
+            mViewPager.setCurrentItem(mCurrentPosition,true);
+        }
     }
 
 

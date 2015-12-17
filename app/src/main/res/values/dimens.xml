@@ -35,7 +35,7 @@
     <!-- Preference fragment padding, sides -->
     <dimen name="preference_fragment_padding_side">8dp</dimen>
     <dimen name="rhythm_edge_size_for_shift">50.0dip</dimen>
-    <dimen name="rhythm_icon_margin">8dp</dimen>
+    <dimen name="rhythm_icon_margin">4dp</dimen>
     <dimen name="rhythm_item_height">100dp</dimen>
     <dimen name="rhythm_layout_height">60dp</dimen>
     <dimen name="rhythm_max_translation_y">40dp</dimen>

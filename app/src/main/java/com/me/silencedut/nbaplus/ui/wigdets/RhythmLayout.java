@@ -13,6 +13,8 @@ import android.view.View;
 import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
 
+import com.me.silencedut.nbaplus.app.AppService;
+import com.me.silencedut.nbaplus.event.RhythmPositonEvent;
 import com.me.silencedut.nbaplus.utils.AnimatorUtils;
 
 import java.util.ArrayList;
@@ -63,7 +65,6 @@ public class RhythmLayout extends HorizontalScrollView {
         mContext = context;
         init();
     }
-
 
     private void init() {
         //获得屏幕大小
@@ -153,7 +154,7 @@ public class RhythmLayout extends HorizontalScrollView {
 
     //更新钢琴按钮的高度
     private void updateItemHeight(float scrollX) {
-        //得到屏幕上可见的7个钢琴按钮的视图
+        //得到屏幕上可见的5个钢琴按钮的视图
         List viewList = getVisibleViews();
         //当前手指所在的item
         int position = (int) (scrollX / mItemWidth);
@@ -178,7 +179,7 @@ public class RhythmLayout extends HorizontalScrollView {
         if (mLinearLayout.getChildCount() < 5) {
             lastPosition = mLinearLayout.getChildCount();
         }
-        //取出当前可见的7个钢琴按钮
+        //取出当前可见的5个钢琴按钮
         for (int i = firstPosition; i < lastPosition; i++)
             arrayList.add(mLinearLayout.getChildAt(i));
         return arrayList;
@@ -267,7 +268,9 @@ public class RhythmLayout extends HorizontalScrollView {
                 }
             }
         }, 200L);
+        AppService.getBus().post(new RhythmPositonEvent(mCurrentItemPosition));
         mCurrentItemPosition = -1;
+
         //使设备震动
         //vibrate(20L);
     }
