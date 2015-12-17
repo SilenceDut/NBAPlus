@@ -26,6 +26,7 @@ public abstract class SwipeRefreshBaseFragment extends ToorbarBaseFragment imple
     }
     @Override
     protected void initViews() {
+        super.initViews();
         mSwipeRefreshLayout.setOnRefreshListener(this);
         mSwipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary, R.color.colorPrimaryLight);
     }

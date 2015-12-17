@@ -1,22 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorAccent"
-    android:orientation="vertical">
+    android:background="@color/main_bg"
+    >
+    <include layout="@layout/toolbar"/>
     <android.support.v4.view.ViewPager
         android:id="@+id/player_page"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="140dp"
-
+        android:layout_above="@+id/box_rhythm"
+        android:layout_marginTop="?attr/actionBarSize"
         />
     <com.me.silencedut.nbaplus.ui.wigdets.RhythmLayout
         android:id="@+id/box_rhythm"
         android:layout_width="match_parent"
         android:layout_height="@dimen/rhythm_layout_height"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="55dp"
         android:scrollbars="none">
         <LinearLayout
             android:layout_width="wrap_content"

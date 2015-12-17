@@ -51,15 +51,15 @@ public class RhythmAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         RelativeLayout relativeLayout = (RelativeLayout) this.mInflater.inflate(R.layout.adapter_rhythm_icon, null);
+
         //设置item布局的大小以及Y轴的位置
         relativeLayout.setLayoutParams(new RelativeLayout.LayoutParams((int) itemWidth, mContext.getResources().getDimensionPixelSize(R.dimen.rhythm_item_height)));
-        relativeLayout.setTranslationY(itemWidth*5/7);
+        relativeLayout.setTranslationY(itemWidth*4/7);
 
         //设置第二层RelativeLayout布局的宽和高
         RelativeLayout childRelativeLayout = (RelativeLayout) relativeLayout.getChildAt(0);
         int relativeLayoutWidth = (int) itemWidth - 2 * mContext.getResources().getDimensionPixelSize(R.dimen.rhythm_icon_margin);
         childRelativeLayout.setLayoutParams(new RelativeLayout.LayoutParams(relativeLayoutWidth, mContext.getResources().getDimensionPixelSize(R.dimen.rhythm_item_height) - 2 * mContext.getResources().getDimensionPixelSize(R.dimen.rhythm_icon_margin)));
-
         return relativeLayout;
     }
 

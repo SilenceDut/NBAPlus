@@ -24,6 +24,8 @@ public abstract class ToorbarBaseFragment extends BaseFragment{
     @Override
     protected void initViews() {
         initToolbar();
+        setHasOptionsMenu(true);
+
     }
 
     protected void initToolbar() {

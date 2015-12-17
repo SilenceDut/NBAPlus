@@ -41,8 +41,6 @@ public abstract class NewsFragment extends SwipeRefreshBaseFragment implements O
     @Override
     protected void initViews() {
         super.initViews();
-        setHasOptionsMenu(true);
-        initToolbar();
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mNewsListView.getContext());
         mNewsListView.setLayoutManager(linearLayoutManager);
         mNewsListView.addOnScrollListener(new RecyclerViewLoadMoreListener(linearLayoutManager, this, 0));

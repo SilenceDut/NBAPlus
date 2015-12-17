@@ -72,6 +72,21 @@ public class AnimatorUtils {
     }
 
     /**
+     * 将View的背景颜色更改，使背景颜色转换更和谐的过渡动画
+     *
+     * @param view      要改变背景颜色的View
+     * @param preColor  上个颜色值
+     * @param currColor 当前颜色值
+     * @param duration  动画持续时间
+     */
+    public static void showCardBackgroundColorAnimation(View view, int preColor, int currColor, int duration) {
+        ObjectAnimator animator = ObjectAnimator.ofInt(view, "cardBackgroundColor", new int[]{preColor, currColor});
+        animator.setDuration(duration);
+        animator.setEvaluator(new ArgbEvaluator());
+        animator.start();
+    }
+
+    /**
      * @param view                需要设置动画的view
      * @param translationY        偏移量
      * @param animatorTime        动画时间

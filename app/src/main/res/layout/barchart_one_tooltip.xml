@@ -9,8 +9,8 @@
         android:layout_width="match_parent"
         android:gravity="center"
         android:layout_marginTop="8dp"
-        android:textSize="11sp"
-        android:textColor="#ffc2c2c2"
+        android:textSize="12sp"
+        android:textColor="#e3f2fd"
         android:includeFontPadding="false">
     </TextView>
 </RelativeLayout>

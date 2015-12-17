@@ -71,7 +71,7 @@ public class AppService {
 
     public void updateNews(int taskId,String type) {
         getCompositeSubscription(taskId).add(RxNews.updateNews(type));
-        getAllStats(taskId);
+        getPerStat(taskId,"points");
     }
 
     public void loadMoreNews(int taskId,String type,String newsId) {
@@ -82,9 +82,9 @@ public class AppService {
         getCompositeSubscription(taskId).add(RxNews.getNewsDetile(date, detielId));
     }
 
-    public void getAllStats(int taskId) {
-
-        getCompositeSubscription(taskId).add(RxStats.getAllStats());
+    public void getPerStat(int taskId,String statKind) {
+        String[] kind = {"points","rebs","assi","ste","blk"};
+        getCompositeSubscription(taskId).add(RxStats.getPerStat(kind));
     }
 
     public CompositeSubscription getCompositeSubscription(int taskId) {

@@ -37,7 +37,7 @@ public class SortFragment extends ToorbarBaseFragment{
 
         mTabLayout.addTab(mTabLayout.newTab().setText(tableTitles.get(0)));
         mTabLayout.addTab(mTabLayout.newTab().setText(tableTitles.get(1)));
-        mSortTableFrahment.add(PlayerSortFragment.newInstance());
+        mSortTableFrahment.add(StatisticsFragment.newInstance());
         mSortTableFrahment.add(TeamSortFragment.newInstance());
 
         FragmentSortAdapter adapter =

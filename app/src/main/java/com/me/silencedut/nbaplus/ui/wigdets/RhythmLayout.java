@@ -75,7 +75,7 @@ public class RhythmLayout extends HorizontalScrollView {
         //初始化时将手指当前所在的位置置为-1
         mCurrentItemPosition = -1;
         mLastDisplayItemPosition = -1;
-        mMaxTranslationHeight = (int) mItemWidth*5/7;
+        mMaxTranslationHeight = (int) mItemWidth*4/7;
         mIntervalHeight = (mMaxTranslationHeight / 4);
         mHandler = new Handler();
     }
@@ -115,6 +115,8 @@ public class RhythmLayout extends HorizontalScrollView {
         }
         return true;
     }
+
+
 
     /**
      * 位移到所选中的item位置，并进行相应的动画
@@ -215,6 +217,13 @@ public class RhythmLayout extends HorizontalScrollView {
             updateItemHeightAnimator(viewList.get(i), translationY);
         }
 
+    }
+
+    /*
+    * 得到每个钢琴按钮的宽度
+    */
+    public float getRhythmItemWidth() {
+        return mItemWidth;
     }
 
     /**

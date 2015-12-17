@@ -12,11 +12,10 @@ import android.widget.TextView;
 import com.me.silencedut.nbaplus.R;
 import com.me.silencedut.nbaplus.app.App;
 import com.me.silencedut.nbaplus.data.Constant;
-import com.me.silencedut.nbaplus.event.Event;
+import com.me.silencedut.nbaplus.event.PlaceholderEvent;
 import com.me.silencedut.nbaplus.utils.AppUtils;
 import com.me.silencedut.nbaplus.utils.DataClearManager;
 import com.me.silencedut.nbaplus.utils.PreferenceUtils;
-import com.squareup.okhttp.Request;
 
 import java.util.Arrays;
 
@@ -67,7 +66,7 @@ public class SettingFragment extends ToorbarBaseFragment implements View.OnClick
     @Override
     protected void initViews() {
         super.initViews();
-        setHasOptionsMenu(true);
+
         rl_load_image.setOnClickListener(this);
         sc_load_image.setOnClickListener(this);
         rl_font_size.setOnClickListener(this);
@@ -88,7 +87,7 @@ public class SettingFragment extends ToorbarBaseFragment implements View.OnClick
         return R.layout.fragment_setting;
     }
 
-    public void onEventMainThread(Event event) {
+    public void onEventMainThread(PlaceholderEvent event) {
 
     }
 

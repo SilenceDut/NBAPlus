@@ -12,7 +12,7 @@ import com.me.silencedut.nbaplus.ui.fragment.BlogFragment;
 import com.me.silencedut.nbaplus.ui.fragment.DrawerFragment;
 import com.me.silencedut.nbaplus.ui.fragment.MainFragment;
 import com.me.silencedut.nbaplus.ui.fragment.SettingFragment;
-import com.me.silencedut.nbaplus.ui.fragment.SortFragment;
+import com.me.silencedut.nbaplus.ui.fragment.StatisticsFragment;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -32,6 +32,7 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void initViews() {
+        getWindow().setBackgroundDrawable(null);
         mNavigationFragment = (DrawerFragment)
                 getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
         mNavigationFragment.setUp((FrameLayout) findViewById(R.id.main_content),
@@ -47,8 +48,8 @@ public class MainActivity extends BaseActivity {
             return;
         }
         mCurrentDrawId=drawerClickEvent.getDrawId();
-        if(mCurrentDrawId==R.string.sort) {
-            mCurrentFragment=SortFragment.newInstance();
+        if(mCurrentDrawId==R.string.statistics) {
+            mCurrentFragment=StatisticsFragment.newInstance();
         }else {
             mCurrentFragment = getFragment(mDrawerIdMap.get(mCurrentDrawId));
         }
@@ -60,6 +61,7 @@ public class MainActivity extends BaseActivity {
     private void initDrawerMap() {
         mDrawerIdMap.put(R.string.news,MainFragment.getClassName());
         mDrawerIdMap.put(R.string.blog,BlogFragment.getClassName());
+
         mDrawerIdMap.put(R.string.setting, SettingFragment.getClassName());
     }
 
