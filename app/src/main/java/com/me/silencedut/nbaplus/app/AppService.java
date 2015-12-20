@@ -3,8 +3,8 @@ package com.me.silencedut.nbaplus.app;
 
 import com.google.gson.Gson;
 import com.me.silencedut.greendao.DBHelper;
-import com.me.silencedut.nbaplus.RxMethod.RxNews;
-import com.me.silencedut.nbaplus.RxMethod.RxStats;
+import com.me.silencedut.nbaplus.rxmethod.RxNews;
+import com.me.silencedut.nbaplus.rxmethod.RxStats;
 
 import java.util.HashMap;
 import java.util.Map;
