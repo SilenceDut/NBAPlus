@@ -10,14 +10,15 @@
         android:layout_height="match_parent"
         android:id="@+id/cardItem"
         android:layout_gravity="center"
+        card_view:cardBackgroundColor="#bcaaa4"
         card_view:cardPreventCornerOverlap="true"
         card_view:contentPadding="10dp"
         card_view:contentPaddingRight="@dimen/margin_0dp"
-        card_view:cardBackgroundColor="@color/colorAccent"
         card_view:cardElevation="@dimen/default_elevation"
         card_view:cardCornerRadius="@dimen/margin_8dp"
         card_view:cardUseCompatPadding="true">
         <RelativeLayout
+            android:id="@+id/rl_change"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             >
@@ -27,17 +28,16 @@
                 android:layout_height="@dimen/fab_margin"
                 android:layout_toLeftOf="@+id/change"
                 android:layout_marginRight="5dp"
-                android:src="@mipmap/play_chart"
                 android:textColor="@color/white"
                 android:text="场均"
                 />
             <ImageView
                 android:id="@+id/change"
-                android:layout_width="@dimen/fab_margin"
-                android:layout_height="@dimen/fab_margin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="5dp"
-                android:src="@mipmap/play_chart"
+                android:src="@mipmap/ic_swap_horiz_white_18dp"
                 />
             <com.db.chart.view.BarChartView
                 android:id="@+id/barchart1"

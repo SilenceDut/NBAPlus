@@ -3,21 +3,24 @@ package com.me.silencedut.nbaplus.model;
 import java.util.List;
 
 /**
- * Created by Administrator on 2015/12/17.
+ * Created by SilenceDut on 2015/12/17.
  */
 public class Statistics {
+
     /**
      * place : 1
-     * name : 布雷克-格里芬
-     * statdata : 34
-     * team : 快船
+     * statkind : points
+     * name : 杰里米-林
+     * statdata : 35
+     * team : 黄蜂
      */
 
     private List<StatEntity> dailyStat;
     /**
      * place : 1
+     * statkind : points
      * name : 斯蒂芬-库里
-     * statdata : 32.3
+     * statdata : 32
      * team : 勇士
      */
 
@@ -41,12 +44,17 @@ public class Statistics {
 
     public static class StatEntity {
         private String place;
+        private String statkind;
         private String name;
         private String statdata;
         private String team;
 
         public void setPlace(String place) {
             this.place = place;
+        }
+
+        public void setStatkind(String statkind) {
+            this.statkind = statkind;
         }
 
         public void setName(String name) {
@@ -63,6 +71,10 @@ public class Statistics {
 
         public String getPlace() {
             return place;
+        }
+
+        public String getStatkind() {
+            return statkind;
         }
 
         public String getName() {

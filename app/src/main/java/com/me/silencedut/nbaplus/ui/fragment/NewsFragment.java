@@ -13,6 +13,7 @@ import com.me.silencedut.nbaplus.event.NewsEvent;
 import com.me.silencedut.nbaplus.model.News;
 import com.me.silencedut.nbaplus.model.News.NewslistEntity;
 import com.me.silencedut.nbaplus.ui.adapter.RecycleAdapter.LoadAdapter;
+import com.me.silencedut.nbaplus.ui.fragment.base.SwipeRefreshBaseFragment;
 import com.me.silencedut.nbaplus.ui.listener.RecyclerViewLoadMoreListener;
 import com.me.silencedut.nbaplus.ui.listener.RecyclerViewLoadMoreListener.OnLoadMoreListener;
 import com.me.silencedut.nbaplus.utils.AppUtils;

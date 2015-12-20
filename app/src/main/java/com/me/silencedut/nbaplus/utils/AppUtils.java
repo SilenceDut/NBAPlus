@@ -34,7 +34,7 @@ public class AppUtils {
         Resources resources  =App.getContext().getResources();
         Snackbar sb = Snackbar.make(view, resources.getString(id), Snackbar.LENGTH_SHORT);
         setSnackbarMessageTextColor(sb);
-        sb.getView().setBackgroundColor(resources.getColor( R.color.main_bg));
+        sb.getView().setBackgroundColor(resources.getColor( R.color.red100));
         sb.show();
     }
 

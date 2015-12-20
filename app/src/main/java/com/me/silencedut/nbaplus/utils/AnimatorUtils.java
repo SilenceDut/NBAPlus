@@ -3,6 +3,7 @@ package com.me.silencedut.nbaplus.utils;
 import android.animation.Animator;
 import android.animation.ArgbEvaluator;
 import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
 import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.OvershootInterpolator;
@@ -11,6 +12,15 @@ import android.view.animation.OvershootInterpolator;
 public class AnimatorUtils {
     public static Animator animViewFadeIn(View paramView) {
         return animViewFadeIn(paramView, 200L, null);
+    }
+
+    public static Animator animRotation(View paramView,int duration) {
+        ObjectAnimator localObjectAnimator = ObjectAnimator.ofFloat(paramView, "rotation", 0f,360f);
+        localObjectAnimator.setDuration(duration);
+        localObjectAnimator.setRepeatCount(ValueAnimator.INFINITE);
+        localObjectAnimator.setRepeatMode(ValueAnimator.INFINITE);
+        localObjectAnimator.start();
+        return localObjectAnimator;
     }
 
     public static Animator animViewFadeIn(View paramView, long paramLong, Animator.AnimatorListener paramAnimatorListener) {
@@ -72,7 +82,7 @@ public class AnimatorUtils {
     }
 
     /**
-     * 将View的背景颜色更改，使背景颜色转换更和谐的过渡动画
+     * 将View的背景颜色更改，使CardView背景颜色转换更和谐的过渡动画
      *
      * @param view      要改变背景颜色的View
      * @param preColor  上个颜色值

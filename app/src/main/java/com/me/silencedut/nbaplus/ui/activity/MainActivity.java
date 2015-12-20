@@ -7,12 +7,11 @@ import android.widget.FrameLayout;
 import com.me.silencedut.nbaplus.R;
 import com.me.silencedut.nbaplus.data.Constant;
 import com.me.silencedut.nbaplus.event.DrawerClickEvent;
-import com.me.silencedut.nbaplus.ui.fragment.BaseFragment;
+import com.me.silencedut.nbaplus.ui.fragment.base.BaseFragment;
 import com.me.silencedut.nbaplus.ui.fragment.BlogFragment;
 import com.me.silencedut.nbaplus.ui.fragment.DrawerFragment;
 import com.me.silencedut.nbaplus.ui.fragment.MainFragment;
-import com.me.silencedut.nbaplus.ui.fragment.SettingFragment;
-import com.me.silencedut.nbaplus.ui.fragment.StatisticsFragment;
+import com.me.silencedut.nbaplus.ui.fragment.playersort.StatisticsFragment;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -63,7 +62,6 @@ public class MainActivity extends BaseActivity {
         mDrawerIdMap.put(R.string.news,MainFragment.getClassName());
         mDrawerIdMap.put(R.string.blog,BlogFragment.getClassName());
 
-        mDrawerIdMap.put(R.string.setting, SettingFragment.getClassName());
     }
 
 

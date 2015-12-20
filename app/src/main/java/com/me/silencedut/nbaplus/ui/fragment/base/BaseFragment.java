@@ -1,4 +1,4 @@
-package com.me.silencedut.nbaplus.ui.fragment;
+package com.me.silencedut.nbaplus.ui.fragment.base;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

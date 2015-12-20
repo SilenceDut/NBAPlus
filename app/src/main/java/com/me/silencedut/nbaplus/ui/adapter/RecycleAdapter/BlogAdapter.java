@@ -33,11 +33,11 @@ public class BlogAdapter extends LoadAdapter {
         LoadAdapter.BaseViewHolder viewHolder=null;
         switch (VIEWTYPE.values()[viewType]) {
             case LOADMORE:
-                viewHolder= new LoadMoreViewHolder(mInflater.inflate(R.layout.fragment_news_item_load_more, parent,false));break;
+                viewHolder= new LoadMoreViewHolder(mInflater.inflate(R.layout.item_fragment_news_load_more, parent,false));break;
             case NOPIC:
-                viewHolder= new NormalBlogViewHolder(mInflater.inflate(R.layout.fragment_blog_item_normal, parent, false),false);break;
+                viewHolder= new NormalBlogViewHolder(mInflater.inflate(R.layout.item_fragment_blog_normal, parent, false),false);break;
             case NORMAL:
-                viewHolder= new NormalBlogViewHolder(mInflater.inflate(R.layout.fragment_blog_item_normal, parent, false),true);break;
+                viewHolder= new NormalBlogViewHolder(mInflater.inflate(R.layout.item_fragment_blog_normal, parent, false),true);break;
             default:
                 break;
         }

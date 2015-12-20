@@ -19,6 +19,7 @@ import com.me.silencedut.nbaplus.app.AppService;
 import com.me.silencedut.nbaplus.data.Constant;
 import com.me.silencedut.nbaplus.event.DrawerClickEvent;
 import com.me.silencedut.nbaplus.ui.adapter.RecycleAdapter.DrawerAdapter;
+import com.me.silencedut.nbaplus.ui.fragment.base.BaseFragment;
 import com.me.silencedut.nbaplus.utils.blur.BitmapUtils;
 import com.me.silencedut.nbaplus.utils.blur.Blur;
 

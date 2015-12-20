@@ -4,7 +4,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import com.me.silencedut.nbaplus.ui.fragment.BarFragment;
+import com.me.silencedut.nbaplus.ui.fragment.playersort.BarFragment;
 
 import java.util.List;
 

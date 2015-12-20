@@ -1,4 +1,4 @@
-package com.me.silencedut.nbaplus.ui.fragment;
+package com.me.silencedut.nbaplus.ui.fragment.base;
 
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -8,14 +8,16 @@ import android.view.MenuItem;
 
 import com.me.silencedut.nbaplus.R;
 import com.me.silencedut.nbaplus.ui.activity.AboutActivity;
+import com.me.silencedut.nbaplus.ui.activity.SettingsActivity;
 
 import butterknife.Bind;
 
 /**
  * Created by SlienceDut on 2015/12/12.
  */
-public abstract class ToorbarBaseFragment extends BaseFragment{
+public abstract class ToorbarBaseFragment extends BaseFragment {
     @Bind(R.id.toolbar)
+    protected
     Toolbar mToolBar;
 
 
@@ -49,7 +51,12 @@ public abstract class ToorbarBaseFragment extends BaseFragment{
         switch (id) {
             case R.id.about :
                 AboutActivity.navigateFrom(getActivity());
-                return true;
+                break;
+            case R.id.setting:
+                SettingsActivity.navigateFrom(getActivity());
+                break;
+            default:break;
+
         }
         return super.onOptionsItemSelected(item);
     }

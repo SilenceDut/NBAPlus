@@ -2,14 +2,20 @@ package com.me.silencedut.nbaplus.RxMethod;
 
 import android.util.Log;
 
+import com.me.silencedut.greendao.GreenStat;
+import com.me.silencedut.greendao.GreenStatDao;
 import com.me.silencedut.nbaplus.app.AppService;
+import com.me.silencedut.nbaplus.data.Constant;
 import com.me.silencedut.nbaplus.event.StatEvent;
 import com.me.silencedut.nbaplus.model.Statistics;
-import com.me.silencedut.nbaplus.utils.DateFormatter;
 
+import java.util.List;
+
+import de.greenrobot.dao.query.DeleteQuery;
+import de.greenrobot.dao.query.Query;
 import rx.Observable;
+import rx.Subscriber;
 import rx.Subscription;
-import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 import rx.functions.Func1;
 import rx.schedulers.Schedulers;
@@ -18,43 +24,73 @@ import rx.schedulers.Schedulers;
  * Created by asan on 2015/12/15.
  */
 public class RxStats {
-    public static Subscription getPerStat(String ...statKind) {
-        final String[] kind = new String[1];
+    public static Subscription getPerStat(String ...statKinds) {
 
-        Subscription subscription = Observable.from(statKind)
+        Subscription subscription = Observable.from(statKinds)
                 .flatMap(new Func1<String, Observable<Statistics>>() {
                     @Override
                     public Observable<Statistics> call(String s) {
-                        kind[0] =s;
-                        return AppService.getNbaplus().getPerStats(DateFormatter.formatDate("yyyyMMdd"), s);
+                        return AppService.getNbaplus().getPerStats(s);
                     }
                 })
                 .subscribeOn(Schedulers.io())
                 .doOnNext(new Action1<Statistics>() {
                     @Override
                     public void call(Statistics statistics) {
-Log.d("getAllStats",kind[0]);
+                        cacheStat(statistics,statistics.getDailyStat().get(0).getStatkind());
                     }
                 })
-                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Action1<Statistics>() {
                     @Override
                     public void call(Statistics statistics) {
                         String[][] lables = getLables(statistics);
                         float[][] ststValues=getStatValues(statistics);
-                         Log.d("getAllStats", lables[0][0] + ";;;" + statistics.getDailyStat().get(0).getName());
-                         AppService.getBus().post(new StatEvent(kind[0], lables,ststValues));
+                        AppService.getBus().post(new StatEvent(statistics.getDailyStat().get(0).getStatkind(), lables,ststValues));
                     }
                 }, new Action1<Throwable>() {
                     @Override
                     public void call(Throwable throwable) {
-                        Log.d("getAllStats", throwable + ";;;");
-//                        NewsEvent newsEvent = new NewsEvent(new News(), Constant.GETNEWSWAY.UPDATE, newsType);
-//                        newsEvent.setEventResult(Constant.Result.FAIL);
-//                        AppService.getBus().post(newsEvent);
+                        StatEvent statEvent = new StatEvent(throwable.toString(), null, null);
+                        statEvent.setEventResult(Constant.Result.FAIL);
+                        AppService.getBus().post(statEvent);
+
                     }
                 });
                 return subscription;
+    }
+
+    public static Subscription initStat(final String statKind) {
+
+        Subscription subscription = Observable.create(new Observable.OnSubscribe<Statistics>() {
+                    @Override
+                    public void call(Subscriber<? super Statistics> subscriber) {
+                        Statistics statistics = getCacheStat(statKind);
+                        subscriber.onNext(statistics);
+                        subscriber.onCompleted();
+
+                    }
+                }).subscribeOn(Schedulers.io())
+                .subscribe(new Action1<Statistics>() {
+                    @Override
+                    public void call(Statistics statistics) {
+                        String[][] lables = getLables(statistics);
+                        float[][] ststValues=getStatValues(statistics);
+                        StatEvent statEvent = new StatEvent(statistics.getDailyStat().get(0).getStatkind(), lables, ststValues);
+                        statEvent.setGetNewsWay(Constant.GETNEWSWAY.INIT);
+                        AppService.getBus().post(statEvent);
+
+                    }
+                }, new Action1<Throwable>() {
+                    @Override
+                    public void call(Throwable throwable) {
+
+                        StatEvent statEvent = new StatEvent(statKind, null, null);
+                        statEvent.setEventResult(Constant.Result.FAIL);
+                        statEvent.setGetNewsWay(Constant.GETNEWSWAY.INIT);
+                        AppService.getBus().post(statEvent);
+                    }
+                });
+        return subscription;
     }
 
     private static String[][] getLables(Statistics statistics) {
@@ -69,8 +105,8 @@ Log.d("getAllStats",kind[0]);
     private static String parseLable(Statistics.StatEntity statEntity) {
         StringBuilder lable =new StringBuilder();
         String playerName=statEntity.getName();
-        for(int index=0;index<playerName.length()/4;index++) {
-            lable.append(playerName.substring(index*4,index+4));
+        for(int index=0;index<playerName.length()-3;index+=4) {
+            lable.append(playerName.substring(index,index+4));
             lable.append("\n");
         }
         if(playerName.length()%4!=0) {
@@ -92,4 +128,35 @@ Log.d("getAllStats",kind[0]);
         }
         return statValues;
     }
+
+    public static void cacheStat(final Statistics stat,final String statKind) {
+
+        GreenStatDao greenStatDao = AppService.getDBHelper().getDaoSession().getGreenStatDao();
+        DeleteQuery deleteQuery = greenStatDao.queryBuilder()
+                .where(GreenStatDao.Properties.Statentity.eq(statKind))
+                .buildDelete();
+        deleteQuery.executeDeleteWithoutDetachingEntities();
+        String statEntity = AppService.getGson().toJson(stat);
+        GreenStat greenStat = new GreenStat(null, statEntity, statKind);
+
+        greenStatDao.insert(greenStat);
+        Log.d("StatEvent", greenStat.getStatkind() + "getStatkind");
+
+    }
+
+    private static Statistics getCacheStat(String statKind) {
+        Statistics statistics=null;
+        GreenStatDao greenStatDao = AppService.getDBHelper().getDaoSession().getGreenStatDao();
+        Query query = greenStatDao.queryBuilder()
+                .where(GreenStatDao.Properties.Statkind.eq(statKind))
+                .build();
+        // 查询结果以 List 返回
+        List<GreenStat> greenStats = query.list();
+        if(greenStats!=null&&greenStats.size()>0) {
+            statistics = AppService.getGson().fromJson(greenStats.get(0).getStatentity(), Statistics.class);
+        }
+        return statistics;
+    }
+
+
 }

@@ -27,6 +27,8 @@
 
     <string name="team">球队</string>
     <string name="player">球员</string>
+    <string name="daily">每日</string>
+    <string name="everage">场均</string>
 
 
     <string name="about_app_name_with_introduce">NBAPlus - 最专注的NBA信息平台</string>
@@ -37,14 +39,17 @@
     <string name="notices">开源协议</string>
     <string name="open_source">开放源代码许可</string>
 
+
     <!--preferences -->
+    <string name="system_setting">系统设置</string>
+    <string name="other_setting">其他设置</string>
+    <string name="pre_loadimage_key">LOADIMAGE</string>
     <string name="news_detile_load_image">正文中加载图片</string>
     <string name="load_current">当前为自动加载正文中的图片（默认）</string>
     <string name="noload_current">当前为不加载正文中的图片</string>
 
-    <!--Settings-->
-    <string name="system_setting">系统设置</string>
-    <string name="other_setting">其他设置</string>
+
+    <string name="pre_fontsize_key">ACTILEFONTSIZE</string>
     <string name="actile_font_size">正文字号</string>
     <string name="big_font">大号字体</string>
     <string name="medium_font">中号字体</string>

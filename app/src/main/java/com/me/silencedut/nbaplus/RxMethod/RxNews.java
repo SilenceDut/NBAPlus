@@ -102,7 +102,6 @@ public class RxNews {
                         return html;
                     }
                 })
-                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Action1<String>() {
                     @Override
                     public void call(String newsContent) {
@@ -120,28 +119,32 @@ public class RxNews {
     }
 
     public static Subscription initNews(final String newsType) {
+
         Subscription subscription = Observable.create(new Observable.OnSubscribe<News>() {
-            @Override
-            public void call(Subscriber<? super News> subscriber) {
-                List<GreenNews> greenNewses = getCacheNews(newsType);
-                if (greenNewses != null && greenNewses.size() > 0) {
-                    News news = AppService.getGson().fromJson(greenNewses.get(0).getNewslist(), News.class);
-                    subscriber.onNext(news);
-                    subscriber.onCompleted();
-                }else {
-                    NewsEvent newsEvent= new NewsEvent(new News(), Constant.GETNEWSWAY.INIT,newsType);
-                    newsEvent.setEventResult(Constant.Result.FAIL);
-                    AppService.getBus().post(newsEvent);
-                }
-            }
-        }).subscribeOn(Schedulers.io())
+                    @Override
+                    public void call(Subscriber<? super News> subscriber) {
+                        News news = getCacheNews(newsType);
+                        subscriber.onNext(news);
+                        subscriber.onCompleted();
+                    }
+                }).subscribeOn(Schedulers.io())
                 .subscribe(new Action1<News>() {
                     @Override
                     public void call(News news) {
-                        AppService.getBus().post(new NewsEvent(news, Constant.GETNEWSWAY.INIT,newsType));
+                        NewsEvent newsEvent= new NewsEvent(news, Constant.GETNEWSWAY.INIT,newsType);
+                        if(news==null) {
+                            newsEvent.setEventResult(Constant.Result.FAIL);
+                        }
+                        AppService.getBus().post(newsEvent);
+                    }
+                }, new Action1<Throwable>() {
+                    @Override
+                    public void call(Throwable throwable) {
+                        NewsEvent newsEvent= new NewsEvent(new News(), Constant.GETNEWSWAY.INIT,newsType);
+                        newsEvent.setEventResult(Constant.Result.FAIL);
+                        AppService.getBus().post(newsEvent);
                     }
                 });
-
         return subscription;
     }
     public static void cacheNews(final News news,final String newsType) {
@@ -157,14 +160,18 @@ public class RxNews {
 
     }
 
-    private static List<GreenNews> getCacheNews(String newsType) {
+    private static News getCacheNews(String newsType) {
+        News news=null;
         GreenNewsDao greenNewsDao = AppService.getDBHelper().getDaoSession().getGreenNewsDao();
         Query query = greenNewsDao.queryBuilder()
                 .where(GreenNewsDao.Properties.Type.eq(newsType))
                 .build();
         // 查询结果以 List 返回
         List<GreenNews> greenNewses = query.list();
-        return greenNewses;
+        if(greenNewses!=null&&greenNewses.size()>0) {
+            news = AppService.getGson().fromJson(greenNewses.get(0).getNewslist(), News.class);
+        }
+        return news;
     }
 
 

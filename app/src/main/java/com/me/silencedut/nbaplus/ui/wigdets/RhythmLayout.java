@@ -76,7 +76,7 @@ public class RhythmLayout extends HorizontalScrollView {
         //初始化时将手指当前所在的位置置为-1
         mCurrentItemPosition = -1;
         mLastDisplayItemPosition = -1;
-        mMaxTranslationHeight = (int) mItemWidth*4/7;
+        mMaxTranslationHeight = (int) mItemWidth*3/7;
         mIntervalHeight = (mMaxTranslationHeight / 4);
         mHandler = new Handler();
     }

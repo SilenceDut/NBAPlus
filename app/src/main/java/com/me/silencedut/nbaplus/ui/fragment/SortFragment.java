@@ -6,6 +6,9 @@ import android.support.v4.view.ViewPager;
 import com.me.silencedut.nbaplus.R;
 import com.me.silencedut.nbaplus.event.Event;
 import com.me.silencedut.nbaplus.ui.adapter.FragmentAdapter.FragmentSortAdapter;
+import com.me.silencedut.nbaplus.ui.fragment.base.BaseFragment;
+import com.me.silencedut.nbaplus.ui.fragment.base.ToorbarBaseFragment;
+import com.me.silencedut.nbaplus.ui.fragment.playersort.StatisticsFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +18,7 @@ import butterknife.Bind;
 /**
  * Created by SilenceDut on 2015/12/12.
  */
-public class SortFragment extends ToorbarBaseFragment{
+public class SortFragment extends ToorbarBaseFragment {
     @Bind(R.id.view_pager)
     ViewPager mViewPager;
     @Bind(R.id.tabs)

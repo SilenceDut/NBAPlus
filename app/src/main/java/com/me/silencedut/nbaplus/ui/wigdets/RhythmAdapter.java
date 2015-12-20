@@ -53,7 +53,7 @@ private static final String[] sStatNames={"得分","篮板","助攻","抢断","�
 
         //设置item布局的大小以及Y轴的位置
         relativeLayout.setLayoutParams(new RelativeLayout.LayoutParams((int) itemWidth, mContext.getResources().getDimensionPixelSize(R.dimen.rhythm_item_height)));
-        relativeLayout.setTranslationY(itemWidth*4/7);
+        relativeLayout.setTranslationY(itemWidth*3/7);
 
         //设置第二层RelativeLayout布局的宽和高
         RelativeLayout childRelativeLayout = (RelativeLayout) relativeLayout.getChildAt(0);

@@ -16,8 +16,6 @@
 
 package com.db.chart.view.animation;
 
-import java.util.ArrayList;
-
 import android.graphics.Path;
 import android.graphics.PathMeasure;
 import android.support.annotation.FloatRange;
@@ -26,6 +24,8 @@ import com.db.chart.model.ChartSet;
 import com.db.chart.view.ChartView;
 import com.db.chart.view.animation.easing.BaseEasingMethod;
 import com.db.chart.view.animation.easing.QuintEase;
+
+import java.util.ArrayList;
 
 
 /**
@@ -374,6 +374,8 @@ public class Animation{
 	private ArrayList<ChartSet> getUpdate(ArrayList<ChartSet> data){
 		
 		final int nSets = data.size();
+		if (nSets==0)
+			return data;
 		final int nEntries = data.get(0).size();
 		
 		// Process current animation duration
@@ -387,7 +389,6 @@ public class Animation{
 			else
 				mCurrentDuration[i] = diff;
 		}
-		
 		// In case current duration slightly goes over the animation duration, 
 		// force it to the duration value
 		if(mCurrentGlobalDuration > mGlobalDuration)

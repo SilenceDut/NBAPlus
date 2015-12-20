@@ -1,4 +1,4 @@
-package com.me.silencedut.nbaplus.ui.fragment;
+package com.me.silencedut.nbaplus.ui.fragment.base;
 
 import android.support.v4.widget.SwipeRefreshLayout;
 
@@ -10,7 +10,8 @@ import butterknife.Bind;
  * Created by SilenceDut on 2015/11/28.
  */
 public abstract class SwipeRefreshBaseFragment extends ToorbarBaseFragment implements SwipeRefreshLayout.OnRefreshListener {
-    @Bind(R.id.swipeRefreshLayout) SwipeRefreshLayout mSwipeRefreshLayout;
+    @Bind(R.id.swipeRefreshLayout)
+    protected SwipeRefreshLayout mSwipeRefreshLayout;
     public void setRefreshing() {
         mSwipeRefreshLayout.post(new Runnable() {
             @Override

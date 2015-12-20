@@ -1,4 +1,4 @@
-package com.me.silencedut.nbaplus.ui.fragment;
+package com.me.silencedut.nbaplus.ui.fragment.playersort;
 
 import android.animation.PropertyValuesHolder;
 import android.graphics.Color;
@@ -7,9 +7,9 @@ import android.graphics.Rect;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.db.chart.Tools;
 import com.db.chart.model.BarSet;
@@ -21,6 +21,7 @@ import com.db.chart.view.YController;
 import com.db.chart.view.animation.Animation;
 import com.me.silencedut.nbaplus.R;
 import com.me.silencedut.nbaplus.event.StatEvent;
+import com.me.silencedut.nbaplus.ui.fragment.base.BaseFragment;
 import com.me.silencedut.nbaplus.utils.AnimatorUtils;
 
 import java.util.ArrayList;
@@ -36,22 +37,27 @@ public class BarFragment extends BaseFragment {
     View mCardItem;
     @Bind(R.id.barchart1)
     BarChartView mStatChart;
+    @Bind(R.id.rl_change)
+    View mChangeLayout;
+    @Bind(R.id.type)
+    TextView mTypeTV;
     @Bind(R.id.change)
     ImageView mChange;
     private static final String STATKIND="STATKIND";
     private static final String CURRENTCOLOR="CURRENTCOLOR";
     private static final int PRECOLOR=Color.parseColor("#bcaaa4");
-    private static final int CHART_TEXT_COLOR=Color.parseColor("#e3f2fd");
+    private static final int CHART_TEXT_COLOR=Color.parseColor("#ffffff");
     private static final int STEP=2;
+    private boolean mIsAnimating;
     private int mCurrentColor;
     private String mStatKind;
     private boolean mShowDaily=true;
     private String[] mLables;
     private float [] mStatValues ;
-    private String[] mLablesDaily= { "科比布莱\n恩特克雷\n汤普森\n(勇士)","科比布莱\n恩特克雷\n汤普森\n(勇士)","克雷汤普森\n勇士","克雷汤普森\n勇士","科比\n布莱\n恩特\n克雷\n汤普森\n(勇士)"};
-    private float [] mStatValuesDaily = {17, 6f, 12f, 8.5f,12f};
-    private String[] mLablesEverage= { "科比布莱\n恩特克雷\n汤普森\n(勇士)","科比\n布莱\n恩特\n克雷\n汤普森\n(勇士)","克雷汤普森\n勇士","克雷汤普森\n勇士","科比\n布莱\n恩特\n克雷\n汤普森\n(勇士)"};
-    private float [] mStatValuesEverage = {4, 3.5f, 5.5f, 4.5f,3f};
+    private String[] mLablesDaily;
+    private float [] mStatValuesDaily;
+    private String[] mLablesEverage;
+    private float [] mStatValuesEverage ;
     private int mMax=16;
     Paint gridPaint;
     BarChartView barChart;
@@ -66,24 +72,16 @@ public class BarFragment extends BaseFragment {
     }
 
 
-    public BarFragment() {}
-
     @Override
     protected void initViews() {
         parseArguments();
-        mChange.setOnClickListener(new View.OnClickListener() {
+        mChangeLayout.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
                 dismissChart(0, mStatChart, mChange);
             }
         });
-        showChart(0, mStatChart, mChange);
-
-    }
-
-    public void showChat() {
-        showChart(0, mStatChart, mChange);
     }
 
     private void parseArguments() {
@@ -106,13 +104,12 @@ public class BarFragment extends BaseFragment {
             mLablesEverage=statEvent.getLables()[1];
             mStatValuesDaily=statEvent.getStatValues()[0];
             mStatValuesEverage=statEvent.getStatValues()[1];
-//            mLables=mShowDaily?mLablesDaily:mLablesEverage;
-//            mStatValues=mShowDaily?mStatValuesDaily:mStatValuesEverage;
-
-            Log.d("onEventMainThread",mLablesDaily.length+";;;"+mLablesEverage.length);
-          //  mMax=((int)mStatValues[0]/STEP+1)*STEP;
-          //  mShowDaily=!mShowDaily;
-            showChart(0, mStatChart, mChange);
+            if(barChart!=null) { 
+                mShowDaily=true;
+                dismissChart(0,mStatChart,mChange);
+            }else {
+                showChart(0, mStatChart, mChange); //first in,init barchart
+            }
         }
     }
 
@@ -123,7 +120,10 @@ public class BarFragment extends BaseFragment {
      * @param btn    Play button
      */
     private void showChart(final int tag, final ChartView chart, final View btn){
-        
+        if(mIsAnimating) {
+            return;
+        }
+        mIsAnimating=true;
         dismissPlay(btn);
         Runnable action =  new Runnable() {
             @Override
@@ -199,6 +199,7 @@ public class BarFragment extends BaseFragment {
     private void prepareStat() {
         mLables=mShowDaily?mLablesDaily:mLablesEverage;
         mStatValues=mShowDaily?mStatValuesDaily:mStatValuesEverage;
+        mTypeTV.setText(mShowDaily?R.string.daily:R.string.everage);
         mMax=((int)mStatValues[0]/STEP+1)*STEP;
         mShowDaily=!mShowDaily;
     }
@@ -210,6 +211,7 @@ public class BarFragment extends BaseFragment {
         preClor=mShowDaily?PRECOLOR:mCurrentColor;
         currentColor=mShowDaily?mCurrentColor:PRECOLOR;
         prepareStat();
+
         AnimatorUtils.showCardBackgroundColorAnimation(mCardItem, preClor, currentColor, 400);
         if(mLables.length<5||mStatValues.length<5) {
             return;
@@ -285,6 +287,9 @@ public class BarFragment extends BaseFragment {
                     tooltip.setExitAnimation(PropertyValuesHolder.ofFloat(View.ALPHA, 0));
                 }
                 mStatChart.showTooltip(tooltip, true);
+            if(i==areas.size()-1) {
+                mIsAnimating=false;
+            }
 
         }
 
