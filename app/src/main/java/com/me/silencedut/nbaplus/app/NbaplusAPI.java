@@ -18,5 +18,7 @@ public interface NbaplusAPI {
     Observable<News> loadMoreNews(@Path("type") String type,@Path("newsId") String newsId );
     @GET("api/v1.0/nbastat/perstat/{statKind}")
     Observable<Statistics> getPerStats(@Path("statKind") String statKind);
+    @GET("api/v1.0/teamsort/sort")
+    Observable<Statistics> getTeamSort();
 
 }

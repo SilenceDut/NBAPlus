@@ -8,7 +8,7 @@ import android.view.View;
 
 import com.me.silencedut.nbaplus.R;
 import com.me.silencedut.nbaplus.data.Constant;
-import com.me.silencedut.nbaplus.event.AnimatEndEvent;
+import com.me.silencedut.nbaplus.event.NewsAnimatEndEvent;
 import com.me.silencedut.nbaplus.event.NewsEvent;
 import com.me.silencedut.nbaplus.model.News;
 import com.me.silencedut.nbaplus.model.News.NewslistEntity;
@@ -117,7 +117,7 @@ public abstract class NewsFragment extends SwipeRefreshBaseFragment implements O
 
     }
 
-    public void onEventMainThread(AnimatEndEvent animatEndEvent) {
+    public void onEventMainThread(NewsAnimatEndEvent newsAnimatEndEvent) {
         setRefreshing();
     }
 

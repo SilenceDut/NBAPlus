@@ -3,5 +3,5 @@ package com.me.silencedut.nbaplus.event;
 /**
  * Created by Administrator on 2015/12/9.
  */
-public class AnimatEndEvent extends Event{
+public class NewsAnimatEndEvent extends Event{
 }

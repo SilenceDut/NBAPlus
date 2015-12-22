@@ -29,13 +29,44 @@ import rx.schedulers.Schedulers;
  * Created by SilenceDut on 2015/12/2.
  */
 public class RxNews {
+
+    public static Subscription initNews(final String newsType) {
+
+        Subscription subscription = Observable.create(new Observable.OnSubscribe<News>() {
+                    @Override
+                    public void call(Subscriber<? super News> subscriber) {
+                        News news = getCacheNews(newsType);
+                        subscriber.onNext(news);
+                        subscriber.onCompleted();
+                    }
+                }).subscribeOn(Schedulers.io())
+                .subscribe(new Action1<News>() {
+                    @Override
+                    public void call(News news) {
+                        NewsEvent newsEvent= new NewsEvent(news, Constant.GETNEWSWAY.INIT,newsType);
+                        if(news==null) {
+                            newsEvent.setEventResult(Constant.Result.FAIL);
+                        }
+                        AppService.getBus().post(newsEvent);
+                    }
+                }, new Action1<Throwable>() {
+                    @Override
+                    public void call(Throwable throwable) {
+                        NewsEvent newsEvent= new NewsEvent(new News(), Constant.GETNEWSWAY.INIT,newsType);
+                        newsEvent.setEventResult(Constant.Result.FAIL);
+                        AppService.getBus().post(newsEvent);
+                    }
+                });
+        return subscription;
+    }
+
     public static Subscription updateNews(final String newsType) {
         Subscription subscription = AppService.getNbaplus().updateNews(newsType)
                 .subscribeOn(Schedulers.io())
                 .doOnNext(new Action1<News>() {
                     @Override
                     public void call(News news) {
-                        cacheNews(news,newsType);
+                        cacheNews(news, newsType);
                     }
                 })
                 .observeOn(AndroidSchedulers.mainThread())
@@ -81,24 +112,26 @@ public class RxNews {
                 .map(new Func1<NewsDetile, String>() {
                     @Override
                     public String call(NewsDetile newsDetile) {
-                        int imageCount=0;
-                        String CSS_STYLE =String.format(Constant.CSS_STYLE , PreferenceUtils.getPrefString(App.getContext(), Constant.ACTILEFONTSIZE, "18"),"#333333");
-                        String html ="<html><head>" +CSS_STYLE+ "</head><body>" +newsDetile.getContent()+"<p>（"+newsDetile.getAuthor()+"）<p></body></html>";
-                        Pattern p=Pattern.compile("(<p class=\"reader_img_box\"><img id=\"img_\\d\" class=\"reader_img\" src=\"reader_img_src\" /></p>)+");
-                        Matcher m=p.matcher(html);
-                        while (m.find()&&imageCount<newsDetile.getArticleMediaMap().size()) {
-                            if(imageCount==0) {
-                                html=html.replace(html.substring(m.start(), (m.end())),"");
-                            }else {
-                                if(PreferenceUtils.getPrefBoolean(App.getContext(),Constant.LOADIMAGE,true)) {
+                        int imageCount = 0;
+                        String assStyle = String.format(Constant.CSS_STYLE, PreferenceUtils.getPrefString(App.getContext()
+                                , Constant.ACTILEFONTSIZE, "18"), "#333333");
+                        String html = "<html><head>" + assStyle + "</head><body>"
+                                + newsDetile.getContent() + "<p>（" + newsDetile.getAuthor() + "）<p></body></html>";
+                        Pattern p = Pattern.compile("(<p class=\"reader_img_box\"><img id=\"img_\\d\" class=\"reader_img\" src=\"reader_img_src\" /></p>)+");
+                        Matcher m = p.matcher(html);
+                        while (m.find() && imageCount < newsDetile.getArticleMediaMap().size()) {
+                            if (imageCount == 0) {
+                                html = html.replace(html.substring(m.start(), (m.end())), "");
+                            } else {
+                                if (PreferenceUtils.getPrefBoolean(App.getContext(), Constant.LOADIMAGE, true)) {
                                     html = html.replace(html.substring(m.start(), (m.end())), "<img src="
                                             + newsDetile.getArticleMediaMap().get(String.format("img_%d", imageCount)).getUrl() + " "
                                             + "width=\"100%\" height=\"auto\">");
                                 }
                             }
                             imageCount++;
-                            m=p.matcher(html);
-                         }
+                            m = p.matcher(html);
+                        }
                         return html;
                     }
                 })
@@ -118,35 +151,6 @@ public class RxNews {
         return subscription;
     }
 
-    public static Subscription initNews(final String newsType) {
-
-        Subscription subscription = Observable.create(new Observable.OnSubscribe<News>() {
-                    @Override
-                    public void call(Subscriber<? super News> subscriber) {
-                        News news = getCacheNews(newsType);
-                        subscriber.onNext(news);
-                        subscriber.onCompleted();
-                    }
-                }).subscribeOn(Schedulers.io())
-                .subscribe(new Action1<News>() {
-                    @Override
-                    public void call(News news) {
-                        NewsEvent newsEvent= new NewsEvent(news, Constant.GETNEWSWAY.INIT,newsType);
-                        if(news==null) {
-                            newsEvent.setEventResult(Constant.Result.FAIL);
-                        }
-                        AppService.getBus().post(newsEvent);
-                    }
-                }, new Action1<Throwable>() {
-                    @Override
-                    public void call(Throwable throwable) {
-                        NewsEvent newsEvent= new NewsEvent(new News(), Constant.GETNEWSWAY.INIT,newsType);
-                        newsEvent.setEventResult(Constant.Result.FAIL);
-                        AppService.getBus().post(newsEvent);
-                    }
-                });
-        return subscription;
-    }
     public static void cacheNews(final News news,final String newsType) {
 
         GreenNewsDao greenNewsDao = AppService.getDBHelper().getDaoSession().getGreenNewsDao();
