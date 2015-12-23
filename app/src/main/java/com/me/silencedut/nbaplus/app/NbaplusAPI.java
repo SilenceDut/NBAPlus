@@ -3,6 +3,7 @@ package com.me.silencedut.nbaplus.app;
 
 import com.me.silencedut.nbaplus.model.News;
 import com.me.silencedut.nbaplus.model.Statistics;
+import com.me.silencedut.nbaplus.model.Teams;
 
 import retrofit.http.GET;
 import retrofit.http.Path;
@@ -19,6 +20,6 @@ public interface NbaplusAPI {
     @GET("api/v1.0/nbastat/perstat/{statKind}")
     Observable<Statistics> getPerStats(@Path("statKind") String statKind);
     @GET("api/v1.0/teamsort/sort")
-    Observable<Statistics> getTeamSort();
+    Observable<Teams> getTeamSort();
 
 }

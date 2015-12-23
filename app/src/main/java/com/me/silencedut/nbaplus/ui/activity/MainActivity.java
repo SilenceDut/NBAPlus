@@ -7,6 +7,7 @@ import android.widget.FrameLayout;
 import com.me.silencedut.nbaplus.R;
 import com.me.silencedut.nbaplus.data.Constant;
 import com.me.silencedut.nbaplus.event.DrawerClickEvent;
+import com.me.silencedut.nbaplus.ui.fragment.TeamSortFragment;
 import com.me.silencedut.nbaplus.ui.fragment.base.BaseFragment;
 import com.me.silencedut.nbaplus.ui.fragment.BlogFragment;
 import com.me.silencedut.nbaplus.ui.fragment.DrawerFragment;
@@ -61,6 +62,7 @@ public class MainActivity extends BaseActivity {
     private void initDrawerMap() {
         mDrawerIdMap.put(R.string.news,MainFragment.getClassName());
         mDrawerIdMap.put(R.string.blog,BlogFragment.getClassName());
+        mDrawerIdMap.put(R.string.sort, TeamSortFragment.getClassName());
 
     }
 

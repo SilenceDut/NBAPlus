@@ -5,6 +5,7 @@ import com.google.gson.Gson;
 import com.me.silencedut.greendao.DBHelper;
 import com.me.silencedut.nbaplus.rxmethod.RxNews;
 import com.me.silencedut.nbaplus.rxmethod.RxStats;
+import com.me.silencedut.nbaplus.rxmethod.RxTeamSort;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -28,6 +29,8 @@ public class AppService {
     private static NewsDetileAPI sNewsDetileApi;
     private static ExecutorService sSingleThreadExecutor;
     private Map<Integer,CompositeSubscription> mCompositeSubMap;
+
+    private AppService(){}
 
     public void initService() {
         sBus = new EventBus();
@@ -91,7 +94,11 @@ public class AppService {
         getCompositeSubscription(taskId).add(RxStats.getPerStat(statKinds));
     }
 
-    public CompositeSubscription getCompositeSubscription(int taskId) {
+    public void getTeamSort(int taskId) {
+        getCompositeSubscription(taskId).add(RxTeamSort.getTeams());
+    }
+
+    private CompositeSubscription getCompositeSubscription(int taskId) {
         CompositeSubscription compositeSubscription ;
         if(mCompositeSubMap.get(taskId)==null) {
             compositeSubscription = new CompositeSubscription();
@@ -102,7 +109,6 @@ public class AppService {
         return compositeSubscription;
     }
 
-    private AppService(){}
 
     public static AppService getInstance() {
         return NBAPLUS_SERVICE;

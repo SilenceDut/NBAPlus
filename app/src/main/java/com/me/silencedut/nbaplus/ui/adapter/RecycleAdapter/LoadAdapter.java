@@ -42,6 +42,7 @@ public abstract class LoadAdapter extends RecyclerView.Adapter<LoadAdapter.BaseV
     protected int mAnimateEndCount;
 
     protected LoadAdapter(Context context,List<News.NewslistEntity> newsList) {
+        super();
         this.mContext = context;
         this.mNewsList=newsList;
         mInflater = LayoutInflater.from(context);

@@ -31,9 +31,9 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/main_left_img_avatar"
-                android:layout_width="72dp"
-                android:layout_height="72dp"
-                android:src="@mipmap/lalakers"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:src="@mipmap/myteam"
                 app:border_width="1dp"
                 app:border_color="@color/white"/>
 
@@ -44,7 +44,7 @@
                 android:layout_marginTop="8dp"
                 android:layout_gravity="center_horizontal"
                 android:textColor="@android:color/white"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 android:text="@string/my_team" />
 
         </LinearLayout>
