@@ -26,12 +26,21 @@ public class Teams {
     }
 
     public static class TeamsortEntity {
+        private String teamurl;
         private String sort;
         private String winPercent;
         private String win;
         private String lose;
         private String gap;
         private String team;
+
+        public String getTeamurl() {
+            return teamurl;
+        }
+
+        public void setTeamurl(String teamurl) {
+            this.teamurl = teamurl;
+        }
 
         public void setSort(String sort) {
             this.sort = sort;

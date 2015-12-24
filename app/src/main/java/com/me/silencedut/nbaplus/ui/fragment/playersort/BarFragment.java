@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.db.chart.Tools;
+import com.db.chart.listener.OnEntryClickListener;
 import com.db.chart.model.BarSet;
 import com.db.chart.view.BarChartView;
 import com.db.chart.view.ChartView;
@@ -216,7 +217,14 @@ public class BarFragment extends BaseFragment {
         if(mLables.length<5||mStatValues.length<5) {
             return;
         }
+
         barChart = (BarChartView) chart;
+        barChart.setOnEntryClickListener(new OnEntryClickListener() {
+            @Override
+            public void onClick(int setIndex, int entryIndex, Rect rect) {
+                System.out.println("OnClick "+rect.left);
+            }
+        });
         Tooltip tooltip = new Tooltip(getActivity(), R.layout.barchart_one_tooltip);
 
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {

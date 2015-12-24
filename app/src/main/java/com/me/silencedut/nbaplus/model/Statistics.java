@@ -45,9 +45,18 @@ public class Statistics {
     public static class StatEntity {
         private String place;
         private String statkind;
+        private String playerurl;
         private String name;
         private String statdata;
         private String team;
+
+        public String getPlayerurl() {
+            return playerurl;
+        }
+
+        public void setPlayerurl(String playerurl) {
+            this.playerurl = playerurl;
+        }
 
         public void setPlace(String place) {
             this.place = place;

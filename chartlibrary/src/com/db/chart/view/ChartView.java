@@ -36,6 +36,7 @@ import android.view.View;
 import android.view.ViewTreeObserver.OnPreDrawListener;
 import android.widget.RelativeLayout;
 
+import com.db.chart.listener.OnEntryClickListener;
 import com.db.chart.model.ChartEntry;
 import com.db.chart.model.ChartSet;
 import com.db.chart.view.animation.Animation;
@@ -111,7 +112,7 @@ public abstract class ChartView extends RelativeLayout{
 
 
 
-
+	private OnEntryClickListener mEntryListener;
 	private OnClickListener mChartListener;
 
 
@@ -246,7 +247,14 @@ public abstract class ChartView extends RelativeLayout{
 		mGridNColumns = DEFAULT_GRID_COLUMNS;
 	}
 
-
+	/**
+	 * Register a listener to be called when the chart is clicked.
+	 *
+	 * @param listener
+	 */
+	public void setOnEntryClickListener(OnEntryClickListener listener){
+		this.mEntryListener = listener;
+	}
 
 
 	@Override
@@ -832,6 +840,7 @@ public abstract class ChartView extends RelativeLayout{
 		if(mAnim == null || !mAnim.isPlaying())
 
 			if(event.getAction() == MotionEvent.ACTION_DOWN &&
+					mEntryListener != null&&
 					(mTooltip != null ) &&
 					mRegions != null){
 
@@ -858,6 +867,11 @@ public abstract class ChartView extends RelativeLayout{
 							.contains((int) event.getX(),
 									(int) event.getY())){
 
+						if(mEntryListener != null){
+							mEntryListener.onClick(mSetClicked,
+									mIndexClicked,
+									new Rect(getEntryRect(mRegions.get(mSetClicked).get(mIndexClicked))));
+						}
 
 						if(mTooltip != null){
 							toggleTooltip(getEntryRect(mRegions.get(mSetClicked).get(mIndexClicked)),
