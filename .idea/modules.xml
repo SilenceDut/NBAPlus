@@ -4,6 +4,8 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/NBAPlus.iml" filepath="$PROJECT_DIR$/NBAPlus.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/chartlibrary/chartlibrary.iml" filepath="$PROJECT_DIR$/chartlibrary/chartlibrary.iml" />
+      <module fileurl="file://$PROJECT_DIR$/greendaogeneration/greendaogeneration.iml" filepath="$PROJECT_DIR$/greendaogeneration/greendaogeneration.iml" />
     </modules>
   </component>
 </project>

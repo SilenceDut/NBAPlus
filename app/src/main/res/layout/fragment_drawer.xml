@@ -33,7 +33,7 @@
                 android:id="@+id/main_left_img_avatar"
                 android:layout_width="56dp"
                 android:layout_height="56dp"
-                android:src="@mipmap/myteam"
+                android:src="@mipmap/lalakers"
                 app:border_width="1dp"
                 app:border_color="@color/white"/>
 

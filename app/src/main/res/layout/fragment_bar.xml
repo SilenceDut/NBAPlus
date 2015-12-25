@@ -29,7 +29,7 @@
                 android:layout_toLeftOf="@+id/change"
                 android:layout_marginRight="5dp"
                 android:textColor="@color/white"
-                android:text="场均"
+                android:text="抱歉今日无数据"
                 />
             <ImageView
                 android:id="@+id/change"

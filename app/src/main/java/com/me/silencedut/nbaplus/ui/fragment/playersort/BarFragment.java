@@ -80,7 +80,9 @@ public class BarFragment extends BaseFragment {
 
             @Override
             public void onClick(View v) {
-                dismissChart(0, mStatChart, mChange);
+                if(mLables!=null&&mStatValues!=null) {
+                    dismissChart(0, mStatChart, mChange);
+                }
             }
         });
     }
@@ -199,7 +201,7 @@ public class BarFragment extends BaseFragment {
 
     private void prepareStat() {
         mLables=mShowDaily?mLablesDaily:mLablesEverage;
-        mStatValues=mShowDaily?mStatValuesDaily:mStatValuesEverage;
+        mStatValues = mShowDaily ? mStatValuesDaily : mStatValuesEverage;
         mTypeTV.setText(mShowDaily?R.string.daily:R.string.everage);
         mMax=((int)mStatValues[0]/STEP+1)*STEP;
         mShowDaily=!mShowDaily;

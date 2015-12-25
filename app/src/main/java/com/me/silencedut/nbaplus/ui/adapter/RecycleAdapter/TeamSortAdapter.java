@@ -1,5 +1,6 @@
 package com.me.silencedut.nbaplus.ui.adapter.RecycleAdapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 
 import com.me.silencedut.nbaplus.R;
 import com.me.silencedut.nbaplus.model.Teams;
+import com.thefinestartist.finestwebview.FinestWebView;
 
 import java.util.HashMap;
 import java.util.List;
@@ -117,7 +119,7 @@ public class TeamSortAdapter extends RecyclerView.Adapter<TeamSortAdapter.TeamHo
         }
     }
 
-    class TeamEntity extends TeamHolder {
+    class TeamEntity extends TeamHolder implements View.OnClickListener{
         @Bind(R.id.place)
         TextView mTeamPlace_tv;
         @Bind(R.id.team_icon)
@@ -135,9 +137,11 @@ public class TeamSortAdapter extends RecyclerView.Adapter<TeamSortAdapter.TeamHo
         @Bind(R.id.divider)
         View divider;
         View mItemView;
+        private Teams.TeamsortEntity mTeam;
         public TeamEntity(View itemView) {
             super(itemView);
             this.mItemView=itemView;
+            itemView.setOnClickListener(this);
         }
         @Override
         void updateItem(int position) {
@@ -150,14 +154,14 @@ public class TeamSortAdapter extends RecyclerView.Adapter<TeamSortAdapter.TeamHo
             }else if(position>0){
                 index=position-1;
             }
-            Teams.TeamsortEntity team=mTeams.get(index);
-            mTeamPlace_tv.setText(team.getSort());
+            mTeam=mTeams.get(index);
+            mTeamPlace_tv.setText(mTeam.getSort());
 
-            mTeamName_tv.setText(team.getTeam());
-            mTeamWin_tv.setText(team.getWin());
-            mTeamLose_tv.setText(team.getLose());
-            mTeamWinPer_tv.setText(team.getWinPercent());
-            mTeamGap_tv.setText(team.getGap());
+            mTeamName_tv.setText(mTeam.getTeam());
+            mTeamWin_tv.setText(mTeam.getWin());
+            mTeamLose_tv.setText(mTeam.getLose());
+            mTeamWinPer_tv.setText(mTeam.getWinPercent());
+            mTeamGap_tv.setText(mTeam.getGap());
             if(index==0||index==16) {
                 mTeamPlace_tv.setText("");
                 divider.setVisibility(View.VISIBLE);
@@ -166,7 +170,7 @@ public class TeamSortAdapter extends RecyclerView.Adapter<TeamSortAdapter.TeamHo
 
             }else {
                 mTeamicon_IV.setVisibility(View.VISIBLE);
-                mTeamicon_IV.setImageResource(teamIconMap.get(team.getTeam()));
+                mTeamicon_IV.setImageResource(teamIconMap.get(mTeam.getTeam()));
                 divider.setVisibility(View.GONE);
                 mItemView.setClickable(true);
             }
@@ -176,6 +180,13 @@ public class TeamSortAdapter extends RecyclerView.Adapter<TeamSortAdapter.TeamHo
             }else {
                 mTeamPlace_tv.setTextColor(Color.parseColor("#212121"));
             }
+        }
+
+        @Override
+        public void onClick(View view) {
+            new FinestWebView.Builder((Activity)mContext)
+                    .gradientDivider(false)
+                    .show(mTeam.getTeamurl());
         }
     }
 

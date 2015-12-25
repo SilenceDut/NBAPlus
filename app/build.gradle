@@ -75,7 +75,7 @@ dependencies {
     compile otherDependencies.rxjava
     compile otherDependencies.adapter_rxjava
     compile otherDependencies.greendao
-
+    compile otherDependencies.finestwebview
     debugCompile otherDependencies.leakcanary_debug
     releaseCompile otherDependencies.leakcanary_release
     compile files('libs/joda-time-2.8.2.jar')
