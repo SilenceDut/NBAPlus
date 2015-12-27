@@ -22,13 +22,13 @@ android {
         exclude 'META-INF/services/javax.annotation.processing.Processor'
     }
 
-//    applicationVariants.all { variant ->
-//        variant.outputs.each { output ->
-//            output.outputFile = new File(
-//                    output.outputFile.parent,
-//                    "nbaplus-${variant.versionName}.apk".toLowerCase())
-//        }
-//    }
+    applicationVariants.all { variant ->
+        variant.outputs.each { output ->
+            output.outputFile = new File(
+                    output.outputFile.parent,
+                    "nbaplus-${variant.versionName}.apk".toLowerCase())
+        }
+    }
 
     buildTypes {
         release {
