@@ -38,7 +38,6 @@ public class TeamSortFragment extends SwipeRefreshBaseFragment {
     @Override
     protected void initViews() {
         super.initViews();
-        mSwipeRefreshLayout.setBackgroundResource(R.color.grey50);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mTeamsListView.getContext());
         mTeamsListView.setLayoutManager(linearLayoutManager);
         mTeamSortAdapter=new TeamSortAdapter(getActivity(),mTeamsSortEntity);

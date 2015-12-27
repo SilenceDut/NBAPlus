@@ -6,8 +6,8 @@
     xmlns:card_view="http://schemas.android.com/tools"
     android:layout_marginLeft="@dimen/margin_12dp"
     android:layout_marginRight="@dimen/margin_12dp"
-    android:layout_marginTop="@dimen/margin_12dp"
-    android:layout_marginBottom="@dimen/margin_2dp"
+    android:layout_marginTop="@dimen/margin_6dp"
+    android:layout_marginBottom="@dimen/margin_6dp"
     android:foreground="?attr/selectableItemBackground"
     card_view:cardCornerRadius="@dimen/margin_4dp"
     card_view:cardElevation="4dp">

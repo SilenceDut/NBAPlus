@@ -1,6 +1,5 @@
 package com.me.silencedut.nbaplus.ui.adapter.RecycleAdapter;
 
-import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
@@ -11,10 +10,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.me.silencedut.nbaplus.R;
+import com.me.silencedut.nbaplus.data.Constant;
 import com.me.silencedut.nbaplus.model.Teams;
-import com.thefinestartist.finestwebview.FinestWebView;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -26,16 +24,7 @@ import butterknife.ButterKnife;
  */
 public class TeamSortAdapter extends RecyclerView.Adapter<TeamSortAdapter.TeamHolder> {
 
-    private final static String[] TEAM_NAMES={"骑士","猛龙","老鹰","步行者","热火","活塞","公牛","魔术"
-            ,"黄蜂","凯尔特人","尼克斯","奇才","雄鹿","篮网","76人","勇士","马刺","雷霆","快船","小牛"
-            ,"灰熊","火箭","爵士","太阳","掘金","森林狼","国王","开拓者","鹈鹕","湖人"};
-    private final static int[] TEAM_ICONS={R.mipmap.cleveland,R.mipmap.toronto,R.mipmap.atlanta,R.mipmap.indiana
-            ,R.mipmap.miami,R.mipmap.detroit,R.mipmap.chicago,R.mipmap.orlando,R.mipmap.charlotte,R.mipmap.boston
-            ,R.mipmap.newyork,R.mipmap.houston,R.mipmap.milwaukee,R.mipmap.brooklyn,R.mipmap.phila,R.mipmap.goldenstate
-            ,R.mipmap.sanantonio,R.mipmap.okc,R.mipmap.laclippers,R.mipmap.dallas,R.mipmap.memphis,R.mipmap.houston
-            ,R.mipmap.utah,R.mipmap.phoenix,R.mipmap.denver,R.mipmap.minnesota,R.mipmap.sacramento,R.mipmap.portland
-            ,R.mipmap.neworleans,R.mipmap.lalakers};
-    private final Map<String,Integer> teamIconMap=new HashMap<>();
+    private final Map<String,Integer> teamIconMap= Constant.getTeamIcons();
     private List<Teams.TeamsortEntity> mTeams;
     protected Context mContext;
     protected LayoutInflater mInflater;
@@ -46,9 +35,6 @@ public class TeamSortAdapter extends RecyclerView.Adapter<TeamSortAdapter.TeamHo
         this.mContext = context;
         this.mTeams=teams;
         mInflater = LayoutInflater.from(context);
-        for (int index=0;index<TEAM_NAMES.length;index++){
-            teamIconMap.put(TEAM_NAMES[index],TEAM_ICONS[index]);
-        }
     }
 
     @Override
@@ -79,11 +65,8 @@ public class TeamSortAdapter extends RecyclerView.Adapter<TeamSortAdapter.TeamHo
 
     @Override
     public int getItemCount() {
-        int count=0;
-        if(mTeams!=null) {
-            count=mTeams.size()+2;
-        }
-        return count;
+
+        return mTeams==null?0:mTeams.size()+2;
     }
 
 
@@ -184,9 +167,9 @@ public class TeamSortAdapter extends RecyclerView.Adapter<TeamSortAdapter.TeamHo
 
         @Override
         public void onClick(View view) {
-            new FinestWebView.Builder((Activity)mContext)
-                    .gradientDivider(false)
-                    .show(mTeam.getTeamurl());
+//            new FinestWebView.Builder((Activity)mContext)
+//                    .gradientDivider(false)
+//                    .show(mTeam.getTeamurl());
         }
     }
 

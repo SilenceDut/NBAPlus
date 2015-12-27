@@ -4,7 +4,7 @@ import com.me.silencedut.nbaplus.data.Constant;
 import com.me.silencedut.nbaplus.model.Teams;
 
 /**
- * Created by asan on 2015/12/23.
+ * Created by SilenceDut on 2015/12/23.
  */
 public class TeamSortEvent extends Event {
     private Teams mTeams;

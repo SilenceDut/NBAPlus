@@ -1,6 +1,7 @@
 package com.me.silencedut.nbaplus.app;
 
 
+import com.me.silencedut.nbaplus.model.Games;
 import com.me.silencedut.nbaplus.model.News;
 import com.me.silencedut.nbaplus.model.Statistics;
 import com.me.silencedut.nbaplus.model.Teams;
@@ -21,5 +22,7 @@ public interface NbaplusAPI {
     Observable<Statistics> getPerStats(@Path("statKind") String statKind);
     @GET("api/v1.0/teamsort/sort")
     Observable<Teams> getTeamSort();
+    @GET("api/v1.0/gamesdate/{date}")
+    Observable<Games> getGames(@Path("date") String date);
 
 }

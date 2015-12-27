@@ -3,6 +3,7 @@ package com.me.silencedut.nbaplus.app;
 
 import com.google.gson.Gson;
 import com.me.silencedut.greendao.DBHelper;
+import com.me.silencedut.nbaplus.rxmethod.RxGames;
 import com.me.silencedut.nbaplus.rxmethod.RxNews;
 import com.me.silencedut.nbaplus.rxmethod.RxStats;
 import com.me.silencedut.nbaplus.rxmethod.RxTeamSort;
@@ -96,6 +97,10 @@ public class AppService {
 
     public void getTeamSort(int taskId) {
         getCompositeSubscription(taskId).add(RxTeamSort.getTeams());
+    }
+
+    public void getGames(int taskId,String date) {
+        getCompositeSubscription(taskId).add(RxGames.getTeams(date));
     }
 
     private CompositeSubscription getCompositeSubscription(int taskId) {

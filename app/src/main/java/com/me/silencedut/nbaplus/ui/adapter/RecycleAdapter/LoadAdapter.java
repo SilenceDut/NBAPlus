@@ -84,7 +84,7 @@ public abstract class LoadAdapter extends RecyclerView.Adapter<LoadAdapter.BaseV
 
     @Override
     public int getItemCount() {
-        return mNewsList.size();
+        return mNewsList==null?0:mNewsList.size();
     }
 
     @Override

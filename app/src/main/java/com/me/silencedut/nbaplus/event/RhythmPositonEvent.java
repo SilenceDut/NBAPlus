@@ -1,7 +1,7 @@
 package com.me.silencedut.nbaplus.event;
 
 /**
- * Created by asan on 2015/12/17.
+ * Created by SilenceDut on 2015/12/17.
  */
 public class RhythmPositonEvent extends Event{
     private int mPosition;

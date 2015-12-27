@@ -12,7 +12,7 @@ import butterknife.Bind;
 public abstract class SwipeRefreshBaseFragment extends ToorbarBaseFragment implements SwipeRefreshLayout.OnRefreshListener {
     @Bind(R.id.swipeRefreshLayout)
     protected SwipeRefreshLayout mSwipeRefreshLayout;
-    public void setRefreshing() {
+    protected void setRefreshing() {
         mSwipeRefreshLayout.post(new Runnable() {
             @Override
             public void run() {
@@ -22,7 +22,11 @@ public abstract class SwipeRefreshBaseFragment extends ToorbarBaseFragment imple
         });
     }
 
-    public void stopRefreshing() {
+    protected boolean isRefreshing() {
+        return mSwipeRefreshLayout.isRefreshing();
+    }
+
+    protected void stopRefreshing() {
         mSwipeRefreshLayout.setRefreshing(false);
     }
     @Override

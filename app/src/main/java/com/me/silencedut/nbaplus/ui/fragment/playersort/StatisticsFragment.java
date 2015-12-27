@@ -88,7 +88,7 @@ public class StatisticsFragment extends ToorbarBaseFragment implements View.OnCl
         mAnimator=AnimatorUtils.animRotation(mRefresh,500);
         AppService.getInstance().getPerStat(getTaskId(), sStatKinds);
     }
-    // no need initdata
+    // no need initdata temporary
     private void initData() {
 
         AppService.getInstance().initPerStat(getTaskId(), sStatKinds[0]);

@@ -18,7 +18,6 @@ public class BlogFragment extends NewsFragment {
 
     @Override
     void setAdapter() {
-        mSwipeRefreshLayout.setBackgroundResource(R.color.main_bg);
         mLoadAdapter=new BlogAdapter(getActivity(),mNewsListEntity);
         mNewsListView.setAdapter(mLoadAdapter);
         mNewsListView.setVerticalScrollBarEnabled(false);
