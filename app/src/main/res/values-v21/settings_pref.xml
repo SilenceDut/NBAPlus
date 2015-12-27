@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+  <string-array name="settings_entries_font_size">
+    <item>小号</item>
+    <item>中号</item>
+    <item>大号</item>
+  </string-array>
+
+  <string-array name="settings_entry_values_font_size">
+    <item>16</item>
+    <item>18</item>
+    <item>20</item>
+  </string-array>
+
+</resources>

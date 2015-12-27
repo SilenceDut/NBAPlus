@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:title="@string/system_setting">
+    <PreferenceCategory
+        android:layout="@layout/preference_category_widget"
+        android:title="系统设置">
+
+        <SwitchPreference
+            android:title="正文中加载大图"
+            android:key="@string/pre_loadimage_key"
+            android:summaryOn="当前为自动加载正文中的图片"
+            android:summaryOff="当前为不加载正文中的图片"
+            android:defaultValue="true"/>
+        <ListPreference
+            android:layout="@layout/preference_list_item"
+            android:title="正文字号"
+            android:defaultValue="18"
+            android:key="@string/pre_fontsize_key"
+            android:summary="中号字体"
+            android:negativeButtonText="@null"
+            android:positiveButtonText="@null"
+            android:entryValues="@array/settings_entry_values_font_size"
+            android:entries="@array/settings_entries_font_size"/>
+        <Preference
+            android:layout="@layout/preference_list_item"
+            android:key="@string/clear_cache"
+            android:title="清空缓存"
+            android:summary="0kb">
+        </Preference>
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:layout="@layout/preference_category_widget"
+        android:title="@string/other_setting">
+
+        <Preference
+            android:layout="@layout/preference_list_item"
+            android:key="@string/version_update"
+            android:title="检查更新"
+            android:summary="V1.0.0">
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="http://fir.im/nbaplus"/>
+        </Preference>
+
+    </PreferenceCategory>
+</PreferenceScreen>

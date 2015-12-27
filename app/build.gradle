@@ -22,13 +22,13 @@ android {
         exclude 'META-INF/services/javax.annotation.processing.Processor'
     }
 
-    applicationVariants.all { variant ->
-        variant.outputs.each { output ->
-            output.outputFile = new File(
-                    output.outputFile.parent,
-                    "nbaplus-${variant.versionName}.apk".toLowerCase())
-        }
-    }
+//    applicationVariants.all { variant ->
+//        variant.outputs.each { output ->
+//            output.outputFile = new File(
+//                    output.outputFile.parent,
+//                    "nbaplus-${variant.versionName}.apk".toLowerCase())
+//        }
+//    }
 
     buildTypes {
         release {
@@ -75,9 +75,9 @@ dependencies {
     compile otherDependencies.rxjava
     compile otherDependencies.adapter_rxjava
     compile otherDependencies.greendao
+    compile otherDependencies.pickview
     debugCompile otherDependencies.leakcanary_debug
     releaseCompile otherDependencies.leakcanary_release
-
     compile files('libs/joda-time-2.8.2.jar')
-
+    compile project(':chartlibrary')
 }

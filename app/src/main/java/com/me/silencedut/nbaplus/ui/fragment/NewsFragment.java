@@ -8,11 +8,12 @@ import android.view.View;
 
 import com.me.silencedut.nbaplus.R;
 import com.me.silencedut.nbaplus.data.Constant;
-import com.me.silencedut.nbaplus.event.AnimatEndEvent;
+import com.me.silencedut.nbaplus.event.NewsAnimatEndEvent;
 import com.me.silencedut.nbaplus.event.NewsEvent;
 import com.me.silencedut.nbaplus.model.News;
 import com.me.silencedut.nbaplus.model.News.NewslistEntity;
 import com.me.silencedut.nbaplus.ui.adapter.RecycleAdapter.LoadAdapter;
+import com.me.silencedut.nbaplus.ui.fragment.base.SwipeRefreshBaseFragment;
 import com.me.silencedut.nbaplus.ui.listener.RecyclerViewLoadMoreListener;
 import com.me.silencedut.nbaplus.ui.listener.RecyclerViewLoadMoreListener.OnLoadMoreListener;
 import com.me.silencedut.nbaplus.utils.AppUtils;
@@ -41,8 +42,6 @@ public abstract class NewsFragment extends SwipeRefreshBaseFragment implements O
     @Override
     protected void initViews() {
         super.initViews();
-        setHasOptionsMenu(true);
-        initToolbar();
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mNewsListView.getContext());
         mNewsListView.setLayoutManager(linearLayoutManager);
         mNewsListView.addOnScrollListener(new RecyclerViewLoadMoreListener(linearLayoutManager, this, 0));
@@ -118,7 +117,7 @@ public abstract class NewsFragment extends SwipeRefreshBaseFragment implements O
 
     }
 
-    public void onEventMainThread(AnimatEndEvent animatEndEvent) {
+    public void onEventMainThread(NewsAnimatEndEvent newsAnimatEndEvent) {
         setRefreshing();
     }
 

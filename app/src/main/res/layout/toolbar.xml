@@ -9,5 +9,5 @@
     android:theme="@style/AppTheme.AppBarOverlay"
     app:popupTheme="@style/AppTheme.PopupOverlay"
     app:layout_scrollFlags="scroll|enterAlways"
-    >
-</android.support.v7.widget.Toolbar>
+    app:elevation="@dimen/toolbar_evelation"
+    android:elevation="@dimen/toolbar_evelation"/>

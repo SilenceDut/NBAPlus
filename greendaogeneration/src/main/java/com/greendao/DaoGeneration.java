@@ -9,7 +9,8 @@ public class DaoGeneration {
 
         Schema schema = new Schema(1, "com.me.silencedut.greendao");
         addNews(schema);
-        new DaoGenerator().generateAll(schema, "/AndroidCode/NBAPlus/app/src/main/java-gen");
+        addStats(schema);
+        new DaoGenerator().generateAll(schema, "/.../NBAPlus/app/src/main/java-gen");
     }
 
     public static void addNews(Schema schema) {
@@ -17,5 +18,12 @@ public class DaoGeneration {
         news.addIdProperty();
         news.addStringProperty("newslist");
         news.addStringProperty("type");
+    }
+
+    public static void addStats(Schema schema) {
+        Entity stat = schema.addEntity("GreenStat");
+        stat.addIdProperty();
+        stat.addStringProperty("statentity");
+        stat.addStringProperty("statkind");
     }
 }

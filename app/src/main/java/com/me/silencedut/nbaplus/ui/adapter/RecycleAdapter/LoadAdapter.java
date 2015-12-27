@@ -14,7 +14,7 @@ import android.view.animation.DecelerateInterpolator;
 
 import com.me.silencedut.nbaplus.R;
 import com.me.silencedut.nbaplus.app.AppService;
-import com.me.silencedut.nbaplus.event.AnimatEndEvent;
+import com.me.silencedut.nbaplus.event.NewsAnimatEndEvent;
 import com.me.silencedut.nbaplus.model.News;
 import com.me.silencedut.nbaplus.ui.activity.NewsDetileActivity;
 import com.me.silencedut.nbaplus.utils.NumericalUtil;
@@ -42,6 +42,7 @@ public abstract class LoadAdapter extends RecyclerView.Adapter<LoadAdapter.BaseV
     protected int mAnimateEndCount;
 
     protected LoadAdapter(Context context,List<News.NewslistEntity> newsList) {
+        super();
         this.mContext = context;
         this.mNewsList=newsList;
         mInflater = LayoutInflater.from(context);
@@ -83,7 +84,7 @@ public abstract class LoadAdapter extends RecyclerView.Adapter<LoadAdapter.BaseV
 
     @Override
     public int getItemCount() {
-        return mNewsList.size();
+        return mNewsList==null?0:mNewsList.size();
     }
 
     @Override
@@ -119,9 +120,9 @@ public abstract class LoadAdapter extends RecyclerView.Adapter<LoadAdapter.BaseV
                     .setListener(new AnimatorListenerAdapter() {
                         @Override
                         public void onAnimationEnd(Animator animation) {
-//                        startContentAnimation();
+
                             if (position == mAnimateEndCount||position>=getItemCount()-1) {
-                                AppService.getInstance().getBus().post(new AnimatEndEvent());
+                                AppService.getInstance().getBus().post(new NewsAnimatEndEvent());
                             }
                         }
                     })

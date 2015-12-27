@@ -4,7 +4,6 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.View;
 
 import com.me.silencedut.nbaplus.R;
@@ -49,9 +48,7 @@ public class MainFragment extends NewsFragment{
         }else {
             initCaChe();
         }
-
     }
-
     private void initCaChe() {
         AppService.getInstance().initNews(getTaskId(), Constant.NEWSTYPE.NEWS.getNewsType());
     }
@@ -74,6 +71,7 @@ public class MainFragment extends NewsFragment{
 
     public void onEventMainThread(NewsEvent newsEvent) {
         if(newsEvent!=null&&Constant.NEWSTYPE.NEWS.getNewsType().equals(newsEvent.getNewsType())) {
+
             updateView(newsEvent);
         }
     }

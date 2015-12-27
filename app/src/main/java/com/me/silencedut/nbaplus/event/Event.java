@@ -4,7 +4,7 @@ import com.me.silencedut.nbaplus.data.Constant.Result;
  * Created by SilenceDut on 2015/11/28.
  */
 public class Event {
-    private Result mEventResult;
+    protected Result mEventResult;
 
     public void setEventResult(Result eventResult) {
         this.mEventResult=eventResult;

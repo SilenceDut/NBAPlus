@@ -6,11 +6,8 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
-
     <dimen name="default_elevation">4dp</dimen>
-
     <dimen name="setting_margin">24dp</dimen>
-
     <dimen name="icon_size">24dp</dimen>
     <dimen name="drawer_text_margin">32dp</dimen>
     <dimen name="navigation_drawer_width">240dp</dimen>
@@ -29,13 +26,20 @@
     <dimen name="margin_2dp">2dp</dimen>
     <dimen name="margin_0dp">0dp</dimen>
 
+    <dimen name="main_card_dimen">@dimen/margin_0dp</dimen>
+
     <dimen name="tableInditorheight">4dp</dimen>
     <dimen name="tableheight">40dp</dimen>
-
-    <dimen name="toolbar_evelation">0dp</dimen>
+    <dimen name="apptoolbar_evelation">0dp</dimen>
+    <dimen name="toolbar_evelation">4dp</dimen>
     <dimen name="item_divider_line">1px</dimen>
 
     <!-- Preference fragment padding, sides -->
     <dimen name="preference_fragment_padding_side">8dp</dimen>
+    <dimen name="rhythm_edge_size_for_shift">50.0dip</dimen>
+    <dimen name="rhythm_icon_margin">4dp</dimen>
+    <dimen name="rhythm_item_height">120dp</dimen>
+    <dimen name="rhythm_layout_height">60dp</dimen>
+    <dimen name="rhythm_max_translation_y">40dp</dimen>
 
 </resources>

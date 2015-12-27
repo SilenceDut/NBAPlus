@@ -1,1 +1,1 @@
-include ':app', ':greendaogeneration'
+include ':app', ':greendaogeneration','chartlibrary'

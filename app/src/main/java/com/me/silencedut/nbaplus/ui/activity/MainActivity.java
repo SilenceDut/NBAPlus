@@ -7,12 +7,13 @@ import android.widget.FrameLayout;
 import com.me.silencedut.nbaplus.R;
 import com.me.silencedut.nbaplus.data.Constant;
 import com.me.silencedut.nbaplus.event.DrawerClickEvent;
-import com.me.silencedut.nbaplus.ui.fragment.BaseFragment;
+import com.me.silencedut.nbaplus.ui.fragment.GamesFragment;
+import com.me.silencedut.nbaplus.ui.fragment.TeamSortFragment;
+import com.me.silencedut.nbaplus.ui.fragment.base.BaseFragment;
 import com.me.silencedut.nbaplus.ui.fragment.BlogFragment;
 import com.me.silencedut.nbaplus.ui.fragment.DrawerFragment;
 import com.me.silencedut.nbaplus.ui.fragment.MainFragment;
-import com.me.silencedut.nbaplus.ui.fragment.SettingFragment;
-import com.me.silencedut.nbaplus.ui.fragment.SortFragment;
+import com.me.silencedut.nbaplus.ui.fragment.playersort.StatisticsFragment;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -32,6 +33,7 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void initViews() {
+        getWindow().setBackgroundDrawable(null);
         mNavigationFragment = (DrawerFragment)
                 getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
         mNavigationFragment.setUp((FrameLayout) findViewById(R.id.main_content),
@@ -46,16 +48,24 @@ public class MainActivity extends BaseActivity {
         if(Constant.Result.FAIL.equals(drawerClickEvent.getEventResult())||drawerClickEvent.getDrawId()==mCurrentDrawId) {
             return;
         }
+
         mCurrentDrawId=drawerClickEvent.getDrawId();
-        mCurrentFragment=getFragment(mDrawerIdMap.get(mCurrentDrawId));
+        if(mCurrentDrawId==R.string.statistics) {
+            mCurrentFragment=StatisticsFragment.newInstance();
+        }else {
+            mCurrentFragment = getFragment(mDrawerIdMap.get(mCurrentDrawId));
+        }
         transactionSupportFragment(mCurrentFragment);
     }
+
 
 
     private void initDrawerMap() {
         mDrawerIdMap.put(R.string.news,MainFragment.getClassName());
         mDrawerIdMap.put(R.string.blog,BlogFragment.getClassName());
-        mDrawerIdMap.put(R.string.setting, SettingFragment.getClassName());
+        mDrawerIdMap.put(R.string.sort, TeamSortFragment.getClassName());
+        mDrawerIdMap.put(R.string.gameDate, GamesFragment.getClassName());
+
     }
 
 
@@ -69,6 +79,7 @@ public class MainActivity extends BaseActivity {
             }
             mBaseFragmentMap.put(fragmentName,baseFragment);
         }
+
         return baseFragment;
     }
 
