@@ -45,12 +45,13 @@ public class RxStats {
                     public void call(Statistics statistics) {
                         String[][] lables = getLables(statistics);
                         float[][] ststValues=getStatValues(statistics);
-                        AppService.getBus().post(new StatEvent(statistics.getDailyStat().get(0).getStatkind(), lables,ststValues));
+                        String[][] playerUrls=getPlayerUrls(statistics);
+                        AppService.getBus().post(new StatEvent(statistics.getDailyStat().get(0).getStatkind(), lables,ststValues,playerUrls));
                     }
                 }, new Action1<Throwable>() {
                     @Override
                     public void call(Throwable throwable) {
-                        StatEvent statEvent = new StatEvent(throwable.toString(), null, null);
+                        StatEvent statEvent = new StatEvent(throwable.toString(), null, null,null);
                         statEvent.setEventResult(Constant.Result.FAIL);
                         AppService.getBus().post(statEvent);
 
@@ -62,20 +63,21 @@ public class RxStats {
     public static Subscription initStat(final String statKind) {
 
         Subscription subscription = Observable.create(new Observable.OnSubscribe<Statistics>() {
-                    @Override
-                    public void call(Subscriber<? super Statistics> subscriber) {
-                        Statistics statistics = getCacheStat(statKind);
-                        subscriber.onNext(statistics);
-                        subscriber.onCompleted();
+            @Override
+            public void call(Subscriber<? super Statistics> subscriber) {
+                Statistics statistics = getCacheStat(statKind);
+                subscriber.onNext(statistics);
+                subscriber.onCompleted();
 
-                    }
-                }).subscribeOn(Schedulers.io())
+            }
+        }).subscribeOn(Schedulers.io())
                 .subscribe(new Action1<Statistics>() {
                     @Override
                     public void call(Statistics statistics) {
                         String[][] lables = getLables(statistics);
                         float[][] ststValues=getStatValues(statistics);
-                        StatEvent statEvent = new StatEvent(statistics.getDailyStat().get(0).getStatkind(), lables, ststValues);
+                        String[][] playerUrls=getPlayerUrls(statistics);
+                        StatEvent statEvent = new StatEvent(statistics.getDailyStat().get(0).getStatkind(), lables, ststValues,playerUrls);
                         statEvent.setGetNewsWay(Constant.GETNEWSWAY.INIT);
                         AppService.getBus().post(statEvent);
 
@@ -84,7 +86,7 @@ public class RxStats {
                     @Override
                     public void call(Throwable throwable) {
 
-                        StatEvent statEvent = new StatEvent(statKind, null, null);
+                        StatEvent statEvent = new StatEvent(statKind, null, null,null);
                         statEvent.setEventResult(Constant.Result.FAIL);
                         statEvent.setGetNewsWay(Constant.GETNEWSWAY.INIT);
                         AppService.getBus().post(statEvent);
@@ -125,6 +127,15 @@ public class RxStats {
         for(int index=0;index<5;index++) {
             statValues[0][index]=Float.parseFloat(statistics.getDailyStat().get(index).getStatdata());
             statValues[1][index]=Float.parseFloat(statistics.getEverageStat().get(index).getStatdata());
+        }
+        return statValues;
+    }
+
+    private static String[][] getPlayerUrls(Statistics statistics) {
+        String[][] statValues=new String[2][5];
+        for(int index=0;index<5;index++) {
+            statValues[0][index]=statistics.getDailyStat().get(index).getPlayerurl();
+            statValues[1][index]=statistics.getEverageStat().get(index).getPlayerurl();
         }
         return statValues;
     }

@@ -1,23 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/cardItem"
+<RelativeLayout
+    android:id="@+id/shotView"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginLeft="@dimen/margin_0dp"
-    android:layout_marginRight="@dimen/margin_0dp"
-    android:layout_marginTop="@dimen/margin_0dp"
+    android:layout_height="match_parent"
+    android:layout_margin="@dimen/margin_0dp"
     android:foreground="?attr/selectableItemBackground"
-    app:cardCornerRadius="@dimen/margin_0dp"
-    app:cardElevation="0dp">
-    <RelativeLayout
-        android:id="@+id/shotView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/shot_item_background"
-        >
+    android:background="@drawable/shot_item_background"
+    xmlns:android="http://schemas.android.com/apk/res/android">
         <TextView
             android:id="@+id/newsTitle"
             android:layout_width="match_parent"
@@ -45,33 +34,36 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/newsTitle"
-            android:layout_margin="@dimen/view_margingtop"
             android:orientation="horizontal">
             <ImageView
                 android:id="@+id/newsImage1"
                 android:layout_width="0dp"
-                android:layout_height="80dp"
+                android:layout_height="100dp"
                 android:layout_gravity="center_vertical"
-                android:layout_marginRight="@dimen/margin_4dp"
+                android:padding="@dimen/margin_8dp"
+                android:paddingRight="@dimen/margin_4dp"
                 android:layout_weight="1"
                 android:scaleType="fitXY"
                 />
             <ImageView
                 android:id="@+id/newsImage2"
                 android:layout_width="0dp"
-                android:layout_height="80dp"
+                android:layout_height="100dp"
                 android:layout_gravity="center_vertical"
-                android:layout_marginLeft="@dimen/margin_4dp"
-                android:layout_marginRight="@dimen/margin_4dp"
+                android:padding="@dimen/margin_8dp"
+                android:paddingLeft="@dimen/margin_4dp"
+                android:paddingRight="@dimen/margin_4dp"
                 android:layout_weight="1"
                 android:scaleType="fitXY"
                 />
             <ImageView
                 android:id="@+id/newsImage3"
                 android:layout_width="0dp"
-                android:layout_height="80dp"
+                android:layout_height="100dp"
+                android:padding="@dimen/margin_8dp"
+                android:paddingLeft="@dimen/margin_4dp"
                 android:layout_gravity="center_vertical"
-                android:layout_marginLeft="@dimen/margin_4dp"
+
                 android:layout_weight="1"
                 android:scaleType="fitXY"
                 />
@@ -98,4 +90,3 @@
             android:layout_height="@dimen/item_divider_line"
             android:background="@color/divider"/>
     </RelativeLayout>
-</android.support.v7.widget.CardView>

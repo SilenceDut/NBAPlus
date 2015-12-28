@@ -1,5 +1,6 @@
 package com.me.silencedut.nbaplus.ui.adapter.RecycleAdapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 import com.me.silencedut.nbaplus.R;
 import com.me.silencedut.nbaplus.data.Constant;
 import com.me.silencedut.nbaplus.model.Teams;
+import com.thefinestartist.finestwebview.FinestWebView;
 
 import java.util.List;
 import java.util.Map;
@@ -119,12 +121,12 @@ public class TeamSortAdapter extends RecyclerView.Adapter<TeamSortAdapter.TeamHo
         TextView mTeamGap_tv;
         @Bind(R.id.divider)
         View divider;
-        View mItemView;
+        @Bind(R.id.itemLayout)
+        View mItemLayout;
         private Teams.TeamsortEntity mTeam;
         public TeamEntity(View itemView) {
             super(itemView);
-            this.mItemView=itemView;
-            itemView.setOnClickListener(this);
+            mItemLayout.setOnClickListener(this);
         }
         @Override
         void updateItem(int position) {
@@ -148,14 +150,13 @@ public class TeamSortAdapter extends RecyclerView.Adapter<TeamSortAdapter.TeamHo
             if(index==0||index==16) {
                 mTeamPlace_tv.setText("");
                 divider.setVisibility(View.VISIBLE);
-                mItemView.setClickable(false);
                 mTeamicon_IV.setVisibility(View.INVISIBLE);
+                mTeam=null;
 
             }else {
                 mTeamicon_IV.setVisibility(View.VISIBLE);
                 mTeamicon_IV.setImageResource(teamIconMap.get(mTeam.getTeam()));
                 divider.setVisibility(View.GONE);
-                mItemView.setClickable(true);
             }
 
             if((index>0&&index<9)||(index>16&&index<25)) {
@@ -167,9 +168,12 @@ public class TeamSortAdapter extends RecyclerView.Adapter<TeamSortAdapter.TeamHo
 
         @Override
         public void onClick(View view) {
-//            new FinestWebView.Builder((Activity)mContext)
-//                    .gradientDivider(false)
-//                    .show(mTeam.getTeamurl());
+            if(mTeam==null) {
+                return;
+            }
+            new FinestWebView.Builder((Activity)mContext)
+                    .gradientDivider(false)
+                    .show(mTeam.getTeamurl());
         }
     }
 

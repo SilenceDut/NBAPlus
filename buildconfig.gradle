@@ -11,7 +11,7 @@ ext {
     ]
 
     //LibrariesVersion
-    googlesupportVersion="23.1.0"
+    googlesupportVersion="23.1.1"
 
     goodleDependencies =[
             appcompat_v7: "com.android.support:appcompat-v7:${googlesupportVersion}",

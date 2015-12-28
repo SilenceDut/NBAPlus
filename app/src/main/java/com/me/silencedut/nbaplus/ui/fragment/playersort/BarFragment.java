@@ -24,6 +24,7 @@ import com.me.silencedut.nbaplus.R;
 import com.me.silencedut.nbaplus.event.StatEvent;
 import com.me.silencedut.nbaplus.ui.fragment.base.BaseFragment;
 import com.me.silencedut.nbaplus.utils.AnimatorUtils;
+import com.thefinestartist.finestwebview.FinestWebView;
 
 import java.util.ArrayList;
 
@@ -54,10 +55,13 @@ public class BarFragment extends BaseFragment {
     private String mStatKind;
     private boolean mShowDaily=true;
     private String[] mLables;
+    private String[] mPlayerUrls;
     private float [] mStatValues ;
+    private String[] mPlayerUrlsDaily;
     private String[] mLablesDaily;
     private float [] mStatValuesDaily;
     private String[] mLablesEverage;
+    private String[] mPlayerUrlsEverage;
     private float [] mStatValuesEverage ;
     private int mMax=16;
     Paint gridPaint;
@@ -105,6 +109,8 @@ public class BarFragment extends BaseFragment {
         if(mStatKind.equals(statEvent.getStatKind())) {
             mLablesDaily=statEvent.getLables()[0];
             mLablesEverage=statEvent.getLables()[1];
+            mPlayerUrlsDaily=statEvent.getPlayerUrls()[0];
+            mPlayerUrlsEverage=statEvent.getPlayerUrls()[1];
             mStatValuesDaily=statEvent.getStatValues()[0];
             mStatValuesEverage=statEvent.getStatValues()[1];
             if(barChart!=null) { 
@@ -201,6 +207,7 @@ public class BarFragment extends BaseFragment {
 
     private void prepareStat() {
         mLables=mShowDaily?mLablesDaily:mLablesEverage;
+        mPlayerUrls=mShowDaily?mPlayerUrlsDaily:mPlayerUrlsEverage;
         mStatValues = mShowDaily ? mStatValuesDaily : mStatValuesEverage;
         mTypeTV.setText(mShowDaily?R.string.daily:R.string.everage);
         mMax=((int)mStatValues[0]/STEP+1)*STEP;
@@ -224,7 +231,10 @@ public class BarFragment extends BaseFragment {
         barChart.setOnEntryClickListener(new OnEntryClickListener() {
             @Override
             public void onClick(int setIndex, int entryIndex, Rect rect) {
-                System.out.println("OnClick "+rect.left);
+                new FinestWebView.Builder(getActivity())
+                        .gradientDivider(false)
+                        .show(mPlayerUrls[entryIndex]);
+                System.out.println("OnClick "+entryIndex+";;"+setIndex);
             }
         });
         Tooltip tooltip = new Tooltip(getActivity(), R.layout.barchart_one_tooltip);

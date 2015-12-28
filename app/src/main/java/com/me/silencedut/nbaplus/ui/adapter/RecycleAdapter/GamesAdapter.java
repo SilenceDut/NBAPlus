@@ -1,9 +1,9 @@
 package com.me.silencedut.nbaplus.ui.adapter.RecycleAdapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.me.silencedut.nbaplus.R;
 import com.me.silencedut.nbaplus.data.Constant;
 import com.me.silencedut.nbaplus.model.Games;
+import com.thefinestartist.finestwebview.FinestWebView;
 
 import java.util.List;
 import java.util.Map;
@@ -141,10 +142,14 @@ public class GamesAdapter extends RecyclerView.Adapter<GamesAdapter.GamesViewHol
         public void onClick(View v) {
             switch (v.getId()) {
                 case R.id.stats:
-                    Log.d("state",mGameEntity.getStateUrl());
+                    new FinestWebView.Builder((Activity)mContext)
+                            .gradientDivider(false)
+                            .show(mGameEntity.getStateUrl());
                     break;
                 default:
-                    Log.d("status",mGameEntity.getStatusUrl());
+                    new FinestWebView.Builder((Activity)mContext)
+                            .gradientDivider(false)
+                            .show(mGameEntity.getStatusUrl());
                     break;
             }
         }

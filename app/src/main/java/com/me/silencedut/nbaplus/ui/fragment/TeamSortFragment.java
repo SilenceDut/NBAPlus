@@ -51,8 +51,6 @@ public class TeamSortFragment extends SwipeRefreshBaseFragment {
     }
 
 
-
-
     public void onEventMainThread(TeamSortEvent teamSortEvent) {
         stopRefreshing();
         if(Constant.Result.FAIL.equals(teamSortEvent.getEventResult())){

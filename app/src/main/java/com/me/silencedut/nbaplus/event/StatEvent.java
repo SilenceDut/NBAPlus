@@ -8,12 +8,14 @@ import com.me.silencedut.nbaplus.data.Constant;
 public class StatEvent extends Event {
     private String mStatKind;
     private String[][] mLables;
+    private String[][] mPlayerUrls;
     private float[][] mStatValues;
     private Constant.GETNEWSWAY getNewsWay;
-    public StatEvent (String statKind,String[][] lables,float[][] statValues) {
+    public StatEvent (String statKind,String[][] lables,float[][] statValues,String[][] playerUrls) {
         this.mStatKind=statKind;
         this.mLables=lables;
         this.mStatValues=statValues;
+        this.mPlayerUrls=playerUrls;
     }
 
     public Constant.GETNEWSWAY getGetNewsWay() {
@@ -34,5 +36,9 @@ public class StatEvent extends Event {
 
     public float[][] getStatValues() {
         return mStatValues;
+    }
+
+    public String[][] getPlayerUrls() {
+        return mPlayerUrls;
     }
 }
