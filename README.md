@@ -1,6 +1,9 @@
 # NBAPlus
 A concise APP about NBA News and Event with RxJava and EventBus。
 
+大体框架
+![image](https://github.com/SilenceDut/NBAPlus/tree/master/art/nbaplus_architecture.png)
+
 关于NBA资讯和赛事信息的平台。 
 全面、方便、快捷的获取新闻动态、比赛数据。 
 无广告、推送信息，不后台常驻，空间占用小。 
