@@ -216,6 +216,9 @@ public class BarFragment extends BaseFragment {
 
 
     public void produceOne(ChartView chart, Runnable action){
+        if(getActivity()==null) {
+            return;
+        }
         int currentColor;
         int preClor;
         preClor=mShowDaily?PRECOLOR:mCurrentColor;
@@ -234,11 +237,11 @@ public class BarFragment extends BaseFragment {
                 new FinestWebView.Builder(getActivity())
                         .gradientDivider(false)
                         .show(mPlayerUrls[entryIndex]);
-                System.out.println("OnClick "+entryIndex+";;"+setIndex);
+
             }
         });
-        Tooltip tooltip = new Tooltip(getActivity(), R.layout.barchart_one_tooltip);
 
+        Tooltip tooltip = new Tooltip(getActivity(), R.layout.barchart_one_tooltip);
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
             tooltip.setEnterAnimation(PropertyValuesHolder.ofFloat(View.ALPHA, 1));
             tooltip.setExitAnimation(PropertyValuesHolder.ofFloat(View.ALPHA, 0));
@@ -295,9 +298,7 @@ public class BarFragment extends BaseFragment {
 
 
     private void showTooltipOne(){
-
         ArrayList<Rect> areas = mStatChart.getEntriesArea(0);
-
         for(int i = 0; i < areas.size(); i++) {
 
                 Tooltip tooltip = new Tooltip(getActivity(), R.layout.barchart_one_tooltip, R.id.value);
