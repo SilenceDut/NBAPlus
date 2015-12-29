@@ -14,3 +14,5 @@ web后台部分在这:[NBAPlus后台](https://github.com/SilenceDut/nbaplus-serv
 如果对你有帮助给个star吧^_^
 
 贴个博客地址，虽然也没写过几篇(ˇˍˇ) [我的博客](http://blog.csdn.net/ls5222325)
+
+微博:http://weibo.com/u/5796432094
