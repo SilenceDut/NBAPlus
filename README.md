@@ -11,7 +11,7 @@ A concise APP about NBA News and Event with RxJava and EventBus。
 
 web后台部分在这:[NBAPlus后台](https://github.com/SilenceDut/nbaplus-server) 
 
-如果对你有帮助给个star吧^_^
+如果对你有帮助给个star吧,欢迎pull requests(^_^）
 
 贴个博客地址，虽然也没写过几篇(ˇˍˇ) [我的博客](http://blog.csdn.net/ls5222325)
 
