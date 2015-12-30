@@ -300,7 +300,9 @@ public class BarFragment extends BaseFragment {
     private void showTooltipOne(){
         ArrayList<Rect> areas = mStatChart.getEntriesArea(0);
         for(int i = 0; i < areas.size(); i++) {
-
+                if(getActivity()==null) {
+                    return;
+                }
                 Tooltip tooltip = new Tooltip(getActivity(), R.layout.barchart_one_tooltip, R.id.value);
                 tooltip.prepare(areas.get(i), mStatValues[i]);
                 if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {

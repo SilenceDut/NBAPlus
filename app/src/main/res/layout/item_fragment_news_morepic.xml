@@ -63,7 +63,6 @@
                 android:padding="@dimen/margin_8dp"
                 android:paddingLeft="@dimen/margin_4dp"
                 android:layout_gravity="center_vertical"
-
                 android:layout_weight="1"
                 android:scaleType="fitXY"
                 />
