@@ -30,7 +30,7 @@ public class GamesFragment extends SwipeRefreshBaseFragment {
     @Bind(R.id.rv_news)
     RecyclerView mGamesListView;
     private GamesAdapter mGamesAdapter;
-    DatePickerPopWin mDatePicker;
+
     private String mDate;
     private String mDateToday =DateFormatter.formatDate("yyyy-MM-dd");
     private List<Games.GamesEntity> mGamesEntity = new ArrayList<>();
@@ -47,16 +47,7 @@ public class GamesFragment extends SwipeRefreshBaseFragment {
     @Override
     protected void initViews() {
         super.initViews();
-        mDatePicker = new DatePickerPopWin.Builder(getActivity(), new DatePickerPopWin.OnDatePickedListener() {
-            @Override
-            public void onDatePickCompleted(int year, int month, int day, String dateDesc) {
-                mDate=dateDesc;
-                setRefreshing();
-            }
-        }).colorConfirm(Color.parseColor("#448AFF"))//color of confirm button
-                .minYear(2015) //min year in loop
-                .maxYear(2017) // max year in loop
-                .build();
+
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mGamesListView.getContext());
         mGamesListView.setLayoutManager(linearLayoutManager);
         mGamesAdapter=new GamesAdapter(getActivity(),mGamesEntity);
@@ -105,8 +96,17 @@ public class GamesFragment extends SwipeRefreshBaseFragment {
         if(isRefreshing()) {
             return;
         }
-        mDatePicker.setSelectedDate(mDateToday);
-        mDatePicker.showPopWin(getActivity());
+        DatePickerPopWin datePicker = new DatePickerPopWin.Builder(getActivity(), new DatePickerPopWin.OnDatePickedListener() {
+            @Override
+            public void onDatePickCompleted(int year, int month, int day, String dateDesc) {
+                mDate=dateDesc;
+                setRefreshing();
+            }
+        }).colorConfirm(Color.parseColor("#448AFF"))//color of confirm button
+                .minYear(2015) //min year in loop
+                .maxYear(2017) // max year in loop
+                .build();
+        datePicker.showPopWin(getActivity());
     }
 
     @Override
