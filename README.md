@@ -14,7 +14,8 @@ follow <a href="https://github.com/futurice/android-best-practices/blob/master/t
  * Retrofit2.0+RxJava+EventBus+GreenDao的使用
  * 代码结构清晰，扩展性强，易复用到其他项目
  * 结合[NBAPlus Server](https://github.com/SilenceDut/nbaplus-server) 学习后台开发知识和接口的设计
- * 采用webp格式图片，大大缩小应用体积，只有3M左右
+ * 优化应用体积，只有3M。
+ * 动态Blur效果。
 
 #关于
 NBA资讯和赛事信息的平台。 
