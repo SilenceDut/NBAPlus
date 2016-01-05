@@ -38,6 +38,7 @@ public class MainFragment extends NewsFragment{
 
     @Override
     void setAdapter() {
+        mSwipeRefreshLayout.setBackgroundResource(R.color.grey50);
         mainTitle.setVisibility(View.VISIBLE);
         mLoadAdapter=new MainAdapter(getActivity(),mNewsListEntity);
         mNewsListView.setAdapter(mLoadAdapter);
