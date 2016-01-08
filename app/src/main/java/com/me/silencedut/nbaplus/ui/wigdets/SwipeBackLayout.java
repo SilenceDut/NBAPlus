@@ -73,8 +73,8 @@ public class SwipeBackLayout extends FrameLayout {
             @Override
             public void onViewReleased(View releasedChild, float xvel, float yvel) {
                 //一定得重写computeScroll()方法，不然没有效果
-                //如果移动的距离大于或等于当前界面的1/8，则触发关闭
-                if (mMoveLeft >= (mContentWidth / 8)) {
+                //如果移动的距离大于或等于当前界面的1/10，则触发关闭
+                if (mMoveLeft >= (mContentWidth / 10)) {
                     isClose = true;
                     //设置滑动的View移动位置，即然当前的界面滑出屏幕
                     mViewDragHelper.settleCapturedViewAt(mContentWidth, releasedChild.getTop());
