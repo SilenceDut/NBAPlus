@@ -6,8 +6,8 @@ ext {
             AndroidTargetSdkVersion : 23,
             AndroidCompileSdkVersion : 23,
             applicationId : "me.silencedut.nbaplus",
-            versionCode:8,
-            versionName:"1.0.1"
+            versionCode:10,
+            versionName:"1.1.0"
     ]
 
     //LibrariesVersion

@@ -29,8 +29,6 @@ web后台部分在这:[NBAPlus Server](https://github.com/SilenceDut/nbaplus-ser
 
 [我的博客](http://blog.csdn.net/ls5222325)
 
-[微博](http://weibo.com/u/5796432094)
-
 # License
 
 Copyright 2015 SilenceDut
