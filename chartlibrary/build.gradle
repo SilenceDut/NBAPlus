@@ -33,12 +33,13 @@ android {
         // conflict with src/ being used by the main source set.
         // Adding new build types or product flavors should be accompanied
         // by a similar customization.
+
         debug.setRoot('build-types/debug')
         release.setRoot('build-types/release')
     }
 }
 
 dependencies {
-    compile 'com.android.support:support-annotations:23.0.0'
+    compile 'com.android.support:support-annotations:23.1.1'
 }
 

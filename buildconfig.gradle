@@ -38,7 +38,7 @@ ext {
             rxjava:"io.reactivex:rxjava:1.0.16",
             greendao:"de.greenrobot:greendao:2.0.0",
             pickview:'com.brucetoo.pickview:library:1.1.1',
-            finestwebview:"com.thefinestartist:finestwebview:1.0.9"
+            finestwebview:"com.thefinestartist:finestwebview:1.1.2"
     ]
 
 
