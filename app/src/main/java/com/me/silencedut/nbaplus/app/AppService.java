@@ -34,7 +34,7 @@ public class AppService {
     private AppService(){}
 
     public void initService() {
-        sBus = new EventBus();
+        sBus = EventBus.getDefault();
         sGson=new Gson();
         mCompositeSubMap=new HashMap<Integer,CompositeSubscription>();
         sSingleThreadExecutor= Executors.newSingleThreadExecutor();
@@ -71,6 +71,18 @@ public class AppService {
         }
     }
 
+    private CompositeSubscription getCompositeSubscription(int taskId) {
+        CompositeSubscription compositeSubscription ;
+        if(mCompositeSubMap.get(taskId)==null) {
+            compositeSubscription = new CompositeSubscription();
+            mCompositeSubMap.put(taskId, compositeSubscription);
+        }else {
+            compositeSubscription= mCompositeSubMap.get(taskId);
+        }
+        return compositeSubscription;
+    }
+
+
     public void initNews(int taskId,String type) {
         getCompositeSubscription(taskId).add(RxNews.initNews(type));
     }
@@ -101,17 +113,6 @@ public class AppService {
 
     public void getGames(int taskId,String date) {
         getCompositeSubscription(taskId).add(RxGames.getTeams(date));
-    }
-
-    private CompositeSubscription getCompositeSubscription(int taskId) {
-        CompositeSubscription compositeSubscription ;
-        if(mCompositeSubMap.get(taskId)==null) {
-            compositeSubscription = new CompositeSubscription();
-            mCompositeSubMap.put(taskId, compositeSubscription);
-        }else {
-            compositeSubscription= mCompositeSubMap.get(taskId);
-        }
-        return compositeSubscription;
     }
 
 
