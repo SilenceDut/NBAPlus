@@ -1,8 +1,14 @@
 package com.me.silencedut.nbaplus.app;
 
 
+import android.os.Handler;
+import android.os.HandlerThread;
+
 import com.google.gson.Gson;
 import com.me.silencedut.greendao.DBHelper;
+import com.me.silencedut.nbaplus.network.NbaplusAPI;
+import com.me.silencedut.nbaplus.network.NbaplusFactory;
+import com.me.silencedut.nbaplus.network.NewsDetileAPI;
 import com.me.silencedut.nbaplus.rxmethod.RxGames;
 import com.me.silencedut.nbaplus.rxmethod.RxNews;
 import com.me.silencedut.nbaplus.rxmethod.RxStats;
@@ -11,7 +17,6 @@ import com.me.silencedut.nbaplus.rxmethod.RxTeamSort;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 import de.greenrobot.event.EventBus;
 import rx.subscriptions.CompositeSubscription;
@@ -26,10 +31,11 @@ public class AppService {
     private static Gson sGson;
     private static EventBus sBus ;
     private static DBHelper sDBHelper;
-    private static NbaplusAPI sNbaplus;
+    private static NbaplusAPI sNbaplusApi;
     private static NewsDetileAPI sNewsDetileApi;
     private static ExecutorService sSingleThreadExecutor;
     private Map<Integer,CompositeSubscription> mCompositeSubMap;
+    private Handler mIoHandler;
 
     private AppService(){}
 
@@ -37,20 +43,32 @@ public class AppService {
         sBus = EventBus.getDefault();
         sGson=new Gson();
         mCompositeSubMap=new HashMap<Integer,CompositeSubscription>();
-        sSingleThreadExecutor= Executors.newSingleThreadExecutor();
-
+        //sSingleThreadExecutor= Executors.newSingleThreadExecutor();
         backGroundInit();
     }
 
     private void backGroundInit() {
-        sSingleThreadExecutor.execute(new Runnable() {
+        HandlerThread ioThread = new HandlerThread("IoThread");
+        ioThread.start();
+        mIoHandler= new Handler(ioThread.getLooper());
+        mIoHandler.post(new Runnable() {
             @Override
             public void run() {
-                sNbaplus = NbaplusFactory.getNbaplus();
+                sNbaplusApi = NbaplusFactory.getNbaplusInstance();
                 sNewsDetileApi = NbaplusFactory.getNewsDetileInstance();
                 sDBHelper = DBHelper.getInstance(App.getContext());
             }
         });
+//  ThreadExecutor is not necessary currently
+
+//        sSingleThreadExecutor.execute(new Runnable() {
+//            @Override
+//            public void run() {
+//                sNbaplus = NbaplusFactory.getNbaplus();
+//                sNewsDetileApi = NbaplusFactory.getNewsDetileInstance();
+//                sDBHelper = DBHelper.getInstance(App.getContext());
+//            }
+//        });
 
     }
 
@@ -125,7 +143,7 @@ public class AppService {
     }
 
     public static NbaplusAPI getNbaplus() {
-        return sNbaplus;
+        return sNbaplusApi;
     }
 
     public static NewsDetileAPI getNewsDetileApi() {

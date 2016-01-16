@@ -1,5 +1,8 @@
-package com.me.silencedut.nbaplus.app;
+package com.me.silencedut.nbaplus.network;
 
+
+import com.me.silencedut.nbaplus.network.NbaplusAPI;
+import com.me.silencedut.nbaplus.network.NewsDetileAPI;
 
 import retrofit.GsonConverterFactory;
 import retrofit.Retrofit;

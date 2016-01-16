@@ -1,4 +1,4 @@
-package com.me.silencedut.nbaplus.app;
+package com.me.silencedut.nbaplus.network;
 
 
 import com.me.silencedut.nbaplus.model.Games;

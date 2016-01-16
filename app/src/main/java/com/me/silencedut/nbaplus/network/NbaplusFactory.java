@@ -1,23 +1,23 @@
-package com.me.silencedut.nbaplus.app;
+package com.me.silencedut.nbaplus.network;
 
 /**
  * Created by SilenceDut on 2015/11/28.
  */
 public class NbaplusFactory {
-    private static NbaplusAPI sInstance=null;
+    private static NbaplusAPI sInstanceInstance=null;
     private static NewsDetileAPI sNewsSetileInStance=null;
     private static final Object WATCH_DOG=new Object();
 
     private NbaplusFactory(){}
 
-    public static NbaplusAPI getNbaplus() {
+    public static NbaplusAPI getNbaplusInstance() {
         synchronized (WATCH_DOG) {
-            if(sInstance==null){
+            if(sInstanceInstance==null){
                 NbaplusCilent nbaplusCilent = new NbaplusCilent();
-                sInstance=nbaplusCilent.getCilent();
+                sInstanceInstance=nbaplusCilent.getCilent();
                 sNewsSetileInStance=nbaplusCilent.getNewsDetileClient();
             }
-            return sInstance;
+            return sInstanceInstance;
         }
     }
 
@@ -25,7 +25,7 @@ public class NbaplusFactory {
         synchronized (WATCH_DOG) {
             if(sNewsSetileInStance==null){
                 NbaplusCilent nbaplusCilent = new NbaplusCilent();
-                sInstance=nbaplusCilent.getCilent();
+                sInstanceInstance=nbaplusCilent.getCilent();
                 sNewsSetileInStance=nbaplusCilent.getNewsDetileClient();
             }
             return sNewsSetileInStance;
