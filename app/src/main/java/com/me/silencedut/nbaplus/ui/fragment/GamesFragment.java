@@ -114,9 +114,5 @@ public class GamesFragment extends SwipeRefreshBaseFragment {
         AppService.getInstance().getGames(getTaskId(),mDate);
         mDate=mDateToday;
     }
-
-    public static String getClassName() {
-        return "com.me.silencedut.nbaplus.ui.fragment.GamesFragment";
-    }
 }
 

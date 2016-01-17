@@ -106,9 +106,4 @@ public class MainFragment extends NewsFragment{
                 }).start();
     }
 
-    public static String getClassName() {
-        return "com.me.silencedut.nbaplus.ui.fragment.MainFragment";
-    }
-
-
 }

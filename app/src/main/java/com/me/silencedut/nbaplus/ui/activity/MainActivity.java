@@ -61,10 +61,10 @@ public class MainActivity extends BaseActivity {
 
 
     private void initDrawerMap() {
-        mDrawerIdMap.put(R.string.news,MainFragment.getClassName());
-        mDrawerIdMap.put(R.string.blog,BlogFragment.getClassName());
-        mDrawerIdMap.put(R.string.sort, TeamSortFragment.getClassName());
-        mDrawerIdMap.put(R.string.gameDate, GamesFragment.getClassName());
+        mDrawerIdMap.put(R.string.news,MainFragment.class.getName());
+        mDrawerIdMap.put(R.string.blog,BlogFragment.class.getName());
+        mDrawerIdMap.put(R.string.sort, TeamSortFragment.class.getName());
+        mDrawerIdMap.put(R.string.gameDate, GamesFragment.class.getName());
 
     }
 
@@ -79,7 +79,6 @@ public class MainActivity extends BaseActivity {
             }
             mBaseFragmentMap.put(fragmentName,baseFragment);
         }
-
         return baseFragment;
     }
 

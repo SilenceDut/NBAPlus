@@ -66,7 +66,4 @@ public class TeamSortFragment extends SwipeRefreshBaseFragment {
         AppService.getInstance().getTeamSort(getTaskId());
     }
 
-    public static String getClassName() {
-        return "com.me.silencedut.nbaplus.ui.fragment.TeamSortFragment";
-    }
 }

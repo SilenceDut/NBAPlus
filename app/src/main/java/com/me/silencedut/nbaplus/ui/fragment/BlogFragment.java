@@ -56,8 +56,4 @@ public class BlogFragment extends NewsFragment {
         return R.string.blog;
     }
 
-    public static String getClassName() {
-        return "com.me.silencedut.nbaplus.ui.fragment.BlogFragment";
-    }
-
 }
