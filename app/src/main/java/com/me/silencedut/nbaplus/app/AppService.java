@@ -34,7 +34,7 @@ public class AppService {
     private static NbaplusAPI sNbaplusApi;
     private static NewsDetileAPI sNewsDetileApi;
     private static ExecutorService sSingleThreadExecutor;
-    private Map<Integer,CompositeSubscription> mCompositeSubMap;
+    private Map<Integer,CompositeSubscription> mCompositeSubByTaskId;
     private Handler mIoHandler;
 
     private AppService(){}
@@ -42,7 +42,7 @@ public class AppService {
     public void initService() {
         sBus = EventBus.getDefault();
         sGson=new Gson();
-        mCompositeSubMap=new HashMap<Integer,CompositeSubscription>();
+        mCompositeSubByTaskId=new HashMap<Integer,CompositeSubscription>();
         //sSingleThreadExecutor= Executors.newSingleThreadExecutor();
         backGroundInit();
     }
@@ -74,28 +74,28 @@ public class AppService {
 
     public void addCompositeSub(int taskId) {
         CompositeSubscription compositeSubscription;
-        if(mCompositeSubMap.get(taskId)==null) {
+        if(mCompositeSubByTaskId.get(taskId)==null) {
             compositeSubscription = new CompositeSubscription();
-            mCompositeSubMap.put(taskId, compositeSubscription);
+            mCompositeSubByTaskId.put(taskId, compositeSubscription);
         }
     }
 
     public void removeCompositeSub(int taskId) {
         CompositeSubscription compositeSubscription;
-        if(mCompositeSubMap!=null&& mCompositeSubMap.get(taskId)!=null){
-            compositeSubscription= mCompositeSubMap.get(taskId);
+        if(mCompositeSubByTaskId!=null&& mCompositeSubByTaskId.get(taskId)!=null){
+            compositeSubscription= mCompositeSubByTaskId.get(taskId);
             compositeSubscription.unsubscribe();
-            mCompositeSubMap.remove(taskId);
+            mCompositeSubByTaskId.remove(taskId);
         }
     }
 
     private CompositeSubscription getCompositeSubscription(int taskId) {
         CompositeSubscription compositeSubscription ;
-        if(mCompositeSubMap.get(taskId)==null) {
+        if(mCompositeSubByTaskId.get(taskId)==null) {
             compositeSubscription = new CompositeSubscription();
-            mCompositeSubMap.put(taskId, compositeSubscription);
+            mCompositeSubByTaskId.put(taskId, compositeSubscription);
         }else {
-            compositeSubscription= mCompositeSubMap.get(taskId);
+            compositeSubscription= mCompositeSubByTaskId.get(taskId);
         }
         return compositeSubscription;
     }
