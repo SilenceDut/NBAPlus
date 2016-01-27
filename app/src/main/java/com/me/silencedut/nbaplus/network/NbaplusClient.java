@@ -1,9 +1,6 @@
 package com.me.silencedut.nbaplus.network;
 
 
-import com.me.silencedut.nbaplus.network.NbaplusAPI;
-import com.me.silencedut.nbaplus.network.NewsDetileAPI;
-
 import retrofit.GsonConverterFactory;
 import retrofit.Retrofit;
 import retrofit.RxJavaCallAdapterFactory;
@@ -11,10 +8,10 @@ import retrofit.RxJavaCallAdapterFactory;
 /**
  * Created by SilenceDut on 2015/11/28.
  */
-public class NbaplusCilent {
+public class NbaplusClient {
     final NbaplusAPI nbaplus ;
     final NewsDetileAPI newsDetileAPI;
-    NbaplusCilent() {
+    NbaplusClient() {
         Retrofit retrofit0 = new Retrofit.Builder()
                 .baseUrl("http://nbaplus.sinaapp.com/")
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
