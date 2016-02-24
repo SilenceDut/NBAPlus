@@ -26,7 +26,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 /**
- * Created by SilenceDut on 2015/12/118.
+ * Created by SilenceDut on 2015/12/18.
  */
 public class SettingsActivity extends AppCompatActivity implements RevealBackgroundView.OnStateChangeListener{
     @Bind(R.id.toolbar)

@@ -21,7 +21,7 @@ public class RhythmAdapter extends BaseAdapter {
      * 数据源
      */
     private int[] mColorList;
-private static final String[] sStatNames={"得分","篮板","助攻","抢断","盖帽"};
+    private static final String[] sStatNames={"得分","篮板","助攻","抢断","盖帽"};
     private LayoutInflater mInflater;
     private Context mContext;
 
