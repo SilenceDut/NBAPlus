@@ -13,9 +13,9 @@ public class NbaplusFactory {
     public static NbaplusAPI getNbaplusInstance() {
         synchronized (WATCH_DOG) {
             if(sInstanceInstance==null){
-                NbaplusCilent nbaplusCilent = new NbaplusCilent();
-                sInstanceInstance=nbaplusCilent.getCilent();
-                sNewsSetileInStance=nbaplusCilent.getNewsDetileClient();
+                NbaplusClient nbaplusClient = new NbaplusClient();
+                sInstanceInstance= nbaplusClient.getCilent();
+                sNewsSetileInStance= nbaplusClient.getNewsDetileClient();
             }
             return sInstanceInstance;
         }
@@ -24,9 +24,9 @@ public class NbaplusFactory {
     public static NewsDetileAPI getNewsDetileInstance() {
         synchronized (WATCH_DOG) {
             if(sNewsSetileInStance==null){
-                NbaplusCilent nbaplusCilent = new NbaplusCilent();
-                sInstanceInstance=nbaplusCilent.getCilent();
-                sNewsSetileInStance=nbaplusCilent.getNewsDetileClient();
+                NbaplusClient nbaplusClient = new NbaplusClient();
+                sInstanceInstance= nbaplusClient.getCilent();
+                sNewsSetileInStance= nbaplusClient.getNewsDetileClient();
             }
             return sNewsSetileInStance;
         }
