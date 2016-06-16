@@ -21,7 +21,7 @@ import com.me.silencedut.nbaplus.utils.AppUtils;
 import butterknife.Bind;
 
 /**
- * Created by asan on 2015/12/8.
+ * Created by SilenceDut on 2015/12/8.
  */
 public class NewsDetileActivity extends SwipeBackActivity{
     @Bind(R.id.webLayout)
@@ -81,7 +81,7 @@ public class NewsDetileActivity extends SwipeBackActivity{
 
         } else {
             mToolBar.setBackgroundResource(R.color.colorPrimary);
-            
+
         }
         mWebView = new WebView(getApplicationContext());
         mWebView.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
