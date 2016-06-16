@@ -1,54 +1,7 @@
-# built application files
-*.apk
-*.ap_
-*.o.d
-
-# files for the dex VM
-*.dex
-
-# Java class files
-*.class
-
-# generated GUI files
-*/R.java
-
-# generated folder
-bin
-gen
-
-# local
-local.properties
-/.idea
-/.gradle
-proguard_logs/
-
-# log files
-log*.txt
-
-# archives
-*.gz
-*.tar
-*.zip
-
-# eclipse
-*.metadata
-*.settings
-*.prefs
-
-#idea
-*.idea
 *.iml
-out/
-
-build/
-.gradle/
+.gradle
+/local.properties
+/.idea
 .DS_Store
-app/.DS_Store
-app/libs/.DS_Store
-gradle/.DS_Store
-greendaogeneration/.DS_Store
-greendaogeneration/src/.DS_Store
-greendaogeneration/src/main/.DS_Store
-greendaogeneration/src/main/java/.DS_Store
-greendaogeneration/src/main/java/com/.DS_Store
-greendaogeneration/src/main/java/com/greendao/.DS_Store
+/build
+/captures
