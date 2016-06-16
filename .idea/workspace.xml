@@ -10,7 +10,7 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a641025b-35ff-44b1-a025-e502872b3b65" name="Default" comment="">
+    <list default="true" id="a641025b-35ff-44b1-a025-e502872b3b65" name="Default" comment="modified gitignore">
       <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="" />
     </list>
     <list id="c14567f0-9e70-460a-b76f-2107e0a93d47" name="New changelist" comment="" />
@@ -3494,7 +3494,14 @@
       <option name="project" value="LOCAL" />
       <updated>1466044155887</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="modified gitignore">
+      <created>1466044187348</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1466044187348</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TodoView">
