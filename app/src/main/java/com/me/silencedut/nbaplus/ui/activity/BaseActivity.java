@@ -21,7 +21,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(getContentViewId());
         AppService.getInstance().addCompositeSub(getTaskId());
-        AppService.getInstance().getBus().register(this);
+        AppService.getBus().register(this);
         ButterKnife.bind(this);
         initViews();
     }
@@ -30,6 +30,6 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         AppService.getInstance().removeCompositeSub(getTaskId());
-        AppService.getInstance().getBus().unregister(this);
+        AppService.getBus().unregister(this);
     }
 }

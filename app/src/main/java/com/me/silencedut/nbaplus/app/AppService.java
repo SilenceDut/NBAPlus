@@ -39,7 +39,7 @@ public class AppService {
 
     private AppService(){}
 
-    public void initService() {
+     void initService() {
         sBus = EventBus.getDefault();
         sGson=new Gson();
         mCompositeSubByTaskId=new HashMap<Integer,CompositeSubscription>();
