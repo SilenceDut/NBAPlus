@@ -12,7 +12,8 @@ import com.me.silencedut.nbaplus.ui.adapter.RecycleAdapter.BlogAdapter;
 public class BlogFragment extends NewsFragment {
     private static boolean mFirstAnimate=true;
     public static BlogFragment newInstance() {
-        BlogFragment blogFragment = new BlogFragment();
+        BlogFragment blogFragment;
+        blogFragment = new BlogFragment();
         return blogFragment;
     }
 

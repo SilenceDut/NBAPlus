@@ -33,9 +33,9 @@ public abstract class NewsFragment extends SwipeRefreshBaseFragment implements O
     CoordinatorLayout newsContainer;
 
 
-    protected List<NewslistEntity> mNewsListEntity = new ArrayList<NewslistEntity>();
-    protected LoadAdapter mLoadAdapter;
-    protected String mNewsId="";
+     List<NewslistEntity> mNewsListEntity = new ArrayList<NewslistEntity>();
+     LoadAdapter mLoadAdapter;
+     String mNewsId="";
 
     abstract void setAdapter();
 
@@ -60,12 +60,12 @@ public abstract class NewsFragment extends SwipeRefreshBaseFragment implements O
         setAdapter();
     }
 
-    protected void stopAll() {
+     void stopAll() {
         stopRefreshing();
         stopLoading();
     }
 
-    protected void stopLoading() {
+     void stopLoading() {
         mLoadAdapter.notifyItemChanged(mLoadAdapter.getItemCount() - 1);
         mLoadAdapter.setLoading(false);
     }
