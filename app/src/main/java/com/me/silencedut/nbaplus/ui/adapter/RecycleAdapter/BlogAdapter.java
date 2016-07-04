@@ -44,7 +44,7 @@ public class BlogAdapter extends LoadAdapter {
         return viewHolder;
     }
 
-     class NormalBlogViewHolder extends EntityHolder {
+     private class NormalBlogViewHolder extends EntityHolder {
 
         @Bind(R.id.newsImage)
         ImageView mNewsImage;
