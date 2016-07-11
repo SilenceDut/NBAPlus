@@ -21,7 +21,7 @@ import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 
 /**
- * Created by asan on 2015/12/15.
+ * Created by SlienceDut on 2015/12/15.
  */
 public class RxStats {
     public static Subscription getPerStat(String ...statKinds) {
@@ -43,10 +43,10 @@ public class RxStats {
                 .subscribe(new Action1<Statistics>() {
                     @Override
                     public void call(Statistics statistics) {
-                        String[][] lables = getLables(statistics);
-                        float[][] ststValues=getStatValues(statistics);
+                        String[][] labels = getLabels(statistics);
+                        float[][] statValues=getStatValues(statistics);
                         String[][] playerUrls=getPlayerUrls(statistics);
-                        AppService.getBus().post(new StatEvent(statistics.getDailyStat().get(0).getStatkind(), lables,ststValues,playerUrls));
+                        AppService.getBus().post(new StatEvent(statistics.getDailyStat().get(0).getStatkind(), labels,statValues,playerUrls));
                     }
                 }, new Action1<Throwable>() {
                     @Override
@@ -74,7 +74,7 @@ public class RxStats {
                 .subscribe(new Action1<Statistics>() {
                     @Override
                     public void call(Statistics statistics) {
-                        String[][] lables = getLables(statistics);
+                        String[][] lables = getLabels(statistics);
                         float[][] ststValues=getStatValues(statistics);
                         String[][] playerUrls=getPlayerUrls(statistics);
                         StatEvent statEvent = new StatEvent(statistics.getDailyStat().get(0).getStatkind(), lables, ststValues,playerUrls);
@@ -95,30 +95,30 @@ public class RxStats {
         return subscription;
     }
 
-    private static String[][] getLables(Statistics statistics) {
+    private static String[][] getLabels(Statistics statistics) {
         String[][] players=new String[2][5];
         for(int index=0;index<5;index++) {
-            players[0][index]=parseLable(statistics.getDailyStat().get(index));
-            players[1][index]=parseLable(statistics.getEverageStat().get(index));
+            players[0][index]=parseLabel(statistics.getDailyStat().get(index));
+            players[1][index]=parseLabel(statistics.getEverageStat().get(index));
         }
         return players;
     }
 
-    private static String parseLable(Statistics.StatEntity statEntity) {
-        StringBuilder lable =new StringBuilder();
+    private static String parseLabel(Statistics.StatEntity statEntity) {
+        StringBuilder label =new StringBuilder();
         String playerName=statEntity.getName();
         for(int index=0;index<playerName.length()-3;index+=4) {
-            lable.append(playerName.substring(index,index+4));
-            lable.append("\n");
+            label.append(playerName.substring(index,index+4));
+            label.append("\n");
         }
         if(playerName.length()%4!=0) {
-            lable.append(playerName.substring(4 * (playerName.length() / 4), playerName.length()));
-            lable.append("\n");
+            label.append(playerName.substring(4 * (playerName.length() / 4), playerName.length()));
+            label.append("\n");
         }
-        lable.append("(");
-        lable.append(statEntity.getTeam());
-        lable.append(")");
-        return lable.toString();
+        label.append("(");
+        label.append(statEntity.getTeam());
+        label.append(")");
+        return label.toString();
 
     }
 

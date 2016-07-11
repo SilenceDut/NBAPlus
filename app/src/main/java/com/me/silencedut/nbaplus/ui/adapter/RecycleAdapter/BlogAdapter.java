@@ -19,7 +19,7 @@ import butterknife.Bind;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
- * Created by Administrator on 2015/12/10.
+ * Created by SilenceDut on 2015/12/10.
  */
 public class BlogAdapter extends LoadAdapter {
 
@@ -44,7 +44,7 @@ public class BlogAdapter extends LoadAdapter {
         return viewHolder;
     }
 
-     private class NormalBlogViewHolder extends EntityHolder {
+      class NormalBlogViewHolder extends EntityHolder {
 
         @Bind(R.id.newsImage)
         ImageView mNewsImage;
