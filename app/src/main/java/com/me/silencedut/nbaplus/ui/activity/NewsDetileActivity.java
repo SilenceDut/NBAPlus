@@ -2,8 +2,6 @@ package com.me.silencedut.nbaplus.ui.activity;
 
 import android.content.Intent;
 import android.support.design.widget.CollapsingToolbarLayout;
-import android.util.Log;
-import android.view.ViewGroup;
 import android.webkit.WebSettings;
 
 import android.webkit.WebView;
@@ -12,10 +10,9 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.me.silencedut.nbaplus.R;
-import com.me.silencedut.nbaplus.app.App;
 import com.me.silencedut.nbaplus.app.AppService;
 import com.me.silencedut.nbaplus.data.Constant;
-import com.me.silencedut.nbaplus.event.NewsDetileEvent;
+import com.me.silencedut.nbaplus.event.NewsDetailEvent;
 import com.me.silencedut.nbaplus.utils.AppUtils;
 
 import butterknife.Bind;
@@ -42,7 +39,7 @@ public class NewsDetileActivity extends SwipeBackActivity{
         return hasTitleImage()? R.layout.activity_detile : R.layout.activity_detile_noimage;
     }
 
-    public void onEventMainThread(NewsDetileEvent event) {
+    public void onEventMainThread(NewsDetailEvent event) {
         if(event!=null) {
             if(Constant.Result.FAIL.equals(event.getEventResult())) {
                 AppUtils.showSnackBar(mSwipeBackLayout, R.string.load_fail);
@@ -89,11 +86,11 @@ public class NewsDetileActivity extends SwipeBackActivity{
         mWebView.setBackgroundColor(0);
         mWebLayout.addView(mWebView);
 
-        getNewsDetile();
+        getNewsDetail();
     }
 
-    private void getNewsDetile(){
-        AppService.getInstance().getNewsDetile(getTaskId(), mGetIntent.getStringExtra(DETILE_DATE), mGetIntent.getStringExtra(DETILE_ID));
+    private void getNewsDetail(){
+        AppService.getInstance().getNewsDetail(getTaskId(), mGetIntent.getStringExtra(DETILE_DATE), mGetIntent.getStringExtra(DETILE_ID));
     }
 
     @Override

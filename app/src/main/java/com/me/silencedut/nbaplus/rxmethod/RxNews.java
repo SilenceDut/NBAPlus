@@ -5,7 +5,7 @@ import com.me.silencedut.greendao.GreenNewsDao;
 import com.me.silencedut.nbaplus.app.App;
 import com.me.silencedut.nbaplus.app.AppService;
 import com.me.silencedut.nbaplus.data.Constant;
-import com.me.silencedut.nbaplus.event.NewsDetileEvent;
+import com.me.silencedut.nbaplus.event.NewsDetailEvent;
 import com.me.silencedut.nbaplus.event.NewsEvent;
 import com.me.silencedut.nbaplus.model.News;
 import com.me.silencedut.nbaplus.model.NewsDetile;
@@ -32,7 +32,7 @@ public class RxNews {
 
     public static Subscription initNews(final String newsType) {
 
-        Subscription subscription = Observable.create(new Observable.OnSubscribe<News>() {
+        return Observable.create(new Observable.OnSubscribe<News>() {
                     @Override
                     public void call(Subscriber<? super News> subscriber) {
                         News news = getCacheNews(newsType);
@@ -57,11 +57,10 @@ public class RxNews {
                         AppService.getBus().post(newsEvent);
                     }
                 });
-        return subscription;
     }
 
     public static Subscription updateNews(final String newsType) {
-        Subscription subscription = AppService.getNbaplus().updateNews(newsType)
+        return  AppService.getNbaplus().updateNews(newsType)
                 .subscribeOn(Schedulers.io())
                 .doOnNext(new Action1<News>() {
                     @Override
@@ -83,11 +82,10 @@ public class RxNews {
                         AppService.getBus().post(newsEvent);
                     }
                 });
-        return subscription;
     }
 
     public static Subscription loadMoreNews(final String newsType,final String newsId) {
-        Subscription subscription = AppService.getNbaplus().loadMoreNews(newsType, newsId)
+        return AppService.getNbaplus().loadMoreNews(newsType, newsId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Action1<News>() {
@@ -103,11 +101,10 @@ public class RxNews {
                         AppService.getBus().post(newsEvent);
                     }
                 });
-        return subscription;
     }
 
-    public static Subscription getNewsDetile(final String date,final String detileId) {
-        Subscription subscription = AppService.getNewsDetileApi().getNewsDetile(date,detileId+".json")
+    public static Subscription getNewsDetail(final String date,final String detailId) {
+        return AppService.getNewsDetileApi().getNewsDetile(date,detailId+".json")
                 .subscribeOn(Schedulers.io())
                 .map(new Func1<NewsDetile, String>() {
                     @Override
@@ -138,20 +135,19 @@ public class RxNews {
                 .subscribe(new Action1<String>() {
                     @Override
                     public void call(String newsContent) {
-                        AppService.getBus().post(new NewsDetileEvent(newsContent));
+                        AppService.getBus().post(new NewsDetailEvent(newsContent));
                     }
                 }, new Action1<Throwable>() {
                     @Override
                     public void call(Throwable throwable) {
-                        NewsDetileEvent newsDetileEvent = new NewsDetileEvent(throwable.toString());
-                        newsDetileEvent.setEventResult(Constant.Result.FAIL);
-                        AppService.getBus().post(newsDetileEvent);
+                        NewsDetailEvent newsDetailEvent = new NewsDetailEvent(throwable.toString());
+                        newsDetailEvent.setEventResult(Constant.Result.FAIL);
+                        AppService.getBus().post(newsDetailEvent);
                     }
                 });
-        return subscription;
     }
 
-    public static void cacheNews(final News news,final String newsType) {
+    private static void cacheNews(final News news,final String newsType) {
 
         GreenNewsDao greenNewsDao = AppService.getDBHelper().getDaoSession().getGreenNewsDao();
         DeleteQuery deleteQuery = greenNewsDao.queryBuilder()

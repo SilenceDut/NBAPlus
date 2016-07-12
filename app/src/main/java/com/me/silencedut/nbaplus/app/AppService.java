@@ -113,8 +113,8 @@ public class AppService {
         getCompositeSubscription(taskId).add(RxNews.loadMoreNews(type, newsId));
     }
 
-    public void getNewsDetile(int taskId,String date,String detielId) {
-        getCompositeSubscription(taskId).add(RxNews.getNewsDetile(date, detielId));
+    public void getNewsDetail(int taskId,String date,String detailId) {
+        getCompositeSubscription(taskId).add(RxNews.getNewsDetail(date, detailId));
     }
 
     public void initPerStat(int taskId,String  statKind) {
