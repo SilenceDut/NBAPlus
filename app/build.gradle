@@ -54,6 +54,7 @@ android {
 }
 
 dependencies {
+
     compile fileTree(include: ['*.jar'], dir: 'libs')
     def googleDependencies = rootProject.ext.goodleDependencies
     def otherDependencies = rootProject.ext.otherDependdencies

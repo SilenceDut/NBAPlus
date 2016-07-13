@@ -1,5 +1,7 @@
 package com.me.silencedut.nbaplus.rxmethod;
 
+import android.util.Log;
+
 import com.me.silencedut.greendao.GreenNews;
 import com.me.silencedut.greendao.GreenNewsDao;
 import com.me.silencedut.nbaplus.app.App;
@@ -38,6 +40,7 @@ public class RxNews {
                         News news = getCacheNews(newsType);
                         subscriber.onNext(news);
                         subscriber.onCompleted();
+                        Log.i("RxNews",Thread.currentThread()+";;;create");
                     }
                 }).subscribeOn(Schedulers.io())
                 .subscribe(new Action1<News>() {
@@ -66,12 +69,14 @@ public class RxNews {
                     @Override
                     public void call(News news) {
                         cacheNews(news, newsType);
+                        Log.i("RxNews",Thread.currentThread()+";;;donOnNext");
                     }
                 })
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Action1<News>() {
                     @Override
                     public void call(News news) {
+                        Log.i("RxNews",Thread.currentThread()+";;;subscribe");
                         AppService.getBus().post(new NewsEvent(news, Constant.GETNEWSWAY.UPDATE,newsType));
                     }
                 }, new Action1<Throwable>() {
