@@ -27,7 +27,9 @@ web后台部分在这:[NBAPlus Server](https://github.com/SilenceDut/nbaplus-ser
 
 如果对你有帮助给个star吧,欢迎pull requests(^_^）
 
-[我的博客](http://blog.csdn.net/ls5222325)
+
+[简书](http://www.jianshu.com/users/6b2e4b40b8ce/latest_articles)
+[CSDN](http://blog.csdn.net/ls5222325)
 
 # License
 
