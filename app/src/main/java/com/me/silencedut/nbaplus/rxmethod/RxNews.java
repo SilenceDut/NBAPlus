@@ -23,6 +23,7 @@ import rx.Observable;
 import rx.Subscriber;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action0;
 import rx.functions.Action1;
 import rx.functions.Func1;
 import rx.schedulers.Schedulers;
@@ -40,9 +41,9 @@ public class RxNews {
                         News news = getCacheNews(newsType);
                         subscriber.onNext(news);
                         subscriber.onCompleted();
-                        Log.i("RxNews",Thread.currentThread()+";;;create");
                     }
                 }).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Action1<News>() {
                     @Override
                     public void call(News news) {
@@ -69,15 +70,13 @@ public class RxNews {
                     @Override
                     public void call(News news) {
                         cacheNews(news, newsType);
-                        Log.i("RxNews",Thread.currentThread()+";;;donOnNext");
                     }
                 })
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Action1<News>() {
                     @Override
                     public void call(News news) {
-                        Log.i("RxNews",Thread.currentThread()+";;;subscribe");
-                        AppService.getBus().post(new NewsEvent(news, Constant.GETNEWSWAY.UPDATE,newsType));
+                        AppService.getBus().post(new NewsEvent(news, Constant.GETNEWSWAY.UPDATE, newsType));
                     }
                 }, new Action1<Throwable>() {
                     @Override
