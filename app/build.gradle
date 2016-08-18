@@ -13,6 +13,8 @@ android {
         versionCode globalConfiguration.versionCode
         versionName globalConfiguration.versionName
 
+        multiDexEnabled true
+
     }
 
     lintOptions {
@@ -58,6 +60,9 @@ dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     def googleDependencies = rootProject.ext.goodleDependencies
     def otherDependencies = rootProject.ext.otherDependdencies
+
+    compile 'com.android.support:multidex:1.0.1'
+
     compile googleDependencies.support_v4
     compile googleDependencies.appcompat_v7
     compile googleDependencies.design
