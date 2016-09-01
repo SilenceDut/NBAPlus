@@ -99,8 +99,7 @@ public class AppService {
         }
         return compositeSubscription;
     }
-
-
+    
     public void initNews(int taskId,String type) {
         getCompositeSubscription(taskId).add(RxNews.initNews(type));
     }

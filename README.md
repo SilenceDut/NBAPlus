@@ -1,4 +1,9 @@
 # NBAPlus
+
+[Deprecated]
+由于最近发现这个应用被别人直接拿来稍作修改后上传到应用商店。这个项目里的新闻等数据来源也未获取授权,最初的开源的目的是用来学习交流的,
+也未考虑过到应用商店发布,所以现在的情况违背了当初的初衷,所以决定关闭web服务器。
+
 A concise APP about NBA News and Event with RxJava and EventBus,
 follow <a href="https://github.com/futurice/android-best-practices/blob/master/translations/Chinese/README.cn.md">android-best-practices</a>
 #效果图
@@ -25,11 +30,6 @@ NBA资讯和赛事信息的平台。
 
 web后台部分在这:[NBAPlus Server](https://github.com/SilenceDut/nbaplus-server) 
 
-如果对你有帮助给个star吧,欢迎pull requests(^_^）
-
-
-[简书](http://www.jianshu.com/users/6b2e4b40b8ce/latest_articles)
-[CSDN](http://blog.csdn.net/ls5222325)
 
 # License
 
