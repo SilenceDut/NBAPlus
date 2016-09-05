@@ -1,9 +1,8 @@
-# NBAPlus
-
 ##[Deprecated]
 由于最近发现这个应用被别人直接拿来稍作修改后上传到应用商店。这个项目里的新闻等数据来源也未获取授权,最初的开源的目的是用来学习交流的,
-也未考虑过到应用商店发布,所以现在的情况违背了当初的初衷,所以决定关闭web服务器。
+也未考虑过到应用商店发布,所以现在的情况违背了当初的初衷,所以决定关闭web服务器,此项目的效果将无法再呈现。
 
+# NBAPlus
 A concise APP about NBA News and Event with RxJava and EventBus,
 follow <a href="https://github.com/futurice/android-best-practices/blob/master/translations/Chinese/README.cn.md">android-best-practices</a>
 #效果图
