@@ -9,10 +9,6 @@ follow <a href="https://github.com/futurice/android-best-practices/blob/master/t
 ![image](https://github.com/SilenceDut/NBAPlus/blob/master/screenshot/1.png)
 ![image](https://github.com/SilenceDut/NBAPlus/blob/master/screenshot/2.png)
 
-
-#程序框架
-![image](https://github.com/SilenceDut/NBAPlus/blob/master/raw/nbaplus_architecture.png)
-
 #特点
  * 遵循<a href="https://github.com/futurice/android-best-practices/blob/master/translations/Chinese/README.cn.md">Android开发最佳实践</a>的一种具体实践
  * Retrofit2.0+RxJava+EventBus+GreenDao的使用
