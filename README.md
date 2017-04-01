@@ -5,7 +5,7 @@
 # NBAPlus
 A concise APP about NBA News and Event with RxJava and EventBus,
 follow <a href="https://github.com/futurice/android-best-practices/blob/master/translations/Chinese/README.cn.md">android-best-practices</a>
-#效果图
+# 效果图
 ![image](https://github.com/SilenceDut/NBAPlus/blob/master/screenshot/1.png)
 ![image](https://github.com/SilenceDut/NBAPlus/blob/master/screenshot/2.png)
 
